@@ -3,7 +3,7 @@ package tds.PhotoTDS.interfaz;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-
+//Comentario
 public class VentanaEntrada {
 
 	private JFrame frame;
