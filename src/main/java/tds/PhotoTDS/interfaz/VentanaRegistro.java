@@ -3,8 +3,6 @@ package tds.PhotoTDS.interfaz;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.*;
-import javax.swing.text.*;
-
 import java.awt.*;
 
 public class VentanaRegistro extends JFrame {
@@ -150,7 +148,6 @@ public class VentanaRegistro extends JFrame {
 		panelCentralCentral.setLayout(new BoxLayout(panelCentralCentral, BoxLayout.Y_AXIS));
 		
 		JPanel panel_6 = new JPanel();
-		FlowLayout flowLayout_7 = (FlowLayout) panel_6.getLayout();
 		panelCentralCentral.add(panel_6);
 		
 		JLabel lblNewLabel_5 = new JLabel("Fecha de nacimiento");

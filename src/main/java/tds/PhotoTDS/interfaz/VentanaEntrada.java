@@ -2,29 +2,11 @@ package tds.PhotoTDS.interfaz;
 
 import java.awt.EventQueue;
 
-import javax.swing.JFrame;
-import java.awt.BorderLayout;
-import javax.swing.JTextField;
-import javax.swing.SwingConstants;
-import javax.swing.JPanel;
-import javax.swing.JButton;
-import javax.swing.JTextArea;
-import java.awt.FlowLayout;
-import javax.swing.BoxLayout;
-import javax.swing.JTextPane;
-import java.awt.Component;
-import java.awt.Font;
-import javax.swing.border.BevelBorder;
-import java.awt.GridLayout;
-import javax.swing.JLabel;
-import java.awt.CardLayout;
-import java.awt.Color;
-import javax.swing.border.CompoundBorder;
-import javax.swing.border.LineBorder;
-import net.miginfocom.swing.MigLayout;
-import java.awt.SystemColor;
-import java.awt.event.ActionListener;
-import java.awt.event.ActionEvent;
+import javax.swing.*;
+import java.awt.*;
+import javax.swing.border.*;
+import java.awt.event.*;
+
 //Comentario
 public class VentanaEntrada {
 
