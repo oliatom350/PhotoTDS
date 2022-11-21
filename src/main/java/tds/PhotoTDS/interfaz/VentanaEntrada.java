@@ -131,7 +131,6 @@ public class VentanaEntrada {
 		panel_3.add(btnNewButton);
 		
 		JPanel panelCrearCuenta = new JPanel();
-		panelCrearCuenta.setBorder(new LineBorder(new Color(0, 0, 0), 3));
 		frame.getContentPane().add(panelCrearCuenta);
 		panelCrearCuenta.setLayout(new BoxLayout(panelCrearCuenta, BoxLayout.Y_AXIS));
 		
