@@ -8,13 +8,13 @@ import java.awt.*;
 public class VentanaRegistro extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
+	private JTextField textField_Email;
+	private JTextField textField_Nombre;
+	private JTextField textField_Usuario;
+	private JTextField textField_Contraseña;
+	private JTextField textField_Dia;
+	private JTextField textField_Mes;
+	private JTextField textField_Año;
 
 	/**
 	 * Launch the application.
@@ -49,23 +49,23 @@ public class VentanaRegistro extends JFrame {
 		contentPane.add(panelNorte, BorderLayout.NORTH);
 		panelNorte.setLayout(new BoxLayout(panelNorte, BoxLayout.Y_AXIS));
 		
-		JPanel panel_11 = new JPanel();
-		panelNorte.add(panel_11);
+		JPanel PanelTitulo = new JPanel();
+		panelNorte.add(PanelTitulo);
 		
-		JLabel lblNewLabel = new JLabel("PhotoTDS");
-		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setFont(new Font("Segoe UI Historic", Font.BOLD, 22));
-		panel_11.add(lblNewLabel);
+		JLabel TituloVentana = new JLabel("PhotoTDS");
+		TituloVentana.setHorizontalAlignment(SwingConstants.CENTER);
+		TituloVentana.setFont(new Font("Segoe UI Historic", Font.BOLD, 22));
+		PanelTitulo.add(TituloVentana);
 		
-		JPanel panel_12 = new JPanel();
-		panel_12.setAlignmentY(Component.BOTTOM_ALIGNMENT);
-		panelNorte.add(panel_12);
+		JPanel PanelSubtitulo = new JPanel();
+		PanelSubtitulo.setAlignmentY(Component.BOTTOM_ALIGNMENT);
+		panelNorte.add(PanelSubtitulo);
 		
-		JLabel lblNewLabel_8 = new JLabel("Ventana de registro");
-		lblNewLabel_8.setVerticalAlignment(SwingConstants.TOP);
-		lblNewLabel_8.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel_8.setFont(new Font("Segoe UI Historic", Font.BOLD, 15));
-		panel_12.add(lblNewLabel_8);
+		JLabel SubtituloVentana = new JLabel("Ventana de registro");
+		SubtituloVentana.setVerticalAlignment(SwingConstants.TOP);
+		SubtituloVentana.setHorizontalAlignment(SwingConstants.CENTER);
+		SubtituloVentana.setFont(new Font("Segoe UI Historic", Font.BOLD, 15));
+		PanelSubtitulo.add(SubtituloVentana);
 		
 		JPanel panelCentral = new JPanel();
 		contentPane.add(panelCentral, BorderLayout.CENTER);
@@ -76,191 +76,185 @@ public class VentanaRegistro extends JFrame {
 		panelCentral.add(panelCentralIOeste, BorderLayout.WEST);
 		panelCentralIOeste.setLayout(new BoxLayout(panelCentralIOeste, BoxLayout.Y_AXIS));
 		
-		JPanel panel = new JPanel();
-		FlowLayout flowLayout = (FlowLayout) panel.getLayout();
-		flowLayout.setAlignment(FlowLayout.RIGHT);
-		panelCentralIOeste.add(panel);
+		JPanel panelEmail = new JPanel();
+		FlowLayout fl_panelEmail = (FlowLayout) panelEmail.getLayout();
+		fl_panelEmail.setAlignment(FlowLayout.RIGHT);
+		panelCentralIOeste.add(panelEmail);
 		
-		JLabel lblNewLabel_1 = new JLabel("Email");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_1.setFont(new Font("SansSerif", Font.PLAIN, 14));
-		panel.add(lblNewLabel_1);
+		JLabel EtiquetaEmail = new JLabel("Email");
+		EtiquetaEmail.setHorizontalAlignment(SwingConstants.LEFT);
+		EtiquetaEmail.setFont(new Font("SansSerif", Font.PLAIN, 14));
+		panelEmail.add(EtiquetaEmail);
 		
-		textField = new JTextField();
-		textField.setFont(new Font("SansSerif", Font.PLAIN, 12));
-		textField.setHorizontalAlignment(SwingConstants.LEFT);
-		textField.setColumns(10);
-		panel.add(textField);
+		textField_Email = new JTextField();
+		textField_Email.setFont(new Font("SansSerif", Font.PLAIN, 12));
+		textField_Email.setHorizontalAlignment(SwingConstants.LEFT);
+		textField_Email.setColumns(10);
+		panelEmail.add(textField_Email);
 		
-		JPanel panel_1 = new JPanel();
-		FlowLayout flowLayout_1 = (FlowLayout) panel_1.getLayout();
-		flowLayout_1.setVgap(10);
-		flowLayout_1.setAlignment(FlowLayout.RIGHT);
-		panelCentralIOeste.add(panel_1);
+		JPanel panelNombre = new JPanel();
+		FlowLayout fl_panelNombre = (FlowLayout) panelNombre.getLayout();
+		fl_panelNombre.setVgap(10);
+		fl_panelNombre.setAlignment(FlowLayout.RIGHT);
+		panelCentralIOeste.add(panelNombre);
 		
-		JLabel lblNewLabel_2 = new JLabel("Nombre completo");
-		lblNewLabel_2.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_2.setFont(new Font("SansSerif", Font.PLAIN, 14));
-		panel_1.add(lblNewLabel_2);
+		JLabel EtiquetaNombre = new JLabel("Nombre completo");
+		EtiquetaNombre.setHorizontalAlignment(SwingConstants.LEFT);
+		EtiquetaNombre.setFont(new Font("SansSerif", Font.PLAIN, 14));
+		panelNombre.add(EtiquetaNombre);
 		
-		textField_1 = new JTextField();
-		textField_1.setFont(new Font("SansSerif", Font.PLAIN, 12));
-		textField_1.setHorizontalAlignment(SwingConstants.LEFT);
-		textField_1.setColumns(10);
-		panel_1.add(textField_1);
+		textField_Nombre = new JTextField();
+		textField_Nombre.setFont(new Font("SansSerif", Font.PLAIN, 12));
+		textField_Nombre.setHorizontalAlignment(SwingConstants.LEFT);
+		textField_Nombre.setColumns(10);
+		panelNombre.add(textField_Nombre);
 		
-		JPanel panel_2 = new JPanel();
-		FlowLayout flowLayout_2 = (FlowLayout) panel_2.getLayout();
-		flowLayout_2.setVgap(10);
-		flowLayout_2.setAlignment(FlowLayout.RIGHT);
-		panelCentralIOeste.add(panel_2);
+		JPanel panelUsuario = new JPanel();
+		FlowLayout fl_panelUsuario = (FlowLayout) panelUsuario.getLayout();
+		fl_panelUsuario.setVgap(10);
+		fl_panelUsuario.setAlignment(FlowLayout.RIGHT);
+		panelCentralIOeste.add(panelUsuario);
 		
-		JLabel lblNewLabel_3 = new JLabel("Nombre usuario");
-		lblNewLabel_3.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_3.setFont(new Font("SansSerif", Font.PLAIN, 14));
-		panel_2.add(lblNewLabel_3);
+		JLabel EtiquetaUsuario = new JLabel("Nombre usuario");
+		EtiquetaUsuario.setHorizontalAlignment(SwingConstants.LEFT);
+		EtiquetaUsuario.setFont(new Font("SansSerif", Font.PLAIN, 14));
+		panelUsuario.add(EtiquetaUsuario);
 		
-		textField_2 = new JTextField();
-		textField_2.setFont(new Font("SansSerif", Font.PLAIN, 12));
-		textField_2.setHorizontalAlignment(SwingConstants.LEFT);
-		textField_2.setColumns(10);
-		panel_2.add(textField_2);
+		textField_Usuario = new JTextField();
+		textField_Usuario.setFont(new Font("SansSerif", Font.PLAIN, 12));
+		textField_Usuario.setHorizontalAlignment(SwingConstants.LEFT);
+		textField_Usuario.setColumns(10);
+		panelUsuario.add(textField_Usuario);
 		
-		JPanel panel_3 = new JPanel();
-		FlowLayout flowLayout_3 = (FlowLayout) panel_3.getLayout();
-		flowLayout_3.setAlignment(FlowLayout.TRAILING);
-		panelCentralIOeste.add(panel_3);
+		JPanel panelContraseña = new JPanel();
+		FlowLayout fl_panelContraseña = (FlowLayout) panelContraseña.getLayout();
+		fl_panelContraseña.setAlignment(FlowLayout.TRAILING);
+		panelCentralIOeste.add(panelContraseña);
 		
-		JLabel lblNewLabel_4 = new JLabel("Contraseña");
-		lblNewLabel_4.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_4.setFont(new Font("SansSerif", Font.PLAIN, 14));
-		panel_3.add(lblNewLabel_4);
+		JLabel EtiquetaContraseña = new JLabel("Contraseña");
+		EtiquetaContraseña.setHorizontalAlignment(SwingConstants.LEFT);
+		EtiquetaContraseña.setFont(new Font("SansSerif", Font.PLAIN, 14));
+		panelContraseña.add(EtiquetaContraseña);
 		
-		textField_3 = new JTextField();
-		textField_3.setFont(new Font("SansSerif", Font.PLAIN, 12));
-		textField_3.setHorizontalAlignment(SwingConstants.LEFT);
-		textField_3.setColumns(10);
-		panel_3.add(textField_3);
+		textField_Contraseña = new JTextField();
+		textField_Contraseña.setFont(new Font("SansSerif", Font.PLAIN, 12));
+		textField_Contraseña.setHorizontalAlignment(SwingConstants.LEFT);
+		textField_Contraseña.setColumns(10);
+		panelContraseña.add(textField_Contraseña);
 		
 		JPanel panelCentralCentral = new JPanel();
 		panelCentralCentral.setBorder(new LineBorder(new Color(0, 0, 0)));
 		panelCentral.add(panelCentralCentral, BorderLayout.CENTER);
 		panelCentralCentral.setLayout(new BoxLayout(panelCentralCentral, BoxLayout.Y_AXIS));
 		
-		JPanel panel_6 = new JPanel();
-		panelCentralCentral.add(panel_6);
+		JPanel panelFecha = new JPanel();
+		panelCentralCentral.add(panelFecha);
 		
-		JLabel lblNewLabel_5 = new JLabel("Fecha de nacimiento");
-		lblNewLabel_5.setFont(new Font("SansSerif", Font.PLAIN, 14));
-		panel_6.add(lblNewLabel_5);
+		JLabel EtiquetaFecha = new JLabel("Fecha de nacimiento");
+		EtiquetaFecha.setFont(new Font("SansSerif", Font.PLAIN, 14));
+		panelFecha.add(EtiquetaFecha);
 		
-		JPanel panel_7 = new JPanel();
-		panel_7.setBorder(new LineBorder(new Color(0, 0, 0), 2));
-		panel_6.add(panel_7);
-		panel_7.setLayout(new GridLayout(0, 1, 0, 0));
+		JPanel panelFormatoFecha = new JPanel();
+		panelFormatoFecha.setBorder(new LineBorder(new Color(0, 0, 0), 2));
+		panelFecha.add(panelFormatoFecha);
+		panelFormatoFecha.setLayout(new GridLayout(0, 1, 0, 0));
 		
-		JPanel panel_8 = new JPanel();
-		FlowLayout flowLayout_4 = (FlowLayout) panel_8.getLayout();
-		flowLayout_4.setAlignment(FlowLayout.RIGHT);
-		panel_7.add(panel_8);
+		JPanel panelDia = new JPanel();
+		FlowLayout fl_panelDia = (FlowLayout) panelDia.getLayout();
+		fl_panelDia.setAlignment(FlowLayout.RIGHT);
+		panelFormatoFecha.add(panelDia);
 		
-		JLabel lblNewLabel_6 = new JLabel("Día");
-		lblNewLabel_6.setFont(new Font("SansSerif", Font.PLAIN, 12));
-		panel_8.add(lblNewLabel_6);
+		JLabel EtiquetaDia = new JLabel("Día");
+		EtiquetaDia.setFont(new Font("SansSerif", Font.PLAIN, 12));
+		panelDia.add(EtiquetaDia);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(2);
-		panel_8.add(textField_4);
+		textField_Dia = new JTextField();
+		textField_Dia.setColumns(2);
+		panelDia.add(textField_Dia);
 		
-		JPanel panel_8_1 = new JPanel();
-		FlowLayout flowLayout_5 = (FlowLayout) panel_8_1.getLayout();
-		flowLayout_5.setAlignment(FlowLayout.RIGHT);
-		panel_7.add(panel_8_1);
+		JPanel panelMes = new JPanel();
+		FlowLayout fl_panelMes = (FlowLayout) panelMes.getLayout();
+		fl_panelMes.setAlignment(FlowLayout.RIGHT);
+		panelFormatoFecha.add(panelMes);
 		
-		JLabel lblNewLabel_6_1 = new JLabel("Mes");
-		lblNewLabel_6_1.setFont(new Font("SansSerif", Font.PLAIN, 12));
-		panel_8_1.add(lblNewLabel_6_1);
+		JLabel EtiquetaMes = new JLabel("Mes");
+		EtiquetaMes.setFont(new Font("SansSerif", Font.PLAIN, 12));
+		panelMes.add(EtiquetaMes);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(2);
-		panel_8_1.add(textField_5);
+		textField_Mes = new JTextField();
+		textField_Mes.setColumns(2);
+		panelMes.add(textField_Mes);
 		
-		JPanel panel_8_2 = new JPanel();
-		FlowLayout flowLayout_6 = (FlowLayout) panel_8_2.getLayout();
-		flowLayout_6.setAlignment(FlowLayout.RIGHT);
-		panel_7.add(panel_8_2);
+		JPanel panelAño = new JPanel();
+		FlowLayout fl_panelAño = (FlowLayout) panelAño.getLayout();
+		fl_panelAño.setAlignment(FlowLayout.RIGHT);
+		panelFormatoFecha.add(panelAño);
 		
-		JLabel lblNewLabel_6_2 = new JLabel("Año");
-		lblNewLabel_6_2.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNewLabel_6_2.setFont(new Font("SansSerif", Font.PLAIN, 12));
-		panel_8_2.add(lblNewLabel_6_2);
+		JLabel EtiquetaAño = new JLabel("Año");
+		EtiquetaAño.setHorizontalAlignment(SwingConstants.LEFT);
+		EtiquetaAño.setFont(new Font("SansSerif", Font.PLAIN, 12));
+		panelAño.add(EtiquetaAño);
 		
-		textField_6 = new JTextField();
-		textField_6.setColumns(2);
-		panel_8_2.add(textField_6);
+		textField_Año = new JTextField();
+		textField_Año.setColumns(2);
+		panelAño.add(textField_Año);
 		
-		JPanel panel_9 = new JPanel();
-		FlowLayout flowLayout_8 = (FlowLayout) panel_9.getLayout();
-		flowLayout_8.setAlignment(FlowLayout.RIGHT);
-		panelCentralCentral.add(panel_9);
+		JPanel panelFotoPerfil = new JPanel();
+		FlowLayout fl_panelFotoPerfil = (FlowLayout) panelFotoPerfil.getLayout();
+		fl_panelFotoPerfil.setAlignment(FlowLayout.RIGHT);
+		panelCentralCentral.add(panelFotoPerfil);
 		
-		JLabel lblNewLabel_7 = new JLabel("Foto de perfil (opcional)");
-		lblNewLabel_7.setFont(new Font("SansSerif", Font.PLAIN, 14));
-		panel_9.add(lblNewLabel_7);
+		JLabel EtiquetaFoto = new JLabel("Foto de perfil (opcional)");
+		EtiquetaFoto.setFont(new Font("SansSerif", Font.PLAIN, 14));
+		panelFotoPerfil.add(EtiquetaFoto);
 		
-		JButton btnNewButton_2 = new JButton("Añadir");
+		JButton BotonAddFoto = new JButton("Añadir");
 		try {
 		    Image img = ImageIO.read(getClass().getResource("images/png.png"));
-		    btnNewButton_2.setIcon(new ImageIcon(img));
+		    BotonAddFoto.setIcon(new ImageIcon(img));
 		  } catch (Exception ex) {
 		    System.out.println(ex);
 		  }
-		panel_9.add(btnNewButton_2);
+		panelFotoPerfil.add(BotonAddFoto);
 		
-		JPanel panel_10 = new JPanel();
-		FlowLayout flowLayout_9 = (FlowLayout) panel_10.getLayout();
-		flowLayout_9.setAlignment(FlowLayout.RIGHT);
-		panelCentralCentral.add(panel_10);
+		JPanel panelDescripcion = new JPanel();
+		FlowLayout fl_panelDescripcion = (FlowLayout) panelDescripcion.getLayout();
+		fl_panelDescripcion.setAlignment(FlowLayout.RIGHT);
+		panelCentralCentral.add(panelDescripcion);
 		
-		JLabel lblNewLabel_7_1 = new JLabel("Descripción (opcional)");
-		lblNewLabel_7_1.setFont(new Font("SansSerif", Font.PLAIN, 14));
-		panel_10.add(lblNewLabel_7_1);
+		JLabel EtiquetaDescripcion = new JLabel("Descripción (opcional)");
+		EtiquetaDescripcion.setFont(new Font("SansSerif", Font.PLAIN, 14));
+		panelDescripcion.add(EtiquetaDescripcion);
 		
-		JButton btnNewButton_3 = new JButton("Añadir");
-		panel_10.add(btnNewButton_3);
+		JButton BotonAddDescripcion = new JButton("Añadir");
+		panelDescripcion.add(BotonAddDescripcion);
 		
 		JPanel panelCentralNorte = new JPanel();
 		panelCentral.add(panelCentralNorte, BorderLayout.NORTH);
-		
-		JPanel panelOeste = new JPanel();
-		contentPane.add(panelOeste, BorderLayout.WEST);
 		
 		JPanel panelSur = new JPanel();
 		contentPane.add(panelSur, BorderLayout.SOUTH);
 		panelSur.setLayout(new BoxLayout(panelSur, BoxLayout.Y_AXIS));
 		
-		JPanel panel_4 = new JPanel();
-		panelSur.add(panel_4);
-		panel_4.setLayout(new BoxLayout(panel_4, BoxLayout.X_AXIS));
+		JPanel panelTextoRegistro = new JPanel();
+		panelSur.add(panelTextoRegistro);
+		panelTextoRegistro.setLayout(new BoxLayout(panelTextoRegistro, BoxLayout.X_AXIS));
 		
 		JTextPane txtRegistro = new JTextPane();
 		txtRegistro.setText("¡Regístrate para navegar por el pictórico mundo de PhotoTDS!");
 		txtRegistro.setFont(new Font("Sylfaen", Font.PLAIN, 20));
 		txtRegistro.setEditable(false);
 		txtRegistro.setBackground(SystemColor.menu);
-		panel_4.add(txtRegistro);
+		panelTextoRegistro.add(txtRegistro);
 		
-		JPanel panel_5 = new JPanel();
-		panelSur.add(panel_5);
+		JPanel panelBotonesVentana = new JPanel();
+		panelSur.add(panelBotonesVentana);
 		
-		JButton btnNewButton = new JButton("Aceptar");
-		panel_5.add(btnNewButton);
+		JButton BotonAceptar = new JButton("Aceptar");
+		panelBotonesVentana.add(BotonAceptar);
 		
-		JButton btnNewButton_1 = new JButton("Cancelar");
-		panel_5.add(btnNewButton_1);
-		
-		JPanel panelEste = new JPanel();
-		contentPane.add(panelEste, BorderLayout.EAST);
+		JButton BotonCancelar = new JButton("Cancelar");
+		panelBotonesVentana.add(BotonCancelar);
 	}
 
 }
