@@ -6,7 +6,6 @@ import java.util.Date;
 public class Usuario {
 	
 	//Atributos
-	@SuppressWarnings("unused")
 	private int id;
 	private String nombre;
 	private String email;
@@ -58,6 +57,10 @@ public class Usuario {
 	
 	public ArrayList<Notificacion> getNotificaciones() {
 		return notificaciones;
+	}
+	
+	public int getId() {
+		return id;
 	}
 
 	public void addSeguidor(String seguidor) {

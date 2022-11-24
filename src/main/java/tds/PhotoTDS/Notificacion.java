@@ -5,7 +5,6 @@ import java.util.*;
 public class Notificacion {
 
 	//Atributos
-	@SuppressWarnings("unused")
 	private int id;
 	private Date fecha;
 	private Publicacion publicacion;
@@ -16,7 +15,7 @@ public class Notificacion {
 		this.publicacion = publicacion;
 	}
 
-	
+
 	//Metodos
 	public Date getFecha() {
 		return fecha;
@@ -25,4 +24,9 @@ public class Notificacion {
 	public Publicacion getPublicacion() {
 		return publicacion;
 	}
+	
+	public int getId() {
+		return id;
+	}
+	
 }

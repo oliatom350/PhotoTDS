@@ -5,7 +5,6 @@ import java.util.*;
 public class Publicacion {
 
 	//Atributos
-	@SuppressWarnings("unused")
 	private int id;
 	private String titulo;
 	private Date fecha;
@@ -57,6 +56,10 @@ public class Publicacion {
 		return usuario;
 	}
 	
+	public int getId() {
+		return id;
+	}
+
 	public void addMeGusta() {
 		this.meGusta++;
 	}

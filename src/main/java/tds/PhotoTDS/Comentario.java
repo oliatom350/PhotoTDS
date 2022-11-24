@@ -3,7 +3,6 @@ package tds.PhotoTDS;
 public class Comentario {
 
 	//Atributos
-	@SuppressWarnings("unused")
 	private int id;
 	private String texto;
 	private String usuario;
@@ -23,4 +22,9 @@ public class Comentario {
 	public String getUsuario() {
 		return usuario;
 	}
+
+	public int getId() {
+		return id;
+	}
+	
 }
