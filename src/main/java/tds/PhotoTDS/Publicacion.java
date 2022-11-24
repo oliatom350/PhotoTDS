@@ -59,6 +59,10 @@ public class Publicacion {
 	public int getId() {
 		return id;
 	}
+	
+	public void setId(int id) {
+		this.id = id;
+	}
 
 	public void addMeGusta() {
 		this.meGusta++;
