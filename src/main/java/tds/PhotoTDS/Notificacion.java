@@ -5,6 +5,8 @@ import java.util.*;
 public class Notificacion {
 
 	//Atributos
+	@SuppressWarnings("unused")
+	private int id;
 	private Date fecha;
 	private Publicacion publicacion;
 	

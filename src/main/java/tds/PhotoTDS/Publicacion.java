@@ -5,6 +5,8 @@ import java.util.*;
 public class Publicacion {
 
 	//Atributos
+	@SuppressWarnings("unused")
+	private int id;
 	private String titulo;
 	private Date fecha;
 	private String descripcion;

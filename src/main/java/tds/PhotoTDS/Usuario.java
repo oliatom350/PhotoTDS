@@ -6,7 +6,8 @@ import java.util.Date;
 public class Usuario {
 	
 	//Atributos
-	
+	@SuppressWarnings("unused")
+	private int id;
 	private String nombre;
 	private String email;
 	private String nombreCompleto;
