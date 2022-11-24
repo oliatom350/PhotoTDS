@@ -9,14 +9,23 @@ public abstract class FactoriaDAO {
 	}
 	
 	// Crea un tipo de factoria DAO. Solo existe el tipo TDSFactoriaDAO
-	public static FactoriaDAO getFactoriaDAO (Integer tipo) throws Exception 
+	@SuppressWarnings("deprecation")
+	public static FactoriaDAO getFactoriaDAO (String tipo) throws Exception 
 	{
 		if (unicaInstancia == null)
 				try { 
-					unicaInstancia = (FactoriaDAO) Class.forName(tipo.toString()).newInstance();
+					unicaInstancia = (FactoriaDAO) Class.forName(tipo).newInstance();
 				} catch (Exception e) {
 					throw new Exception(e.getMessage());
 				}
 		return unicaInstancia;
 	}
+	
+	protected FactoriaDAO () {}
+	
+	public abstract IAdaptadorUsuarioDAO getUsuarioDAO();
+	public abstract IAdaptadorNotificacionDAO getNotificacion();
+	public abstract IAdaptadorPublicacionDAO getPublicacion();
+	public abstract IAdaptadorComentarioDAO getPublicacion();
+	
 }

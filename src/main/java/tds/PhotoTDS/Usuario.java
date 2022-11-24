@@ -27,9 +27,6 @@ public class Usuario {
 
 	//Metodos
 	
-	public String getNombre() {
-		return nombre;
-	}
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
@@ -59,8 +56,20 @@ public class Usuario {
 		return notificaciones;
 	}
 	
+	public ArrayList<String> getUsuariosSeguidores() {
+		return usuariosSeguidores;
+	}
+
+	public void setUsuariosSeguidores(ArrayList<String> usuariosSeguidores) {
+		this.usuariosSeguidores = usuariosSeguidores;
+	}
+
 	public int getId() {
 		return id;
+	}
+	
+	public void setId(int id) {
+		this.id = id;
 	}
 
 	public void addSeguidor(String seguidor) {
