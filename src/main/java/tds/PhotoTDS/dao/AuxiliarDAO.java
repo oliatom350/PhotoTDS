@@ -18,12 +18,30 @@ public class AuxiliarDAO {
 		return lineas.trim();
 	}
 	
-	public String obtenerNotificacionesDesdeIds(String lineas) {
+	public List<Notificacion> obtenerNotificacionesDesdeIds(String lineas) {
 		List<Notificacion> notificaciones = new LinkedList<Notificacion>(); 
 		StringTokenizer strTok = new StringTokenizer(lineas, " ");
 		while (strTok.hasMoreTokens()) {
-			notificaciones.add(FactoriaDAO.getFactoriaDAO().getNotificacion().recuperarTodasNotificaciones(Integer.valueOf((String)strTok.nextElement())));
+			notificaciones.add(FactoriaDAO.getFactoriaDAO().getNotificacion().recuperarNotificacion(Integer.valueOf((String)strTok.nextElement())));
 		}
+		return notificaciones;
+	}
+	
+	public static String obtenerCadenaDeIdsUsuario(List<String> usuarios) {
+		String lineas = "";
+		for(String linea : usuarios) {
+			lineas += linea + " ";
+		}
+		return lineas.trim();
+	}
+	
+	public static List<String> obtenerIdsDeCadenaUsuario(String lineas) {
+		List<String> usuarios = new LinkedList<String>();
+		StringTokenizer strTok = new StringTokenizer(lineas, " ");
+		while (strTok.hasMoreTokens()) {
+			usuarios.add((String)strTok.nextElement());
+		}
+		return usuarios;
 	}
 	
 	public static String obtenerIdsComentarios(List<Comentario> comentarios) {
@@ -33,11 +51,11 @@ public class AuxiliarDAO {
 		return lineas.trim();
 	}
 	
-	public String obtenerComentariosDesdeIds(String lineas) {
-		List<Comentario> comentarios = new LinkedList<Comentario>(); 
-		StringTokenizer strTok = new StringTokenizer(lineas, " ");
-		while (strTok.hasMoreTokens()) {
-			comentarios.add(FactoriaDAO.getFactoriaDAO().getComentario().recuperarTodosComentarios(Integer.valueOf((String)strTok.nextElement())));
-		}
-	}
+//	public String obtenerComentariosDesdeIds(String lineas) {
+//		List<Comentario> comentarios = new LinkedList<Comentario>(); 
+//		StringTokenizer strTok = new StringTokenizer(lineas, " ");
+//		while (strTok.hasMoreTokens()) {
+//			comentarios.add(FactoriaDAO.getFactoriaDAO().getComentario().recuperarComentario(Integer.valueOf((String)strTok.nextElement())));
+//		}
+//	}
 }
