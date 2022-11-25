@@ -6,6 +6,7 @@ import java.util.StringTokenizer;
 
 import tds.PhotoTDS.Comentario;
 import tds.PhotoTDS.Notificacion;
+import tds.PhotoTDS.Publicacion;
 
 public class AuxiliarDAO {
 
@@ -22,7 +23,7 @@ public class AuxiliarDAO {
 		List<Notificacion> notificaciones = new LinkedList<Notificacion>(); 
 		StringTokenizer strTok = new StringTokenizer(lineas, " ");
 		while (strTok.hasMoreTokens()) {
-			notificaciones.add(FactoriaDAO.getFactoriaDAO().getNotificacion().recuperarNotificacion(Integer.valueOf((String)strTok.nextElement())));
+			notificaciones.add(FactoriaDAO.getFactoriaDAO().getNotificacionDAO().recuperarNotificacion(Integer.valueOf((String)strTok.nextElement())));
 		}
 		return notificaciones;
 	}
@@ -35,11 +36,12 @@ public class AuxiliarDAO {
 		return lineas.trim();
 	}
 	
-	public static List<String> obtenerIdsDeCadenaUsuario(String lineas) {
+	public static List<String> obtenerUsuariosDesdeIds(String lineas) {
 		List<String> usuarios = new LinkedList<String>();
 		StringTokenizer strTok = new StringTokenizer(lineas, " ");
 		while (strTok.hasMoreTokens()) {
 			usuarios.add((String)strTok.nextElement());
+			//usuarios.add(FactoriaDAO.getFactoriaDAO().getUsuarioDAO().recuperarTodosUsuarios(Integer.valueOf((String)strTok.nextElement())));
 		}
 		return usuarios;
 	}

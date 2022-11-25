@@ -24,8 +24,8 @@ public abstract class FactoriaDAO {
 	protected FactoriaDAO () {}
 	
 	public abstract IAdaptadorUsuarioDAO getUsuarioDAO();
-	public abstract IAdaptadorNotificacionDAO getNotificacion();
-	public abstract IAdaptadorPublicacionDAO getPublicacion();
-	public abstract IAdaptadorComentarioDAO getPublicacion();
+	public abstract IAdaptadorNotificacionDAO getNotificacionDAO();
+	public abstract IAdaptadorPublicacionDAO getPublicacionDAO();
+	public abstract IAdaptadorComentarioDAO getComentarioDAO();
 	
 }

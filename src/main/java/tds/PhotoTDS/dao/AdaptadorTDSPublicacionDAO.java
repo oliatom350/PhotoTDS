@@ -19,12 +19,12 @@ public class AdaptadorTDSPublicacionDAO implements IAdaptadorPublicacionDAO {
 	
 	@Override
 	public void registrarPublicacion(Publicacion publicacion) {
-		boolean existe = true;
+		boolean existe = false;
 		Entidad ePublicacion = null;
 		try {
 			ePublicacion = servPersistencia.recuperarEntidad(publicacion.getId());
 		} catch (NullPointerException e) {
-			existe = false;
+			existe = true;
 		}
 		if (existe || ePublicacion != null) return;
 		
@@ -47,14 +47,40 @@ public class AdaptadorTDSPublicacionDAO implements IAdaptadorPublicacionDAO {
 
 	@Override
 	public void borrarPublicacion(Publicacion publicacion) {
-		// TODO Auto-generated method stub
+		Entidad ePublicacion;
+		ePublicacion = servPersistencia.recuperarEntidad(publicacion.getId());
+		
+		servPersistencia.borrarEntidad(ePublicacion);
 		
 	}
 
 	@Override
-	public Publicacion modificarPublicacion(Publicacion publicacion) {
-		// TODO Auto-generated method stub
-		return null;
+	public void modificarPublicacion(Publicacion publicacion) {
+		Entidad ePublicacion = servPersistencia.recuperarEntidad(publicacion.getId());
+		
+		for (Propiedad propiedad : ePublicacion.getPropiedades()) {
+			if(propiedad.getNombre().equals("titulo")) {
+				propiedad.setValor(publicacion.getTitulo());
+			}
+			if(propiedad.getNombre().equals("fecha")) {
+				propiedad.setValor(publicacion.getFecha().toString());
+			}
+			if(propiedad.getNombre().equals("descripcion")) {
+				propiedad.setValor(publicacion.getDescripcion());
+			}
+			if(propiedad.getNombre().equals("meGusta")) {
+				propiedad.setValor(String.valueOf(publicacion.getMeGusta()));
+			}
+			if(propiedad.getNombre().equals("hashtags")) {
+				propiedad.setValor(String.valueOf(publicacion.getHashtags().toString()));
+			}
+			if(propiedad.getNombre().equals("usuario")) {
+				propiedad.setValor(String.valueOf(publicacion.getUsuario()));
+			}
+			if(propiedad.getNombre().equals("comentarios")) {
+				propiedad.setValor(String.valueOf(AuxiliarDAO.obtenerIdsComentarios(publicacion.getComentarios())));
+			}
+		}
 	}
 
 	@Override

@@ -74,7 +74,7 @@ public class AdaptadorTDSUsuarioDAO implements IAdaptadorUsuarioDAO{
 				propiedad.setValor(usuario.getNombreCompleto());
 			}
 			if(propiedad.getNombre().equals("fechaNacimiento")) {
-				propiedad.setValor(usuario.getNombre());
+				propiedad.setValor(usuario.getFechaNacimiento().toString());
 			}
 			if(propiedad.getNombre().equals("isPremium")) {
 				propiedad.setValor(String.valueOf(usuario.isPremium()));

@@ -19,12 +19,12 @@ public class AdaptadorTDSComentarioDAO implements IAdaptadorComentarioDAO {
 	
 	@Override
 	public void registrarComentario(Comentario comentario) {
-		boolean existe = true;
+		boolean existe = false;
 		Entidad eComentario = null;
 		try {
 			eComentario = servPersistencia.recuperarEntidad(comentario.getId());
 		} catch (NullPointerException e) {
-			existe = false;
+			existe = true;
 		}
 		if (existe || eComentario != null) return;
 		
@@ -42,14 +42,25 @@ public class AdaptadorTDSComentarioDAO implements IAdaptadorComentarioDAO {
 
 	@Override
 	public void borrarComentario(Comentario comentario) {
-		// TODO Auto-generated method stub
+		Entidad eComentario;
+		eComentario = servPersistencia.recuperarEntidad(comentario.getId());
+		
+		servPersistencia.borrarEntidad(eComentario);
 		
 	}
 
 	@Override
-	public Comentario modificarComentario(Comentario comentario) {
-		// TODO Auto-generated method stub
-		return null;
+	public void modificarComentario(Comentario comentario) {
+		Entidad eComentario = servPersistencia.recuperarEntidad(comentario.getId());
+		
+		for (Propiedad propiedad : eComentario.getPropiedades()) {
+			if(propiedad.getNombre().equals("titulo")) {
+				propiedad.setValor(comentario.getTexto());
+			}
+			if(propiedad.getNombre().equals("usuario")) {
+				propiedad.setValor(comentario.getUsuario());
+			}
+		}
 	}
 
 	@Override
