@@ -50,7 +50,7 @@ public class AdaptadorTDSNotificacionDAO implements IAdaptadorNotificacionDAO{
 	}
 
 	@Override
-	public void modificarUsuario(Notificacion notificacion) {
+	public void modificarNotificacion(Notificacion notificacion) {
 		Entidad eNotificacion = servPersistencia.recuperarEntidad(notificacion.getId());
 		
 		for (Propiedad propiedad : eNotificacion.getPropiedades()) {
