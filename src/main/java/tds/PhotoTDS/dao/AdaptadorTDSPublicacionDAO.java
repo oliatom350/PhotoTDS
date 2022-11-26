@@ -1,5 +1,6 @@
 package tds.PhotoTDS.dao;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -75,13 +76,13 @@ public class AdaptadorTDSPublicacionDAO implements IAdaptadorPublicacionDAO {
 				propiedad.setValor(String.valueOf(publicacion.getMeGusta()));
 			}
 			if(propiedad.getNombre().equals("hashtags")) {
-				propiedad.setValor(String.valueOf(publicacion.getHashtags().toString()));
+				propiedad.setValor(AuxiliarDAO.obtenerCadenaDeIds(publicacion.getHashtags()));
 			}
 			if(propiedad.getNombre().equals("usuario")) {
 				propiedad.setValor(String.valueOf(publicacion.getUsuario()));
 			}
 			if(propiedad.getNombre().equals("comentarios")) {
-				propiedad.setValor(String.valueOf(AuxiliarDAO.obtenerIdsComentarios(publicacion.getComentarios())));
+				propiedad.setValor(AuxiliarDAO.obtenerIdsComentarios(publicacion.getComentarios()));
 			}
 		}
 	}
@@ -98,9 +99,26 @@ public class AdaptadorTDSPublicacionDAO implements IAdaptadorPublicacionDAO {
 		ArrayList<Comentario> comentarios = null;
 		String usuario = null;
 		
+		Entidad ePublicacion = servPersistencia.recuperarEntidad(codigo);
+		titulo = servPersistencia.recuperarPropiedadEntidad(ePublicacion, "titulo");
+		descripcion = servPersistencia.recuperarPropiedadEntidad(ePublicacion, "descripcion");
+		meGusta = Integer.parseInt(servPersistencia.recuperarPropiedadEntidad(ePublicacion, "meGusta"));
+		usuario = servPersistencia.recuperarPropiedadEntidad(ePublicacion, "usuario");
+		try {
+			fecha = dateFormat.parse(servPersistencia.recuperarPropiedadEntidad(ePublicacion, "fecha"));
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
 		
+		hashtags = (ArrayList<String>) AuxiliarDAO.obtenerListaDeIds(servPersistencia.recuperarPropiedadEntidad(ePublicacion, "hashtags"));
+		comentarios = (ArrayList<Comentario>) AuxiliarDAO.obtenerComentariosDesdeIds(servPersistencia.recuperarPropiedadEntidad(ePublicacion, "comentarios"));
 		
-		return null;
+		Publicacion publicacion = new Publicacion(titulo, descripcion, hashtags, usuario);
+		publicacion.setComentarios(comentarios);
+		publicacion.setFecha(fecha);
+		publicacion.setMeGusta(meGusta);
+		
+		return publicacion;
 	}
 
 	@Override

@@ -56,6 +56,18 @@ public class Publicacion {
 		return usuario;
 	}
 	
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
+
+	public void setMeGusta(int meGusta) {
+		this.meGusta = meGusta;
+	}
+
+	public void setComentarios(ArrayList<Comentario> comentarios) {
+		this.comentarios = comentarios;
+	}
+
 	public int getId() {
 		return id;
 	}

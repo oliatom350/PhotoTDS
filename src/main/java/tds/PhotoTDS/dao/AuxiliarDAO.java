@@ -53,11 +53,12 @@ public class AuxiliarDAO {
 		return lineas.trim();
 	}
 	
-//	public String obtenerComentariosDesdeIds(String lineas) {
-//		List<Comentario> comentarios = new LinkedList<Comentario>(); 
-//		StringTokenizer strTok = new StringTokenizer(lineas, " ");
-//		while (strTok.hasMoreTokens()) {
-//			comentarios.add(FactoriaDAO.getFactoriaDAO().getComentario().recuperarComentario(Integer.valueOf((String)strTok.nextElement())));
-//		}
-//	}
+	public static List<Comentario> obtenerComentariosDesdeIds(String lineas) {
+		List<Comentario> comentarios = new LinkedList<Comentario>(); 
+		StringTokenizer strTok = new StringTokenizer(lineas, " ");
+		while (strTok.hasMoreTokens()) {
+			comentarios.add(FactoriaDAO.getFactoriaDAO().getComentarioDAO().recuperarComentario(Integer.valueOf((String)strTok.nextElement())));
+		}
+		return comentarios;
+	}
 }
