@@ -1,8 +1,10 @@
 package tds.PhotoTDS.dao;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import beans.Entidad;
@@ -15,10 +17,12 @@ import tds.driver.ServicioPersistencia;
 public class AdaptadorTDSUsuarioDAO implements IAdaptadorUsuarioDAO{
 	
 	private ServicioPersistencia servPersistencia;
+	private PoolDAO poolUsuarios;
+	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 	
 	public AdaptadorTDSUsuarioDAO() {
 		servPersistencia = FactoriaServicioPersistencia.getInstance().getServicioPersistencia();
-		
+		poolUsuarios = PoolDAO.getInstance();
 	}
 
 	@Override
@@ -40,9 +44,9 @@ public class AdaptadorTDSUsuarioDAO implements IAdaptadorUsuarioDAO{
 						new Propiedad("nombre", usuario.getNombre()),
 						new Propiedad("email", usuario.getEmail()),
 						new Propiedad("nombreCompleto", usuario.getNombreCompleto()),
-						new Propiedad("fechaNacimiento", usuario.getFechaNacimiento().toString()),
+						new Propiedad("fechaNacimiento", dateFormat.format(usuario.getFechaNacimiento())),
 						new Propiedad("isPremium", String.valueOf(usuario.isPremium())),
-						new Propiedad("usuariosSeguidores", AuxiliarDAO.obtenerCadenaDeIdsUsuario(usuario.getUsuariosSeguidores())),
+						new Propiedad("usuariosSeguidores", AuxiliarDAO.obtenerCadenaDeIds(usuario.getUsuariosSeguidores())),
 						new Propiedad("notificaciones", AuxiliarDAO.obtenerIdsNotificaciones(usuario.getNotificaciones())))));
 		
 		eUsuario = servPersistencia.registrarEntidad(eUsuario);
@@ -80,7 +84,7 @@ public class AdaptadorTDSUsuarioDAO implements IAdaptadorUsuarioDAO{
 				propiedad.setValor(String.valueOf(usuario.isPremium()));
 			}
 			if(propiedad.getNombre().equals("usuariosSeguidores")) {
-				propiedad.setValor(AuxiliarDAO.obtenerCadenaDeIdsUsuario(usuario.getUsuariosSeguidores()));
+				propiedad.setValor(AuxiliarDAO.obtenerCadenaDeIds(usuario.getUsuariosSeguidores()));
 			}
 			if(propiedad.getNombre().equals("notificaciones")) {
 				propiedad.setValor(AuxiliarDAO.obtenerIdsNotificaciones(usuario.getNotificaciones()));
@@ -90,8 +94,34 @@ public class AdaptadorTDSUsuarioDAO implements IAdaptadorUsuarioDAO{
 
 	@Override
 	public Usuario recuperarUsuario(int codigo) {
-		// TODO Auto-generated method stub
-		return null;
+		if (poolUsuarios.contains(codigo)) return (Usuario) poolUsuarios.getObject(codigo);
+		
+		Date fecha = null;
+		
+		
+		Entidad eUsuario = servPersistencia.recuperarEntidad(codigo);
+		try {
+			fecha = dateFormat.parse(servPersistencia.recuperarPropiedadEntidad(eUsuario, "fechaNacimiento"));
+		} catch (ParseException e) {e.printStackTrace(); }
+		
+		String nombre = servPersistencia.recuperarPropiedadEntidad(eUsuario, "nombre");
+		String email = servPersistencia.recuperarPropiedadEntidad(eUsuario, "email");
+		String nombreCompleto = servPersistencia.recuperarPropiedadEntidad(eUsuario, "nombreCompleto");
+		boolean isPremium = Boolean.parseBoolean(servPersistencia.recuperarPropiedadEntidad(eUsuario, "isPremium"));
+		List<String> usuariosSeguidores = AuxiliarDAO.obtenerListaDeIds(servPersistencia.recuperarPropiedadEntidad(eUsuario, "usuariosSeguidores"));
+		List<Notificacion> notificaciones = AuxiliarDAO.obtenerNotificacionesDesdeIds(servPersistencia.recuperarPropiedadEntidad(eUsuario, "notificaciones"));
+		
+		Usuario usuario = new Usuario(nombre, email, nombreCompleto, fecha, isPremium);
+		for(String usuarioId : usuariosSeguidores) {
+			usuario.addSeguidor(usuarioId);
+		}
+		for(Notificacion notificacion : notificaciones) {
+			usuario.addNotificacion(notificacion);
+		}
+		
+		poolUsuarios.addObject(codigo, usuario);
+		
+		return usuario;
 	}
 
 	@Override

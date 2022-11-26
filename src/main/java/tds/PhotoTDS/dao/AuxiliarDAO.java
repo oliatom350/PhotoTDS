@@ -19,7 +19,7 @@ public class AuxiliarDAO {
 		return lineas.trim();
 	}
 	
-	public List<Notificacion> obtenerNotificacionesDesdeIds(String lineas) {
+	public static List<Notificacion> obtenerNotificacionesDesdeIds(String lineas) {
 		List<Notificacion> notificaciones = new LinkedList<Notificacion>(); 
 		StringTokenizer strTok = new StringTokenizer(lineas, " ");
 		while (strTok.hasMoreTokens()) {
@@ -28,22 +28,22 @@ public class AuxiliarDAO {
 		return notificaciones;
 	}
 	
-	public static String obtenerCadenaDeIdsUsuario(List<String> usuarios) {
+	public static String obtenerCadenaDeIds(List<String> ids) {
 		String lineas = "";
-		for(String linea : usuarios) {
+		for(String linea : ids) {
 			lineas += linea + " ";
 		}
 		return lineas.trim();
 	}
 	
-	public static List<String> obtenerUsuariosDesdeIds(String lineas) {
-		List<String> usuarios = new LinkedList<String>();
+	public static List<String> obtenerListaDeIds(String lineas) {
+		List<String> ids = new LinkedList<String>();
 		StringTokenizer strTok = new StringTokenizer(lineas, " ");
 		while (strTok.hasMoreTokens()) {
-			usuarios.add((String)strTok.nextElement());
+			ids.add((String)strTok.nextElement());
 			//usuarios.add(FactoriaDAO.getFactoriaDAO().getUsuarioDAO().recuperarTodosUsuarios(Integer.valueOf((String)strTok.nextElement())));
 		}
-		return usuarios;
+		return ids;
 	}
 	
 	public static String obtenerIdsComentarios(List<Comentario> comentarios) {

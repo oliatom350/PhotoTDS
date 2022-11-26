@@ -1,8 +1,10 @@
 package tds.PhotoTDS.dao;
 
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import beans.Entidad;
@@ -14,8 +16,14 @@ import tds.driver.ServicioPersistencia;
 
 public class AdaptadorTDSNotificacionDAO implements IAdaptadorNotificacionDAO{
 
-	ServicioPersistencia servPersistencia = FactoriaServicioPersistencia.getInstance().getServicioPersistencia();
+	ServicioPersistencia servPersistencia;
 	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+	private PoolDAO poolNotificaciones;
+	
+	public AdaptadorTDSNotificacionDAO() {
+		poolNotificaciones = PoolDAO.getInstance();
+		servPersistencia = FactoriaServicioPersistencia.getInstance().getServicioPersistencia();
+	}
 	
 	@Override
 	public void registrarNotificacion(Notificacion notificacion) {
@@ -33,7 +41,7 @@ public class AdaptadorTDSNotificacionDAO implements IAdaptadorNotificacionDAO{
 		
 		eNotificacion.setPropiedades(
 				new ArrayList<Propiedad>(Arrays.asList(
-						new Propiedad("fecha", notificacion.getFecha().toString()),
+						new Propiedad("fecha", dateFormat.format(notificacion.getFecha())),
 						new Propiedad("publicacion", Integer.toString(notificacion.getPublicacion().getId())) 
 				))
 		);
@@ -65,8 +73,19 @@ public class AdaptadorTDSNotificacionDAO implements IAdaptadorNotificacionDAO{
 
 	@Override
 	public Notificacion recuperarNotificacion(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		if (poolNotificaciones.contains(id)) return (Notificacion) poolNotificaciones.getObject(id);
+		
+		Entidad eNotificacion = servPersistencia.recuperarEntidad(id);
+		
+		Date fecha = null;
+		try {
+			fecha = dateFormat.parse(servPersistencia.recuperarPropiedadEntidad(eNotificacion, "fechaNacimiento"));
+		} catch (ParseException e) {e.printStackTrace(); }
+		Publicacion publicacion = FactoriaDAO.getFactoriaDAO().getPublicacionDAO().recuperarPublicacion(Integer.parseInt(servPersistencia.recuperarPropiedadEntidad(eNotificacion, "publicacion")));
+		
+		Notificacion notificacion = new Notificacion(fecha, publicacion);
+		
+		return notificacion;
 	}
 
 	@Override
