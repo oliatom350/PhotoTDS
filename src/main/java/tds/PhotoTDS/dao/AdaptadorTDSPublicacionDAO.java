@@ -3,10 +3,12 @@ package tds.PhotoTDS.dao;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import beans.Entidad;
 import beans.Propiedad;
+import tds.PhotoTDS.Comentario;
 import tds.PhotoTDS.Publicacion;
 import tds.driver.FactoriaServicioPersistencia;
 import tds.driver.ServicioPersistencia;
@@ -16,6 +18,7 @@ public class AdaptadorTDSPublicacionDAO implements IAdaptadorPublicacionDAO {
 
 	ServicioPersistencia servPersistencia = FactoriaServicioPersistencia.getInstance().getServicioPersistencia();
 	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+	private PoolDAO poolPublicaciones = PoolDAO.getInstance();
 	
 	@Override
 	public void registrarPublicacion(Publicacion publicacion) {
@@ -85,7 +88,18 @@ public class AdaptadorTDSPublicacionDAO implements IAdaptadorPublicacionDAO {
 
 	@Override
 	public Publicacion recuperarPublicacion(int codigo) {
-		// TODO Auto-generated method stub
+		if (poolPublicaciones.contains(codigo)) return (Publicacion) poolPublicaciones.getObject(codigo);
+		
+		String titulo = null;
+		Date fecha = null;
+		String descripcion = null;
+		int meGusta = 0;
+		ArrayList<String> hashtags = null;
+		ArrayList<Comentario> comentarios = null;
+		String usuario = null;
+		
+		
+		
 		return null;
 	}
 

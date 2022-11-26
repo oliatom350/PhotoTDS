@@ -10,5 +10,5 @@ public interface IAdaptadorComentarioDAO {
 	public void borrarComentario(Comentario comentario);
 	public void modificarComentario(Comentario comentario);
 	public Comentario recuperarComentario(int codigo);
-	public List<Comentario> recuperarTodasComentarios();
+	public List<Comentario> recuperarTodosComentarios();
 }

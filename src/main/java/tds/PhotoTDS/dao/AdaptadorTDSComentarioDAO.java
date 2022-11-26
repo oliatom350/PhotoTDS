@@ -16,6 +16,7 @@ public class AdaptadorTDSComentarioDAO implements IAdaptadorComentarioDAO {
 
 	ServicioPersistencia servPersistencia = FactoriaServicioPersistencia.getInstance().getServicioPersistencia();
 	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+	private PoolDAO poolComentarios = PoolDAO.getInstance();
 	
 	@Override
 	public void registrarComentario(Comentario comentario) {
@@ -32,7 +33,7 @@ public class AdaptadorTDSComentarioDAO implements IAdaptadorComentarioDAO {
 		eComentario.setNombre("comentario");
 		eComentario.setPropiedades(
 				new ArrayList<Propiedad>(Arrays.asList(
-						new Propiedad("titulo", comentario.getTexto()),
+						new Propiedad("texto", comentario.getTexto()),
 						new Propiedad("usuario", comentario.getUsuario())
 		))
 		);
@@ -54,7 +55,7 @@ public class AdaptadorTDSComentarioDAO implements IAdaptadorComentarioDAO {
 		Entidad eComentario = servPersistencia.recuperarEntidad(comentario.getId());
 		
 		for (Propiedad propiedad : eComentario.getPropiedades()) {
-			if(propiedad.getNombre().equals("titulo")) {
+			if(propiedad.getNombre().equals("texto")) {
 				propiedad.setValor(comentario.getTexto());
 			}
 			if(propiedad.getNombre().equals("usuario")) {
@@ -65,12 +66,24 @@ public class AdaptadorTDSComentarioDAO implements IAdaptadorComentarioDAO {
 
 	@Override
 	public Comentario recuperarComentario(int codigo) {
-		// TODO Auto-generated method stub
-		return null;
+		if (poolComentarios.contains(codigo)) return (Comentario) poolComentarios.getObject(codigo);
+		
+		String texto = null;
+		String usuario = null;
+		
+		Entidad eComentario = servPersistencia.recuperarEntidad(codigo);
+		texto = servPersistencia.recuperarPropiedadEntidad(eComentario, "texto");
+		usuario = servPersistencia.recuperarPropiedadEntidad(eComentario, "usuario");
+	
+		Comentario comentario = new Comentario(texto, usuario);
+		comentario.setId(codigo);
+			
+		poolComentarios.addObject(codigo, comentario);
+		return comentario;
 	}
 
 	@Override
-	public List<Comentario> recuperarTodasComentarios() {
+	public List<Comentario> recuperarTodosComentarios() {
 		// TODO Auto-generated method stub
 		return null;
 	}
