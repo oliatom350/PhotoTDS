@@ -123,8 +123,12 @@ public class AdaptadorTDSPublicacionDAO implements IAdaptadorPublicacionDAO {
 
 	@Override
 	public List<Publicacion> recuperarTodasPublicaciones() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Publicacion> publicaciones = new ArrayList<Publicacion>();
+        List<Entidad> ePublicaciones = servPersistencia.recuperarEntidades("publicacion");
+        for(Entidad e : ePublicaciones) {
+        	publicaciones.add(recuperarPublicacion(e.getId()));
+        }
+        return publicaciones;
 	}
 
 	
