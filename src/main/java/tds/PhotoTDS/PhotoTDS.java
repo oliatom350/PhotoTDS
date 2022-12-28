@@ -44,11 +44,11 @@ public class PhotoTDS {
 	
 	//Metodos
 	public RepoUsuarios getRepUsers() {
-		return repUsers;
+		return repUsuarios;
 	}
 
 	public RepoPublicaciones getRepPubli() {
-		return repPubli;
+		return repPublicaciones;
 	}
 
 	public GeneradorPDF getGenPDF() {
