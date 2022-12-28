@@ -84,8 +84,12 @@ public class AdaptadorTDSComentarioDAO implements IAdaptadorComentarioDAO {
 
 	@Override
 	public List<Comentario> recuperarTodosComentarios() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Comentario> comentarios = new ArrayList<Comentario>();
+        List<Entidad> eComentarios = servPersistencia.recuperarEntidades("comentario");
+        for(Entidad e : eComentarios) {
+        	comentarios.add(recuperarComentario(e.getId()));
+        }
+        return comentarios;
 	}
 
 	
