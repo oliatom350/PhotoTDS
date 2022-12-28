@@ -38,7 +38,7 @@ public class AdaptadorTDSUsuarioDAO implements IAdaptadorUsuarioDAO{
 		
 		eUsuario = new Entidad();
 		eUsuario.setNombre("usuario");
-		
+				
 		eUsuario.setPropiedades(
 				new ArrayList<Propiedad>(Arrays.asList(
 						new Propiedad("nombre", usuario.getNombre()),
@@ -90,6 +90,7 @@ public class AdaptadorTDSUsuarioDAO implements IAdaptadorUsuarioDAO{
 				propiedad.setValor(AuxiliarDAO.obtenerIdsNotificaciones(usuario.getNotificaciones()));
 			}
 		}
+		servPersistencia.modificarEntidad(eUsuario);
 	}
 
 	@Override
@@ -126,8 +127,12 @@ public class AdaptadorTDSUsuarioDAO implements IAdaptadorUsuarioDAO{
 
 	@Override
 	public List<Usuario> recuperarTodosUsuarios() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Usuario> usuarios = new ArrayList<Usuario>();
+		List<Entidad> eUsuarios= servPersistencia.recuperarEntidades("usuario");
+		for(Entidad e : eUsuarios) {
+			usuarios.add(recuperarUsuario(e.getId()));
+		}
+		return usuarios;
 	}
 	
 	

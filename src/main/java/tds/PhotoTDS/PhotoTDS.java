@@ -1,20 +1,45 @@
 package tds.PhotoTDS;
 
+import tds.PhotoTDS.dao.FactoriaDAO;
+import tds.PhotoTDS.dao.IAdaptadorComentarioDAO;
+import tds.PhotoTDS.dao.IAdaptadorNotificacionDAO;
+import tds.PhotoTDS.dao.IAdaptadorPublicacionDAO;
+import tds.PhotoTDS.dao.IAdaptadorUsuarioDAO;
+
 public class PhotoTDS {
 
 	//Atributos
-	private RepoUsuarios repUsers;
-	private RepoPublicaciones repPubli;
+	private static PhotoTDS unicaInstancia = new PhotoTDS();
+	private RepoUsuarios repUsuarios;
+	private RepoPublicaciones repPublicaciones;
 	private GeneradorPDF genPDF;
 	private GeneradorExcel genExcel;
+	private IAdaptadorNotificacionDAO adaptadorNotificacion;
+	private IAdaptadorUsuarioDAO adaptadorUsuario;
+	private IAdaptadorComentarioDAO adaptadorComentario;
+	private IAdaptadorPublicacionDAO adaptadorPublicacion;
 	
 	//Constructor
-	public PhotoTDS(RepoUsuarios repUsers, RepoPublicaciones repPubli, GeneradorPDF genPDF, GeneradorExcel genExcel) {
-		super();
-		this.repUsers = repUsers;
-		this.repPubli = repPubli;
-		this.genPDF = genPDF;
-		this.genExcel = genExcel;
+	public PhotoTDS() {
+		inicializarAdaptadores();
+		inicializarRepos();
+	}
+	
+	public void inicializarAdaptadores() {
+		FactoriaDAO factoria = null;
+		try {
+			factoria = FactoriaDAO.getFactoriaDAO();
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+		adaptadorComentario = factoria.getComentarioDAO();
+		adaptadorNotificacion = factoria.getNotificacionDAO();
+		adaptadorPublicacion = factoria.getPublicacionDAO();
+		adaptadorUsuario = factoria.getUsuarioDAO();
+	}
+	
+	public void inicializarRepos() {
+		
 	}
 	
 	//Metodos

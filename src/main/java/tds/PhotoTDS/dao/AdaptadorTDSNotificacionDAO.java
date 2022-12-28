@@ -69,6 +69,7 @@ public class AdaptadorTDSNotificacionDAO implements IAdaptadorNotificacionDAO{
 				propiedad.setValor(Integer.toString(notificacion.getPublicacion().getId()));
 			}
 		}
+		servPersistencia.modificarEntidad(eNotificacion);
 	}
 
 	@Override
@@ -90,8 +91,12 @@ public class AdaptadorTDSNotificacionDAO implements IAdaptadorNotificacionDAO{
 
 	@Override
 	public List<Notificacion> recuperarTodasNotificaciones() {
-		// TODO Auto-generated method stub
-		return null;
+		List<Notificacion> notificaciones = new ArrayList<Notificacion>();
+		List<Entidad> eNotificaciones = servPersistencia.recuperarEntidades("notificacion");
+		for(Entidad e : eNotificaciones) {
+			notificaciones.add(recuperarNotificacion(e.getId()));
+		}
+		return notificaciones;
 	}
 
 }

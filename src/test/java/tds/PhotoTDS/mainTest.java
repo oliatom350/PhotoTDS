@@ -23,9 +23,14 @@ public class mainTest {
 		
 		System.out.println(servPersistencia.recuperarEntidades().toString());
 		
-		System.out.println(servPersistencia.recuperarEntidades().toString());
+		servPersistencia.borrarEntidad(usuario);
 		
-
+				for(Entidad entidad : servPersistencia.recuperarEntidades()) {
+			servPersistencia.borrarEntidad(entidad);
+		}
+		
+		System.out.println(servPersistencia.recuperarEntidades().toString());
+				
 	}
 
 }
