@@ -1,6 +1,5 @@
 package tds.PhotoTDS.dao;
 
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -15,7 +14,6 @@ import tds.driver.ServicioPersistencia;
 public class AdaptadorTDSComentarioDAO implements IAdaptadorComentarioDAO {
 
 	ServicioPersistencia servPersistencia = FactoriaServicioPersistencia.getInstance().getServicioPersistencia();
-	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 	private PoolDAO poolComentarios = PoolDAO.getInstance();
 	
 	@Override

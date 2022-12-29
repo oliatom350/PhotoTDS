@@ -19,7 +19,6 @@ public class Publicacion {
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.hashtags = hashtags;
-		
 		this.fecha = new Date();
 		this.meGusta = 0;
 		this.comentarios = new ArrayList<Comentario>();
