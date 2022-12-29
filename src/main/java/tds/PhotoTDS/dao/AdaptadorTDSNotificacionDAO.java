@@ -42,7 +42,7 @@ public class AdaptadorTDSNotificacionDAO implements IAdaptadorNotificacionDAO{
 		eNotificacion.setPropiedades(
 				new ArrayList<Propiedad>(Arrays.asList(
 						new Propiedad("fecha", dateFormat.format(notificacion.getFecha())),
-						new Propiedad("publicacion", Integer.toString(notificacion.getPublicacion().getId())) 
+						new Propiedad("publicacion", Integer.toString(notificacion.getPublicacion())) 
 				))
 		);
 		eNotificacion = servPersistencia.registrarEntidad(eNotificacion);
@@ -66,7 +66,7 @@ public class AdaptadorTDSNotificacionDAO implements IAdaptadorNotificacionDAO{
 				propiedad.setValor(notificacion.getFecha().toString());
 			}
 			if(propiedad.getNombre().equals("publicacion")) {
-				propiedad.setValor(Integer.toString(notificacion.getPublicacion().getId()));
+				propiedad.setValor(Integer.toString(notificacion.getPublicacion()));
 			}
 		}
 		servPersistencia.modificarEntidad(eNotificacion);
@@ -79,18 +79,15 @@ public class AdaptadorTDSNotificacionDAO implements IAdaptadorNotificacionDAO{
 		Entidad eNotificacion = servPersistencia.recuperarEntidad(id);
 		
 		Date fecha = null;
-		//TODO 
-		// Realmente hace falta este IF?
+		
 		String f = servPersistencia.recuperarPropiedadEntidad(eNotificacion, "fechaNacimiento");
 		if (f != null) {
 			try {
 				fecha = dateFormat.parse(f);
 			} catch (ParseException e) {e.printStackTrace(); }
 		}
-		//TODO
-		//Cannot invoke "tds.PhotoTDS.dao.FactoriaDAO.getPublicacionDAO()" because the return value of "tds.PhotoTDS.dao.FactoriaDAO.getFactoriaDAO()" is null
-		//Al no haber publicaciones, no se recupera nada y da error
-		Publicacion publicacion = FactoriaDAO.getFactoriaDAO().getPublicacionDAO().recuperarPublicacion(Integer.parseInt(servPersistencia.recuperarPropiedadEntidad(eNotificacion, "publicacion")));
+		
+		int publicacion = Integer.parseInt(servPersistencia.recuperarPropiedadEntidad(eNotificacion, "publicacion"));
 		
 		Notificacion notificacion = new Notificacion(fecha, publicacion);
 		

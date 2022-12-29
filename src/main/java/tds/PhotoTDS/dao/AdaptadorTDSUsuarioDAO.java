@@ -47,7 +47,11 @@ public class AdaptadorTDSUsuarioDAO implements IAdaptadorUsuarioDAO{
 						new Propiedad("fechaNacimiento", dateFormat.format(usuario.getFechaNacimiento())),
 						new Propiedad("isPremium", String.valueOf(usuario.isPremium())),
 						new Propiedad("usuariosSeguidores", AuxiliarDAO.obtenerCadenaDeIds(usuario.getUsuariosSeguidores())),
-						new Propiedad("notificaciones", AuxiliarDAO.obtenerIdsNotificaciones(usuario.getNotificaciones())))));
+						new Propiedad("usuariosSeguidos", AuxiliarDAO.obtenerCadenaDeIds(usuario.getUsuariosSeguidos())),
+						new Propiedad("notificaciones", AuxiliarDAO.obtenerIdsNotificaciones(usuario.getNotificaciones())),
+						new Propiedad("password", usuario.getPassword()),
+						new Propiedad("fotoPerfil", usuario.getFotoPerfil()),
+						new Propiedad("presentacion", usuario.getPresentacion()))));
 		
 		eUsuario = servPersistencia.registrarEntidad(eUsuario);
 		usuario.setId(eUsuario.getId());
@@ -89,6 +93,18 @@ public class AdaptadorTDSUsuarioDAO implements IAdaptadorUsuarioDAO{
 			if(propiedad.getNombre().equals("notificaciones")) {
 				propiedad.setValor(AuxiliarDAO.obtenerIdsNotificaciones(usuario.getNotificaciones()));
 			}
+			if(propiedad.getNombre().equals("usuariosSeguidos")) {
+				propiedad.setValor(AuxiliarDAO.obtenerCadenaDeIds(usuario.getUsuariosSeguidos()));
+			}
+			if(propiedad.getNombre().equals("password")) {
+				propiedad.setValor(usuario.getPassword());
+			}
+			if(propiedad.getNombre().equals("fotoPerfil")) {
+				propiedad.setValor(usuario.getFotoPerfil());
+			}
+			if(propiedad.getNombre().equals("presentacion")) {
+				propiedad.setValor(usuario.getPresentacion());
+			}
 		}
 		servPersistencia.modificarEntidad(eUsuario);
 	}
@@ -108,17 +124,25 @@ public class AdaptadorTDSUsuarioDAO implements IAdaptadorUsuarioDAO{
 		String nombre = servPersistencia.recuperarPropiedadEntidad(eUsuario, "nombre");
 		String email = servPersistencia.recuperarPropiedadEntidad(eUsuario, "email");
 		String nombreCompleto = servPersistencia.recuperarPropiedadEntidad(eUsuario, "nombreCompleto");
+		String password = servPersistencia.recuperarPropiedadEntidad(eUsuario, "password");
+		String fotoPerfil = servPersistencia.recuperarPropiedadEntidad(eUsuario, "fotoPerfil");
+		String presentacion = servPersistencia.recuperarPropiedadEntidad(eUsuario, "presentacion");
 		boolean isPremium = Boolean.parseBoolean(servPersistencia.recuperarPropiedadEntidad(eUsuario, "isPremium"));
 		List<String> usuariosSeguidores = AuxiliarDAO.obtenerListaDeIds(servPersistencia.recuperarPropiedadEntidad(eUsuario, "usuariosSeguidores"));
 		List<Notificacion> notificaciones = AuxiliarDAO.obtenerNotificacionesDesdeIds(servPersistencia.recuperarPropiedadEntidad(eUsuario, "notificaciones"));
+		List<String> usuariosSeguidos = AuxiliarDAO.obtenerListaDeIds(servPersistencia.recuperarPropiedadEntidad(eUsuario, "usuariosSeguidos"));
 		
-		Usuario usuario = new Usuario(nombre, email, nombreCompleto, fecha, isPremium);
+		Usuario usuario = new Usuario(nombre, email, nombreCompleto, fecha, isPremium, password, fotoPerfil, presentacion);
 		for(String usuarioId : usuariosSeguidores) {
 			usuario.addSeguidor(usuarioId);
 		}
 		for(Notificacion notificacion : notificaciones) {
 			usuario.addNotificacion(notificacion);
 		}
+		for(String usuarioId : usuariosSeguidos) {
+			usuario.addSeguidor(usuarioId);
+		}
+		
 		
 		poolUsuarios.addObject(codigo, usuario);
 		
@@ -126,8 +150,8 @@ public class AdaptadorTDSUsuarioDAO implements IAdaptadorUsuarioDAO{
 	}
 
 	@Override
-	public List<Usuario> recuperarTodosUsuarios() {
-		List<Usuario> usuarios = new ArrayList<Usuario>();
+	public ArrayList<Usuario> recuperarTodosUsuarios() {
+		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 		List<Entidad> eUsuarios= servPersistencia.recuperarEntidades("usuario");
 		for(Entidad e : eUsuarios) {
 			usuarios.add(recuperarUsuario(e.getId()));

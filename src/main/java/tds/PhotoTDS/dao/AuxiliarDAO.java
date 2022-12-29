@@ -1,5 +1,6 @@
 package tds.PhotoTDS.dao;
 
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.StringTokenizer;
@@ -39,7 +40,7 @@ public class AuxiliarDAO {
 	}
 	
 	public static List<String> obtenerListaDeIds(String lineas) {
-		List<String> ids = new LinkedList<String>();
+		List<String> ids = new ArrayList<String>();
 		StringTokenizer strTok = new StringTokenizer(lineas, " ");
 		while (strTok.hasMoreTokens()) {
 			ids.add((String)strTok.nextElement());
@@ -56,7 +57,7 @@ public class AuxiliarDAO {
 	}
 	
 	public static List<Comentario> obtenerComentariosDesdeIds(String lineas) {
-		List<Comentario> comentarios = new LinkedList<Comentario>(); 
+		List<Comentario> comentarios = new ArrayList<Comentario>(); 
 		StringTokenizer strTok = new StringTokenizer(lineas, " ");
 		while (strTok.hasMoreTokens()) {
 			comentarios.add(FactoriaDAO.getFactoriaDAO().getComentarioDAO().recuperarComentario(Integer.valueOf((String)strTok.nextElement())));

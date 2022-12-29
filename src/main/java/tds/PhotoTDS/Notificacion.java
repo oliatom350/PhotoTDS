@@ -7,10 +7,10 @@ public class Notificacion {
 	//Atributos
 	private int id;
 	private Date fecha;
-	private Publicacion publicacion;
+	private int publicacion;
 	
 	//Constructor
-	public Notificacion(Date fecha, Publicacion publicacion) {
+	public Notificacion(Date fecha, int publicacion) {
 		this.fecha = fecha;
 		this.publicacion = publicacion;
 	}
@@ -21,7 +21,7 @@ public class Notificacion {
 		return fecha;
 	}
 
-	public Publicacion getPublicacion() {
+	public int getPublicacion() {
 		return publicacion;
 	}
 	

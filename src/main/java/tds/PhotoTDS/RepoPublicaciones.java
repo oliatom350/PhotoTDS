@@ -1,6 +1,7 @@
 package tds.PhotoTDS;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class RepoPublicaciones {
 
@@ -11,16 +12,22 @@ public class RepoPublicaciones {
 			return publicaciones;
 		}
 
+		public void setPublicaciones(List<Publicacion> publicaciones) {
+			this.publicaciones = (ArrayList<Publicacion>) publicaciones;
+		}
+		
 		//Métodos
 		public void addPublicacion(Publicacion Publicacion) {
 			publicaciones.add(Publicacion);
 		}
 		
-		public Publicacion findPublicacion(Publicacion Publicacion) {
-			int ind = publicaciones.indexOf(Publicacion);
-			if(ind == -1)
-				return null;
-			return publicaciones.get(ind);
+		public Publicacion findPublicacion(int id) {
+			for(Publicacion p : publicaciones) {
+				if(id == p.getId()) {
+					return p;
+				}
+			}
+			return null;
 		}
 	
 }

@@ -39,7 +39,8 @@ public class PhotoTDS {
 	}
 	
 	public void inicializarRepos() {
-		
+		repUsuarios.setUsuarios(adaptadorUsuario.recuperarTodosUsuarios());
+		repPublicaciones.setPublicaciones(adaptadorPublicacion.recuperarTodasPublicaciones());
 	}
 	
 	//Metodos
@@ -59,8 +60,23 @@ public class PhotoTDS {
 		return genExcel;
 	}
 
-	public void registrarUsuario() {
-		
+	public void registrarUsuario(Usuario usuario) {
+		for(Notificacion n : usuario.getNotificaciones()) {
+			adaptadorNotificacion.registrarNotificacion(n);
+		}
+		adaptadorUsuario.registrarUsuario(usuario);
+		repUsuarios.addUsuario(usuario);
+	}
+	
+	public void registrarPublicacion(Publicacion publicacion) {
+		adaptadorPublicacion.registrarPublicacion(publicacion);
+		repPublicaciones.addPublicacion(publicacion);
+	}
+	
+	public void addComentario(Comentario comentario, Publicacion publicacion) {
+		publicacion.addComentario(comentario);
+		adaptadorPublicacion.modificarPublicacion(publicacion);
+		adaptadorComentario.registrarComentario(comentario);
 	}
 	
 	public void addFoto() {
