@@ -40,7 +40,7 @@ public class AdaptadorTDSPublicacionDAO implements IAdaptadorPublicacionDAO {
 						new Propiedad("fecha", dateFormat.format(publicacion.getFecha())),
 						new Propiedad("descripcion", publicacion.getDescripcion()),
 						new Propiedad("meGusta", String.valueOf(publicacion.getMeGusta())),
-						new Propiedad("hashtags", publicacion.getHashtags().toString()),
+						new Propiedad("hashtags", AuxiliarDAO.obtenerCadenaDeIds(publicacion.getHashtags())),
 						new Propiedad("usuario", publicacion.getUsuario()),
 						new Propiedad("comentarios", AuxiliarDAO.obtenerIdsComentarios(publicacion.getComentarios()))
 		))

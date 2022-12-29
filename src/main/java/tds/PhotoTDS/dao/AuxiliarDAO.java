@@ -30,8 +30,10 @@ public class AuxiliarDAO {
 	
 	public static String obtenerCadenaDeIds(List<String> ids) {
 		String lineas = "";
-		for(String linea : ids) {
-			lineas += linea + " ";
+		if (ids != null) {
+			for(String linea : ids) {
+				lineas += linea + " ";
+			}
 		}
 		return lineas.trim();
 	}

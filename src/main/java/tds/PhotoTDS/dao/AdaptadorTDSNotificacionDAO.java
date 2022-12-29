@@ -79,9 +79,17 @@ public class AdaptadorTDSNotificacionDAO implements IAdaptadorNotificacionDAO{
 		Entidad eNotificacion = servPersistencia.recuperarEntidad(id);
 		
 		Date fecha = null;
-		try {
-			fecha = dateFormat.parse(servPersistencia.recuperarPropiedadEntidad(eNotificacion, "fechaNacimiento"));
-		} catch (ParseException e) {e.printStackTrace(); }
+		//TODO 
+		// Realmente hace falta este IF?
+		String f = servPersistencia.recuperarPropiedadEntidad(eNotificacion, "fechaNacimiento");
+		if (f != null) {
+			try {
+				fecha = dateFormat.parse(f);
+			} catch (ParseException e) {e.printStackTrace(); }
+		}
+		//TODO
+		//Cannot invoke "tds.PhotoTDS.dao.FactoriaDAO.getPublicacionDAO()" because the return value of "tds.PhotoTDS.dao.FactoriaDAO.getFactoriaDAO()" is null
+		//Al no haber publicaciones, no se recupera nada y da error
 		Publicacion publicacion = FactoriaDAO.getFactoriaDAO().getPublicacionDAO().recuperarPublicacion(Integer.parseInt(servPersistencia.recuperarPropiedadEntidad(eNotificacion, "publicacion")));
 		
 		Notificacion notificacion = new Notificacion(fecha, publicacion);
