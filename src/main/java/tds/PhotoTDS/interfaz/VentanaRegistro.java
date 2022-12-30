@@ -260,9 +260,10 @@ public class VentanaRegistro extends JFrame {
 		JButton BotonCancelar = new JButton("Cancelar");
 		panelBotonesVentana.add(BotonCancelar);
 		BotonCancelar.addActionListener(ev -> {
-			this.dispose();
 			VentanaEntrada vE = new VentanaEntrada();
+			vE.setLocationRelativeTo(null);
 			vE.setVisible(true);
+			this.dispose();
 		});
 	}
 
