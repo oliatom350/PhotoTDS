@@ -228,6 +228,10 @@ public class VentanaRegistro extends JFrame {
 		
 		JButton BotonAddDescripcion = new JButton("Añadir");
 		panelDescripcion.add(BotonAddDescripcion);
+		BotonAddDescripcion.addActionListener(ev -> {
+			VentanaDescripcion vD = new VentanaDescripcion();
+			vD.setVisible(true);
+		});
 		
 		JPanel panelCentralNorte = new JPanel();
 		panelCentral.add(panelCentralNorte, BorderLayout.NORTH);
@@ -255,6 +259,11 @@ public class VentanaRegistro extends JFrame {
 		
 		JButton BotonCancelar = new JButton("Cancelar");
 		panelBotonesVentana.add(BotonCancelar);
+		BotonCancelar.addActionListener(ev -> {
+			this.dispose();
+			VentanaEntrada vE = new VentanaEntrada();
+			vE.setVisible(true);
+		});
 	}
 
 }

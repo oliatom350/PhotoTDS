@@ -80,9 +80,15 @@ public class VentanaDescripcion extends JFrame {
 		
 		JButton btnFinalizar = new JButton("Finalizar");
 		panelSur.add(btnFinalizar);
+		btnFinalizar.addActionListener(ev -> {
+			this.setVisible(false);
+		});
 		
-		JButton btnNewButton = new JButton("Cancelar");
-		panelSur.add(btnNewButton);
+		JButton btnCancelar = new JButton("Cancelar");
+		panelSur.add(btnCancelar);
+		btnCancelar.addActionListener(ev -> {
+			this.setVisible(false);
+		});
 	}
 
 }
