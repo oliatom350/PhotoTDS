@@ -8,11 +8,15 @@ import javax.swing.border.*;
 import java.awt.event.*;
 
 //Comentario
-public class VentanaEntrada {
+public class VentanaEntrada extends JFrame{
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JFrame frame;
-	private JTextField textField;
-	private JTextField textField_1;
+	private JTextField usuario;
+	private JTextField password;
 
 	/**
 	 * Launch the application.
@@ -40,7 +44,7 @@ public class VentanaEntrada {
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
+	private void initialize(){
 		frame = new JFrame();
 		frame.getContentPane().setFont(new Font("SansSerif", Font.PLAIN, 14));
 		frame.setBounds(100, 100, 450, 300);
@@ -85,32 +89,34 @@ public class VentanaEntrada {
 		panel_1.add(panel_7);
 		panel_7.setLayout(new BoxLayout(panel_7, BoxLayout.Y_AXIS));
 		
-		textField = new JTextField();
-		textField.setHorizontalAlignment(SwingConstants.CENTER);
-		textField.setColumns(10);
-		panel_7.add(textField);
+		usuario = new JTextField();
+		usuario.setHorizontalAlignment(SwingConstants.CENTER);
+		usuario.setColumns(10);
+		panel_7.add(usuario);
 		
 		JPanel panel_8 = new JPanel();
 		panel_7.add(panel_8);
 		
-		textField_1 = new JTextField();
-		textField_1.setHorizontalAlignment(SwingConstants.CENTER);
-		textField_1.setColumns(10);
-		panel_7.add(textField_1);
+		password = new JTextField();
+		password.setHorizontalAlignment(SwingConstants.CENTER);
+		password.setColumns(10);
+		panel_7.add(password);
 		
 		JPanel panel_3 = new JPanel();
 		panelInicioSesion.add(panel_3);
 		panel_3.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
-		JButton btnNewButton = new JButton("Iniciar Sesión");
-		btnNewButton.setVerticalAlignment(SwingConstants.BOTTOM);
-		btnNewButton.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		btnNewButton.setBackground(SystemColor.text);
-		btnNewButton.setHorizontalAlignment(SwingConstants.LEFT);
-		panel_3.add(btnNewButton);
+		JButton iniciarSesion = new JButton("Iniciar Sesión");
+		iniciarSesion.setVerticalAlignment(SwingConstants.BOTTOM);
+		iniciarSesion.addActionListener(ev -> {
+				String nombreUsuario = usuario.getText();
+				String passUsuario = password.getText();
+				System.out.println("Usuario registrado: " + nombreUsuario + " " + passUsuario);	
+			});
+		
+		iniciarSesion.setBackground(SystemColor.text);
+		iniciarSesion.setHorizontalAlignment(SwingConstants.LEFT);
+		panel_3.add(iniciarSesion);
 		
 		JPanel panelCrearCuenta = new JPanel();
 		frame.getContentPane().add(panelCrearCuenta);
@@ -125,10 +131,17 @@ public class VentanaEntrada {
 		JPanel panel_5 = new JPanel();
 		panelCrearCuenta.add(panel_5);
 		
-		JButton btnNewButton_1 = new JButton("Crear una nueva cuenta");
-		btnNewButton_1.setBackground(new Color(255, 255, 255));
-		btnNewButton_1.setForeground(new Color(0, 0, 0));
-		panel_5.add(btnNewButton_1);
+		JButton crearCuenta = new JButton("Crear una nueva cuenta");
+		crearCuenta.addActionListener(ev -> {
+				VentanaRegistro vR = new VentanaRegistro();
+				vR.setVisible(true);
+				frame.dispose();
+			});
+		crearCuenta.setBackground(new Color(255, 255, 255));
+		crearCuenta.setForeground(new Color(0, 0, 0));
+		panel_5.add(crearCuenta);
+		
 	}
+
 
 }
