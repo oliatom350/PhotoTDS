@@ -1,35 +1,52 @@
 package tds.PhotoTDS;
 
-import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+
+import tds.PhotoTDS.dao.FactoriaDAO;
+import tds.PhotoTDS.dao.IAdaptadorUsuarioDAO;
 
 public class RepoUsuarios {
 	
 	//Atributos
-	private ArrayList<Usuario> usuarios;
+	private Map<Integer, Usuario> usuarios;
+	private static RepoUsuarios unicaInstancia = new RepoUsuarios();
 
-	public ArrayList<Usuario> getUsuarios() {
-		return usuarios;
+	private FactoriaDAO dao;
+	private IAdaptadorUsuarioDAO adaptadorUsuario;
+	
+	public RepoUsuarios() {
+		try {
+			 dao = FactoriaDAO.getFactoriaDAO(FactoriaDAO.DAO_TDS);
+			 adaptadorUsuario = dao.getUsuarioDAO();
+			 usuarios = new HashMap<Integer,Usuario>();
+			 this.cargarRepo();
+		} catch (Exception eDAO) {
+			 eDAO.printStackTrace();
+		} 
 	}
 	
-	public void setUsuarios(List<Usuario> list) {
-		this.usuarios = (ArrayList<Usuario>) list;
+	public static RepoUsuarios getInstancia() {
+		return unicaInstancia;
 	}
-
-	//Métodos
+	
 	public void addUsuario(Usuario usuario) {
-		usuarios.add(usuario);
+		 usuarios.put(usuario.getId(), usuario);
 	}
 	
-	public Usuario findUsuario(int id) {
-		for(Usuario u : usuarios) {
-			if(id == u.getId()) {
-				return u;
-			}
-		}
-		return null;
+	public void removeUsuario(Usuario usuario) {
+		 usuarios.remove(usuario.getId());
 	}
 	
+	public Usuario getUsuario(int id) {
+		return usuarios.get(id);
+	}
 	
+	private void cargarRepo() {
+		List<Usuario> usuariosBD = adaptadorUsuario.recuperarTodosUsuarios();
+		for (Usuario usuario: usuariosBD)
+			usuarios.put(usuario.getId(), usuario);			 
+	}
 	
 }

@@ -28,7 +28,7 @@ public class PhotoTDS {
 	public void inicializarAdaptadores() {
 		FactoriaDAO factoria = null;
 		try {
-			factoria = FactoriaDAO.getFactoriaDAO();
+			factoria = FactoriaDAO.getFactoriaDAO(FactoriaDAO.DAO_TDS);
 		} catch(Exception e) {
 			e.printStackTrace();
 		}
