@@ -21,6 +21,7 @@ public class AdaptadorTDSPublicacionDAO implements IAdaptadorPublicacionDAO {
 	ServicioPersistencia servPersistencia = FactoriaServicioPersistencia.getInstance().getServicioPersistencia();
 	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 	private PoolDAO poolPublicaciones = PoolDAO.getInstance();
+	private static AdaptadorTDSPublicacionDAO unicaInstancia;
 	
 	@Override
 	public void registrarPublicacion(Publicacion publicacion) {
@@ -130,6 +131,13 @@ public class AdaptadorTDSPublicacionDAO implements IAdaptadorPublicacionDAO {
         	publicaciones.add(recuperarPublicacion(e.getId()));
         }
         return publicaciones;
+	}
+
+	public static AdaptadorTDSPublicacionDAO getUnicaInstancia() {
+		if (unicaInstancia == null)
+			 return new AdaptadorTDSPublicacionDAO();
+		else
+			 return unicaInstancia; 
 	}
 
 	

@@ -15,6 +15,7 @@ public class AdaptadorTDSComentarioDAO implements IAdaptadorComentarioDAO {
 
 	ServicioPersistencia servPersistencia = FactoriaServicioPersistencia.getInstance().getServicioPersistencia();
 	private PoolDAO poolComentarios = PoolDAO.getInstance();
+	private static AdaptadorTDSComentarioDAO unicaInstancia;
 	
 	@Override
 	public void registrarComentario(Comentario comentario) {
@@ -88,6 +89,13 @@ public class AdaptadorTDSComentarioDAO implements IAdaptadorComentarioDAO {
         	comentarios.add(recuperarComentario(e.getId()));
         }
         return comentarios;
+	}
+
+	public static AdaptadorTDSComentarioDAO getUnicaInstancia() {
+		if (unicaInstancia == null)
+			 return new AdaptadorTDSComentarioDAO();
+		else
+			 return unicaInstancia; 
 	}
 
 	

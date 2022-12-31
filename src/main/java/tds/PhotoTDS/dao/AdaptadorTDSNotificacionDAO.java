@@ -19,6 +19,7 @@ public class AdaptadorTDSNotificacionDAO implements IAdaptadorNotificacionDAO{
 	ServicioPersistencia servPersistencia;
 	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
 	private PoolDAO poolNotificaciones;
+	private static AdaptadorTDSNotificacionDAO unicaInstancia;
 	
 	public AdaptadorTDSNotificacionDAO() {
 		poolNotificaciones = PoolDAO.getInstance();
@@ -102,6 +103,13 @@ public class AdaptadorTDSNotificacionDAO implements IAdaptadorNotificacionDAO{
 			notificaciones.add(recuperarNotificacion(e.getId()));
 		}
 		return notificaciones;
+	}
+
+	public static AdaptadorTDSNotificacionDAO getUnicaInstancia() {
+		if (unicaInstancia == null)
+			 return new AdaptadorTDSNotificacionDAO();
+		else
+			 return unicaInstancia; 
 	}
 
 }

@@ -19,6 +19,7 @@ public class AdaptadorTDSUsuarioDAO implements IAdaptadorUsuarioDAO{
 	private ServicioPersistencia servPersistencia;
 	private PoolDAO poolUsuarios;
 	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+	private static AdaptadorTDSUsuarioDAO unicaInstancia;
 	
 	public AdaptadorTDSUsuarioDAO() {
 		servPersistencia = FactoriaServicioPersistencia.getInstance().getServicioPersistencia();
@@ -157,6 +158,13 @@ public class AdaptadorTDSUsuarioDAO implements IAdaptadorUsuarioDAO{
 			usuarios.add(recuperarUsuario(e.getId()));
 		}
 		return usuarios;
+	}
+
+	public static AdaptadorTDSUsuarioDAO getUnicaInstancia() {
+		if (unicaInstancia == null)
+			 return new AdaptadorTDSUsuarioDAO();
+		else
+			 return unicaInstancia; 
 	}
 	
 	

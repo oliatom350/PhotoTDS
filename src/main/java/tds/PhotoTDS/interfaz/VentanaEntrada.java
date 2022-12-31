@@ -5,6 +5,10 @@ import java.awt.EventQueue;
 import javax.swing.*;
 import java.awt.*;
 import javax.swing.border.*;
+
+import tds.PhotoTDS.PhotoTDS;
+import tds.PhotoTDS.Usuario;
+
 import java.awt.event.*;
 
 public class VentanaEntrada extends JFrame {
@@ -95,13 +99,10 @@ public class VentanaEntrada extends JFrame {
 		panelInicioSesion.add(panel_3);
 		panel_3.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 
+		JLabel incorrecto = new JLabel("Nombre de usuario, email o contraseña incorrectos");
+		
 		JButton iniciarSesion = new JButton("Iniciar Sesión");
 		iniciarSesion.setVerticalAlignment(SwingConstants.BOTTOM);
-		iniciarSesion.addActionListener(ev -> {
-				String nombreUsuario = usuario.getText();
-				String passUsuario = password.getText();
-				System.out.println("Usuario registrado: " + nombreUsuario + " " + passUsuario);	
-			});
 
 		iniciarSesion.setBackground(SystemColor.text);
 		iniciarSesion.setHorizontalAlignment(SwingConstants.LEFT);
@@ -116,7 +117,14 @@ public class VentanaEntrada extends JFrame {
 
 		JLabel lblNewLabel_2 = new JLabel("¿Aún no tienes cuenta?");
 		panel_4.add(lblNewLabel_2);
-
+		
+		iniciarSesion.addActionListener(ev -> {
+			String nombreUsuario = usuario.getText();
+			String passUsuario = password.getText();
+			if(iniciarSesion(nombreUsuario, passUsuario) == 0)
+				panel_4.add(incorrecto);
+		});
+		
 		JPanel panel_5 = new JPanel();
 		panelCrearCuenta.add(panel_5);
 
@@ -129,6 +137,17 @@ public class VentanaEntrada extends JFrame {
 		crearCuenta.setBackground(new Color(255, 255, 255));
 		crearCuenta.setForeground(new Color(0, 0, 0));
 		panel_5.add(crearCuenta);
+	}
+
+	private int iniciarSesion(String nombreUsuario, String passUsuario) {
+		// TODO 
+		PhotoTDS controlador = new PhotoTDS();
+		for(Usuario usuario : controlador.getRepUsers().getUsuarios()) {
+			if((usuario.getEmail().equals(nombreUsuario) || usuario.getNombre().equals(nombreUsuario)) && usuario.getPassword().equals(passUsuario))
+				return 1;
+		}
+		System.out.println("Nombre de usuario, email o contraseña incorrectos");
+		return 0;
 	}
 
 }
