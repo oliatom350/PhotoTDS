@@ -111,7 +111,7 @@ public class AdaptadorTDSUsuarioDAO implements IAdaptadorUsuarioDAO{
 	}
 
 	@Override
-	public Usuario recuperarUsuario(int codigo) {
+	public Usuario recuperarUsuario(int codigo) throws Exception {
 		if (poolUsuarios.contains(codigo)) return (Usuario) poolUsuarios.getObject(codigo);
 		
 		Date fecha = null;
@@ -151,7 +151,7 @@ public class AdaptadorTDSUsuarioDAO implements IAdaptadorUsuarioDAO{
 	}
 
 	@Override
-	public ArrayList<Usuario> recuperarTodosUsuarios() {
+	public ArrayList<Usuario> recuperarTodosUsuarios() throws Exception {
 		ArrayList<Usuario> usuarios = new ArrayList<Usuario>();
 		List<Entidad> eUsuarios= servPersistencia.recuperarEntidades("usuario");
 		for(Entidad e : eUsuarios) {

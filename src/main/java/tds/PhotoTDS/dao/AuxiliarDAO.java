@@ -7,7 +7,6 @@ import java.util.StringTokenizer;
 
 import tds.PhotoTDS.Comentario;
 import tds.PhotoTDS.Notificacion;
-import tds.PhotoTDS.Publicacion;
 
 public class AuxiliarDAO {
 
@@ -20,7 +19,7 @@ public class AuxiliarDAO {
 		return lineas.trim();
 	}
 	
-	public static List<Notificacion> obtenerNotificacionesDesdeIds(String lineas) {
+	public static List<Notificacion> obtenerNotificacionesDesdeIds(String lineas) throws Exception {
 		List<Notificacion> notificaciones = new LinkedList<Notificacion>(); 
 		StringTokenizer strTok = new StringTokenizer(lineas, " ");
 		while (strTok.hasMoreTokens()) {
@@ -41,12 +40,15 @@ public class AuxiliarDAO {
 	
 	public static List<String> obtenerListaDeIds(String lineas) {
 		List<String> ids = new ArrayList<String>();
-		StringTokenizer strTok = new StringTokenizer(lineas, " ");
-		while (strTok.hasMoreTokens()) {
-			ids.add((String)strTok.nextElement());
-			//usuarios.add(FactoriaDAO.getFactoriaDAO().getUsuarioDAO().recuperarTodosUsuarios(Integer.valueOf((String)strTok.nextElement())));
+		if(lineas != null) {
+			StringTokenizer strTok = new StringTokenizer(lineas, " ");
+			while (strTok.hasMoreTokens()) {
+				ids.add((String)strTok.nextElement());
+				//usuarios.add(FactoriaDAO.getFactoriaDAO().getUsuarioDAO().recuperarTodosUsuarios(Integer.valueOf((String)strTok.nextElement())));
+			}
 		}
 		return ids;
+
 	}
 	
 	public static String obtenerIdsComentarios(List<Comentario> comentarios) {
@@ -56,7 +58,7 @@ public class AuxiliarDAO {
 		return lineas.trim();
 	}
 	
-	public static List<Comentario> obtenerComentariosDesdeIds(String lineas) {
+	public static List<Comentario> obtenerComentariosDesdeIds(String lineas) throws Exception {
 		List<Comentario> comentarios = new ArrayList<Comentario>(); 
 		StringTokenizer strTok = new StringTokenizer(lineas, " ");
 		while (strTok.hasMoreTokens()) {

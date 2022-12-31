@@ -25,6 +25,12 @@ public class PhotoTDS {
 		inicializarRepos();
 	}
 	
+	public static PhotoTDS getUnicaInstancia() {
+		 if (unicaInstancia == null)
+		 unicaInstancia = new PhotoTDS();
+		 return unicaInstancia;
+		 } 
+	
 	public void inicializarAdaptadores() {
 		FactoriaDAO factoria = null;
 		try {
@@ -39,8 +45,8 @@ public class PhotoTDS {
 	}
 	
 	public void inicializarRepos() {
-		repUsuarios.setUsuarios(adaptadorUsuario.recuperarTodosUsuarios());
-		repPublicaciones.setPublicaciones(adaptadorPublicacion.recuperarTodasPublicaciones());
+		repUsuarios = RepoUsuarios.getInstancia();
+		repPublicaciones = RepoPublicaciones.getInstancia();
 	}
 	
 	//Metodos

@@ -1,5 +1,6 @@
 package tds.PhotoTDS;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -43,7 +44,14 @@ public class RepoPublicaciones {
 			return Publicaciones.get(id);
 		}
 		
-		private void cargarRepo() {
+		public List<Publicacion> getPublicaciones(){
+			ArrayList<Publicacion> lista = new ArrayList<Publicacion>();
+			for (Publicacion publicacion: Publicaciones.values())
+				lista.add(publicacion);
+			return lista;
+		}
+		
+		private void cargarRepo() throws Exception {
 			List<Publicacion> PublicacionesBD = adaptadorPublicacion.recuperarTodasPublicaciones();
 			for (Publicacion Publicacion: PublicacionesBD)
 				Publicaciones.put(Publicacion.getId(), Publicacion);			 

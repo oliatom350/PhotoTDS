@@ -90,7 +90,7 @@ public class AdaptadorTDSPublicacionDAO implements IAdaptadorPublicacionDAO {
 	}
 
 	@Override
-	public Publicacion recuperarPublicacion(int codigo) {
+	public Publicacion recuperarPublicacion(int codigo) throws Exception {
 		if (poolPublicaciones.contains(codigo)) return (Publicacion) poolPublicaciones.getObject(codigo);
 		
 		String titulo = null;
@@ -124,7 +124,7 @@ public class AdaptadorTDSPublicacionDAO implements IAdaptadorPublicacionDAO {
 	}
 
 	@Override
-	public List<Publicacion> recuperarTodasPublicaciones() {
+	public List<Publicacion> recuperarTodasPublicaciones() throws Exception {
 		List<Publicacion> publicaciones = new ArrayList<Publicacion>();
         List<Entidad> ePublicaciones = servPersistencia.recuperarEntidades("publicacion");
         for(Entidad e : ePublicaciones) {

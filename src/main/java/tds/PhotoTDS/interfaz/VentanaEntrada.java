@@ -98,8 +98,6 @@ public class VentanaEntrada extends JFrame {
 		JPanel panel_3 = new JPanel();
 		panelInicioSesion.add(panel_3);
 		panel_3.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-
-		JLabel incorrecto = new JLabel("Nombre de usuario, email o contraseña incorrectos");
 		
 		JButton iniciarSesion = new JButton("Iniciar Sesión");
 		iniciarSesion.setVerticalAlignment(SwingConstants.BOTTOM);
@@ -122,7 +120,8 @@ public class VentanaEntrada extends JFrame {
 			String nombreUsuario = usuario.getText();
 			String passUsuario = password.getText();
 			if(iniciarSesion(nombreUsuario, passUsuario) == 0)
-				panel_4.add(incorrecto);
+				;
+				
 		});
 		
 		JPanel panel_5 = new JPanel();

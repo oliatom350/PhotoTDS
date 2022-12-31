@@ -3,7 +3,7 @@ package tds.PhotoTDS.dao;
 public abstract class FactoriaDAO {
 
 	private static FactoriaDAO unicaInstancia;
-	public static final String DAO_TDS = "persistencia.TDSFactoriaDAO";
+	public static final String DAO_TDS = "tds.PhotoTDS.dao.TDSFactoriaDAO";
 	
 	public static FactoriaDAO getFactoriaDAO() throws Exception {
 		if (unicaInstancia == null)
