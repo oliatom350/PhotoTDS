@@ -18,6 +18,8 @@ public class VentanaDescripcion extends JFrame {
 
 	private JPanel contentPane;
 
+	private static VentanaRegistro vr;
+	
 	/**
 	 * Launch the application.
 	 */
@@ -25,7 +27,7 @@ public class VentanaDescripcion extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VentanaDescripcion frame = new VentanaDescripcion();
+					VentanaDescripcion frame = new VentanaDescripcion(vr);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -37,7 +39,9 @@ public class VentanaDescripcion extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public VentanaDescripcion() {
+	public VentanaDescripcion(VentanaRegistro ventana) {
+		vr = ventana;
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -81,6 +85,7 @@ public class VentanaDescripcion extends JFrame {
 		JButton btnFinalizar = new JButton("Finalizar");
 		panelSur.add(btnFinalizar);
 		btnFinalizar.addActionListener(ev -> {
+			vr.setDescripcion(textArea.getText());
 			this.setVisible(false);
 		});
 		
