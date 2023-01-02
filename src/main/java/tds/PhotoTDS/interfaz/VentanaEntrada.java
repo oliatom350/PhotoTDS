@@ -119,9 +119,14 @@ public class VentanaEntrada extends JFrame {
 		iniciarSesion.addActionListener(ev -> {
 			String nombreUsuario = usuario.getText();
 			String passUsuario = password.getText();
-			if(iniciarSesion(nombreUsuario, passUsuario) == 0)
+			Usuario usuario = iniciarSesion(nombreUsuario, passUsuario);
+			if(!usuario.equals(null)) {
 				;
-				
+			}
+			else {
+				VentanaWarning vW = new VentanaWarning("Nombre de usuario, email o contraseña incorrectos");
+				vW.setVisible(true);
+			}
 		});
 		
 		JPanel panel_5 = new JPanel();
@@ -138,15 +143,15 @@ public class VentanaEntrada extends JFrame {
 		panel_5.add(crearCuenta);
 	}
 
-	private int iniciarSesion(String nombreUsuario, String passUsuario) {
+	private Usuario iniciarSesion(String nombreUsuario, String passUsuario) {
 		// TODO 
-		PhotoTDS controlador = new PhotoTDS();
+		PhotoTDS controlador = PhotoTDS.getUnicaInstancia();
 		for(Usuario usuario : controlador.getRepUsers().getUsuarios()) {
 			if((usuario.getEmail().equals(nombreUsuario) || usuario.getNombre().equals(nombreUsuario)) && usuario.getPassword().equals(passUsuario))
-				return 1;
+				return usuario;
 		}
 		System.out.println("Nombre de usuario, email o contraseña incorrectos");
-		return 0;
+		return null;
 	}
 
 }

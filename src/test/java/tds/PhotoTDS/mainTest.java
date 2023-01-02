@@ -44,6 +44,8 @@ public class mainTest {
 //		System.out.println(c.recuperarTodosComentarios().toString());
 //		System.out.println(n.recuperarTodasNotificaciones().toString());
 //		System.out.println(p.recuperarTodasPublicaciones().toString());
+		for(Entidad e : servPersistencia.recuperarEntidades())
+			servPersistencia.borrarEntidad(e);
 	}
 
 }
