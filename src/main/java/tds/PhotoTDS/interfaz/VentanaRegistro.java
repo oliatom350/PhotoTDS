@@ -6,6 +6,7 @@ import javax.swing.border.*;
 
 import org.eclipse.persistence.internal.expressions.ArgumentListFunctionExpression;
 
+import tds.PhotoTDS.PhotoTDS;
 import tds.PhotoTDS.Usuario;
 
 import java.awt.*;
@@ -22,7 +23,8 @@ public class VentanaRegistro extends JFrame {
 	private JTextField textField_Mes;
 	private JTextField textField_Año;
 	
-	//Inicialmente, descripcion estará vacía
+	//Inicialmente, rutaFoto y descripcion estarán vacías
+	private String rutaFoto = "";
 	private String descripcion = "";
 
 	/**
@@ -219,13 +221,11 @@ public class VentanaRegistro extends JFrame {
 		panelFotoPerfil.add(EtiquetaFoto);
 		
 		JButton BotonAddFoto = new JButton("Añadir");
-		try {
-		    Image img = ImageIO.read(getClass().getResource("images/png.png"));
-		    BotonAddFoto.setIcon(new ImageIcon(img));
-		  } catch (Exception ex) {
-		    System.out.println(ex);
-		  }
 		panelFotoPerfil.add(BotonAddFoto);
+		BotonAddFoto.addActionListener(ev -> {
+			VentanaSeleccionarFotoPerfil vF = new VentanaSeleccionarFotoPerfil(this);
+			vF.setVisible(true);
+		});
 		
 		JPanel panelDescripcion = new JPanel();
 		FlowLayout fl_panelDescripcion = (FlowLayout) panelDescripcion.getLayout();
@@ -284,43 +284,36 @@ public class VentanaRegistro extends JFrame {
 				showWarning("contraseña");
 				return;
 			}
-			//TODO Ventana para añadir la foto de perfil
-			registrarUsuario(textField_Usuario.getText(), 
-							 textField_Email.getText(),
-							 textField_Nombre.getText(),
-							 new Date(Integer.parseInt(textField_Año.getText()), 
-									  Integer.parseInt(textField_Mes.getText()), 
-									  Integer.parseInt(textField_Dia.getText())),
-							 textField_Contraseña.getText(),
-							 "",
-							 descripcion
-							 );
+			
+			PhotoTDS controlador = PhotoTDS.getUnicaInstancia();
+			//Por defecto se registra al nuevo usuario como NO PREMIUM
+			controlador.registrarUsuario(new Usuario(textField_Usuario.getText(), 
+					 						textField_Email.getText(),
+					 						textField_Nombre.getText(),
+											new Date(Integer.parseInt(textField_Año.getText()), 
+													 Integer.parseInt(textField_Mes.getText()), 
+													 Integer.parseInt(textField_Dia.getText())),
+											false,
+											textField_Contraseña.getText(),
+											rutaFoto,
+											descripcion
+					 						));
+			llamaVentanaLogin();
 		});
 		
 		JButton BotonCancelar = new JButton("Cancelar");
 		panelBotonesVentana.add(BotonCancelar);
 		BotonCancelar.addActionListener(ev -> {
-			VentanaEntrada vE = new VentanaEntrada();
-			vE.setLocationRelativeTo(null);
-			vE.setVisible(true);
-			this.dispose();
+			llamaVentanaLogin();
 		});
-	}
-
-	private void registrarUsuario(String nombre, String email, String nombreCompleto, Date fechaNacimiento, String password, String fotoPerfil, String presentacion) {
-		// Inicialmente, user no es premium
-		Usuario user = new Usuario(nombre, email, nombreCompleto, fechaNacimiento, false, password, fotoPerfil, presentacion);
-		System.out.println(nombre);
-		System.out.println(email);
-		System.out.println(nombreCompleto);
-		System.out.println(fechaNacimiento);
-		System.out.println(password);
-		System.out.println(fotoPerfil);
-		System.out.println(presentacion);
 	}
 	
 	protected void setDescripcion(String presentacion) {
 		descripcion = presentacion;
+	}
+	
+	protected void setRutaFoto(String ruta) {
+		rutaFoto = ruta;
 	}
 	
 	private boolean checkStringNotNull(String s) {
@@ -332,5 +325,12 @@ public class VentanaRegistro extends JFrame {
 		VentanaWarning vw = new VentanaWarning("El campo de entrada "+field+ " es incorrecto!");
 		vw.setLocationRelativeTo(null);
 		vw.setVisible(true);
+	}
+	
+	private void llamaVentanaLogin() {
+		VentanaEntrada vE = new VentanaEntrada();
+		vE.setLocationRelativeTo(null);
+		vE.setVisible(true);
+		this.dispose();
 	}
 }
