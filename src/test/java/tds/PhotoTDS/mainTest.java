@@ -10,7 +10,6 @@ import beans.Entidad;
 import beans.Propiedad;
 import tds.driver.FactoriaServicioPersistencia;
 import tds.driver.ServicioPersistencia;
-
 import tds.PhotoTDS.dao.*;
 
 public class mainTest {
@@ -47,5 +46,4 @@ public class mainTest {
 		for(Entidad e : servPersistencia.recuperarEntidades())
 			servPersistencia.borrarEntidad(e);
 	}
-
 }
