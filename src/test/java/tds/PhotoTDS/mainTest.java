@@ -10,8 +10,7 @@ import beans.Entidad;
 import beans.Propiedad;
 import tds.driver.FactoriaServicioPersistencia;
 import tds.driver.ServicioPersistencia;
-import umu.tds.fotos.Fotos;
-import umu.tds.fotos.MapperFotosXMLtoJava;
+import umu.tds.fotos.*;
 import tds.PhotoTDS.dao.*;
 
 public class mainTest {
@@ -22,7 +21,6 @@ public class mainTest {
 //
 //		for(Entidad e : servPersistencia.recuperarEntidades())
 //			servPersistencia.borrarEntidad(e);
-		
 		Fotos fotos = MapperFotosXMLtoJava
 				.cargarFotos("xml/fotos.xml");
 				//Obtener fichero a cargar mediante JFileChooser en Swing
