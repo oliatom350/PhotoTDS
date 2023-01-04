@@ -10,40 +10,31 @@ import beans.Entidad;
 import beans.Propiedad;
 import tds.driver.FactoriaServicioPersistencia;
 import tds.driver.ServicioPersistencia;
+import umu.tds.fotos.Fotos;
+import umu.tds.fotos.MapperFotosXMLtoJava;
 import tds.PhotoTDS.dao.*;
 
 public class mainTest {
 
 	public static void main(String[] args) {
 		
-		ServicioPersistencia servPersistencia = FactoriaServicioPersistencia.getInstance().getServicioPersistencia();
+//		ServicioPersistencia servPersistencia = FactoriaServicioPersistencia.getInstance().getServicioPersistencia();
+//
+//		for(Entidad e : servPersistencia.recuperarEntidades())
+//			servPersistencia.borrarEntidad(e);
 		
-//		Usuario jose = new Usuario("jose", "jose@umu.es", "jose sanchez fernandez", new Date(2001, 10, 26), false);
-//		Publicacion bicho = new Publicacion("elBicho", "hola", null, null);
-//		Comentario comment = new Comentario("que tal el dia", null);
-//		
-//		AdaptadorTDSUsuarioDAO u = new AdaptadorTDSUsuarioDAO();
-//		AdaptadorTDSComentarioDAO c = new AdaptadorTDSComentarioDAO();
-//		AdaptadorTDSPublicacionDAO p = new AdaptadorTDSPublicacionDAO();
-//		AdaptadorTDSNotificacionDAO n = new AdaptadorTDSNotificacionDAO();
-//		u.registrarUsuario(jose);
-//		c.registrarComentario(comment);
-//		p.registrarPublicacion(bicho);
-//		Notificacion hey = new Notificacion(new Date(2022, 10, 23), bicho.getId());
-//		n.registrarNotificacion(hey);
-		
-//		System.out.println(servPersistencia.recuperarEntidades().toString());
-//		
-//		u.borrarUsuario(jose);
-//		c.borrarComentario(comment);
-//		n.borrarNotificacion(hey);
-//		p.borrarPublicacion(bicho);
-//		System.out.println(servPersistencia.recuperarEntidades().toString());
-//		System.out.println(u.recuperarTodosUsuarios().toString());
-//		System.out.println(c.recuperarTodosComentarios().toString());
-//		System.out.println(n.recuperarTodasNotificaciones().toString());
-//		System.out.println(p.recuperarTodasPublicaciones().toString());
-		for(Entidad e : servPersistencia.recuperarEntidades())
-			servPersistencia.borrarEntidad(e);
+		Fotos fotos = MapperFotosXMLtoJava
+				.cargarFotos("xml/fotos.xml");
+				//Obtener fichero a cargar mediante JFileChooser en Swing
+				for (umu.tds.fotos.Foto foto: fotos.getFoto()) {
+				System.out.println("Titulo: " + foto.getTitulo());
+				System.out.println(" Descripcion: " + foto.getDescripcion());
+				System.out.println(" Path : " + foto.getPath());
+				System.out.println(" HashTags : ");
+				foto.getHashTags().stream()
+				.flatMap(h -> h.getHashTag().stream())
+				.forEach(h -> System.out.println(" " + h + " "));
+				System.out.println("***** ***** *****");
+				}
 	}
 }
