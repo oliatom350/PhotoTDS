@@ -1,12 +1,14 @@
 package tds.PhotoTDS;
 
+import tds.PhotoTDS.CargadorFotos.FotosEvent;
+import tds.PhotoTDS.CargadorFotos.FotosListener;
 import tds.PhotoTDS.dao.FactoriaDAO;
 import tds.PhotoTDS.dao.IAdaptadorComentarioDAO;
 import tds.PhotoTDS.dao.IAdaptadorNotificacionDAO;
 import tds.PhotoTDS.dao.IAdaptadorPublicacionDAO;
 import tds.PhotoTDS.dao.IAdaptadorUsuarioDAO;
 
-public class PhotoTDS {
+public class PhotoTDS implements FotosListener {
 
 	//Atributos
 	private static PhotoTDS unicaInstancia = new PhotoTDS();
@@ -84,8 +86,9 @@ public class PhotoTDS {
 		adaptadorPublicacion.modificarPublicacion(publicacion);
 		adaptadorComentario.registrarComentario(comentario);
 	}
-	
-	public void addFoto() {
+
+	@Override
+	public void cargarFotos(FotosEvent e) {
 		
 	}
 }
