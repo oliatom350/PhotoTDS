@@ -16,12 +16,17 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.FlowLayout;
+import java.awt.BorderLayout;
 
 public class VentanaPrincipal extends JFrame {
 
 	private JPanel contentPane;
 	private static Usuario usuario;
-	private JTextField buscarUsuario;
+	private JPanel panel_1;
+	private JPanel panel_2;
+	private JButton addFoto;
+	private JTextField txtBuscaFotoUsuario;
+	private JPanel panel_3;
 
 	/**
 	 * Launch the application.
@@ -52,23 +57,28 @@ public class VentanaPrincipal extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 		
-		JPanel panel = new JPanel();
-		contentPane.add(panel);
+		JPanel panelSuperior = new JPanel();
+		contentPane.add(panelSuperior);
+		panelSuperior.setLayout(new BorderLayout(0, 0));
 		
-		JButton addFoto = new JButton("");
-		addFoto.setBackground(new Color(255, 255, 255));
+		panel_2 = new JPanel();
+		panelSuperior.add(panel_2, BorderLayout.EAST);
+		
+		addFoto = new JButton("");
 		Image iconAddFoto = new ImageIcon(VentanaPrincipal.class.getResource("/images/iconoplus.png")).getImage();
-		addFoto.setIcon( new ImageIcon(iconAddFoto.getScaledInstance(20, 20, DO_NOTHING_ON_CLOSE)));
-		addFoto.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
-		panel.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
-		panel.add(addFoto);
+		addFoto.setIcon(new ImageIcon(iconAddFoto.getScaledInstance(20, 20, DO_NOTHING_ON_CLOSE)));
+		addFoto.setBackground(Color.WHITE);
+		panel_2.add(addFoto);
 		
-		buscarUsuario = new JTextField();
-		panel.add(buscarUsuario);
-		buscarUsuario.setColumns(10);
+		txtBuscaFotoUsuario = new JTextField();
+		txtBuscaFotoUsuario.setColumns(10);
+		panel_2.add(txtBuscaFotoUsuario);
+		
+		panel_3 = new JPanel();
+		panelSuperior.add(panel_3, BorderLayout.WEST);
+		
+		panel_1 = new JPanel();
+		contentPane.add(panel_1);
 	}
 
 }
