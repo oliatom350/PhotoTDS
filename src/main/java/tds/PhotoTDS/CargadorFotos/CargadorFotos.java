@@ -13,11 +13,11 @@ public class CargadorFotos {
 	
 	public CargadorFotos() {}
 	
-	public synchronized void addSueldoListener(FotosListener listener){
+	public synchronized void addFotosListener(FotosListener listener){
 		fotosListeners.addElement(listener);
 	}
 	
-	public synchronized void removeSueldoListener(FotosListener listener){
+	public synchronized void removeFotosListener(FotosListener listener){
 		fotosListeners.removeElement(listener);
 	}
 	
