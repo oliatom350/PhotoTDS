@@ -15,13 +15,13 @@ import tds.PhotoTDS.dao.*;
 
 public class mainTest {
 
-	public static void main(String[] args) {
+	public static void main(String[] args) throws Exception {
 		
 //		ServicioPersistencia servPersistencia = FactoriaServicioPersistencia.getInstance().getServicioPersistencia();
 //
 //		for(Entidad e : servPersistencia.recuperarEntidades())
 //			servPersistencia.borrarEntidad(e);
-		Fotos fotos = MapperFotosXMLtoJava
+		/*Fotos fotos = MapperFotosXMLtoJava
 				.cargarFotos("xml/fotos.xml");
 				//Obtener fichero a cargar mediante JFileChooser en Swing
 				for (umu.tds.fotos.Foto foto: fotos.getFoto()) {
@@ -33,6 +33,12 @@ public class mainTest {
 				.flatMap(h -> h.getHashTag().stream())
 				.forEach(h -> System.out.println(" " + h + " "));
 				System.out.println("***** ***** *****");
-				}
+				}*/
+		PhotoTDS controlador = PhotoTDS.getUnicaInstancia();
+		ArrayList<String> hashtags = new ArrayList<>();
+		hashtags.add("#TOTY");
+		Foto f = new Foto("TOTY", "Militao TOTY VAMOOOO", hashtags, "asdiia", "soyRuta");
+		controlador.registrarFoto(f);
+		System.out.println(controlador.getFoto(f.getId()).getPath());
 	}
 }

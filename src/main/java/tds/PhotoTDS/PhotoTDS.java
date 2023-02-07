@@ -98,6 +98,10 @@ public class PhotoTDS implements FotosListener {
 		}
 		adaptadorComentario.registrarComentario(comentario);
 	}
+	
+	public Foto getFoto(int id) throws Exception {
+		return adaptadorFoto.recuperarFoto(id);
+	}
 
 	@Override
 	public void cargarFotos(FotosEvent e) {
