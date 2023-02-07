@@ -39,9 +39,4 @@ public class CargadorFotos {
 			fl.cargarFotos(ev);
 		}
 	}
-	
-	public void MapperJavaToFotosXML(Fotos fotos) {
-		
-	}
-	
 }
