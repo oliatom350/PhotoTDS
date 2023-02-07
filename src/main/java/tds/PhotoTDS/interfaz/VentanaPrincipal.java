@@ -4,29 +4,41 @@ import java.awt.EventQueue;
 import java.awt.Image;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import tds.PhotoTDS.Foto;
 import tds.PhotoTDS.Usuario;
 import javax.swing.BoxLayout;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import java.awt.event.ActionEvent;
 import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import javax.swing.JList;
+import javax.swing.JScrollPane;
 
 public class VentanaPrincipal extends JFrame {
 
 	private JPanel contentPane;
 	private static Usuario usuario;
-	private JPanel panel_1;
 	private JPanel panel_2;
 	private JButton addFoto;
 	private JTextField txtBuscaFotoUsuario;
 	private JPanel panel_3;
+	private JPanel panel_ListFotos;
+	private JPanel panel;
+	private JPanel panel_1;
+	private JPanel panel_4;
+	private JLabel lblNewLabel;
+	private JLabel lblNewLabel_1;
+	private JLabel lblNewLabel_2;
 
 	/**
 	 * Launch the application.
@@ -77,8 +89,34 @@ public class VentanaPrincipal extends JFrame {
 		panel_3 = new JPanel();
 		panelSuperior.add(panel_3, BorderLayout.WEST);
 		
+		panel_ListFotos = new JPanel();
+		panelSuperior.add(panel_ListFotos, BorderLayout.SOUTH);
+		panel_ListFotos.setLayout(new GridLayout(0, 1, 0, 0));
+		
+		panel = new JPanel();
+		panel_ListFotos.add(panel);
+		
+		lblNewLabel = new JLabel("");
+		iconAddFoto = new ImageIcon(VentanaPrincipal.class.getResource("/images/arbol.png")).getImage().getScaledInstance(50, 50, DO_NOTHING_ON_CLOSE);
+		lblNewLabel.setIcon(new ImageIcon(iconAddFoto));
+		panel.add(lblNewLabel);
+		
 		panel_1 = new JPanel();
-		contentPane.add(panel_1);
+		panel_ListFotos.add(panel_1);
+		
+		lblNewLabel_1 = new JLabel("");
+		iconAddFoto = new ImageIcon(VentanaPrincipal.class.getResource("/images/leopardo.png")).getImage().getScaledInstance(50, 50, DO_NOTHING_ON_CLOSE);
+		lblNewLabel_1.setIcon(new ImageIcon(iconAddFoto));
+		panel_1.add(lblNewLabel_1);
+		
+		panel_4 = new JPanel();
+		panel_ListFotos.add(panel_4);
+		
+		lblNewLabel_2 = new JLabel("");
+		iconAddFoto = new ImageIcon(VentanaPrincipal.class.getResource("/images/madrid.png")).getImage().getScaledInstance(50, 50, DO_NOTHING_ON_CLOSE);
+		lblNewLabel_2.setIcon(new ImageIcon(iconAddFoto));
+		panel_4.add(lblNewLabel_2);
+		
 	}
 
 }
