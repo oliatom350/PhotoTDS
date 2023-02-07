@@ -4,8 +4,9 @@ import tds.PhotoTDS.CargadorFotos.FotosEvent;
 import tds.PhotoTDS.CargadorFotos.FotosListener;
 import tds.PhotoTDS.dao.FactoriaDAO;
 import tds.PhotoTDS.dao.IAdaptadorComentarioDAO;
+import tds.PhotoTDS.dao.IAdaptadorFotoDAO;
 import tds.PhotoTDS.dao.IAdaptadorNotificacionDAO;
-import tds.PhotoTDS.dao.IAdaptadorPublicacionDAO;
+import tds.PhotoTDS.dao.IAdaptadorTDSAlbumDAO;
 import tds.PhotoTDS.dao.IAdaptadorUsuarioDAO;
 
 public class PhotoTDS implements FotosListener {
@@ -19,7 +20,8 @@ public class PhotoTDS implements FotosListener {
 	private IAdaptadorNotificacionDAO adaptadorNotificacion;
 	private IAdaptadorUsuarioDAO adaptadorUsuario;
 	private IAdaptadorComentarioDAO adaptadorComentario;
-	private IAdaptadorPublicacionDAO adaptadorPublicacion;
+	private IAdaptadorFotoDAO adaptadorFoto;
+	private IAdaptadorTDSAlbumDAO adaptadorAlbum;
 	
 	//Constructor
 	public PhotoTDS() {
@@ -42,7 +44,8 @@ public class PhotoTDS implements FotosListener {
 		}
 		adaptadorComentario = factoria.getComentarioDAO();
 		adaptadorNotificacion = factoria.getNotificacionDAO();
-		adaptadorPublicacion = factoria.getPublicacionDAO();
+		adaptadorAlbum = factoria.getAlbumDAO();
+		adaptadorFoto = factoria.getFotoDAO();
 		adaptadorUsuario = factoria.getUsuarioDAO();
 	}
 	
@@ -76,19 +79,28 @@ public class PhotoTDS implements FotosListener {
 		repUsuarios.addUsuario(usuario);
 	}
 	
-	public void registrarPublicacion(Publicacion publicacion) {
-		adaptadorPublicacion.registrarPublicacion(publicacion);
-		repPublicaciones.addPublicacion(publicacion);
+	public void registrarFoto(Foto foto) {
+		adaptadorFoto.registrarFoto(foto);
+		repPublicaciones.addFoto(foto);
+	}
+	
+	public void registrarAlbum(Album album) {
+		adaptadorAlbum.registrarAlbum(album);
+		repPublicaciones.addAlbum(album);
 	}
 	
 	public void addComentario(Comentario comentario, Publicacion publicacion) {
 		publicacion.addComentario(comentario);
-		adaptadorPublicacion.modificarPublicacion(publicacion);
+		if (publicacion instanceof Foto) {
+			adaptadorFoto.modificarFoto((Foto) publicacion);
+		} else {
+			adaptadorAlbum.modificarAlbum((Album) publicacion);
+		}
 		adaptadorComentario.registrarComentario(comentario);
 	}
 
 	@Override
 	public void cargarFotos(FotosEvent e) {
-		
+		//TODO
 	}
 }

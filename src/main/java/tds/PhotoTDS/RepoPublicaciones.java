@@ -6,7 +6,8 @@ import java.util.List;
 import java.util.Map;
 
 import tds.PhotoTDS.dao.FactoriaDAO;
-import tds.PhotoTDS.dao.IAdaptadorPublicacionDAO;
+import tds.PhotoTDS.dao.IAdaptadorFotoDAO;
+import tds.PhotoTDS.dao.IAdaptadorTDSAlbumDAO;
 
 public class RepoPublicaciones {
 
@@ -15,12 +16,14 @@ public class RepoPublicaciones {
 		private static RepoPublicaciones unicaInstancia = new RepoPublicaciones();
 
 		private FactoriaDAO dao;
-		private IAdaptadorPublicacionDAO adaptadorPublicacion;
+		private IAdaptadorFotoDAO adaptadorFoto;
+		private IAdaptadorTDSAlbumDAO adaptadorAlbum;
 		
 		public RepoPublicaciones() {
 			try {
 				 dao = FactoriaDAO.getFactoriaDAO(FactoriaDAO.DAO_TDS);
-				 adaptadorPublicacion = dao.getPublicacionDAO();
+				 adaptadorFoto = dao.getFotoDAO();
+				 adaptadorAlbum = dao.getAlbumDAO();
 				 Publicaciones = new HashMap<Integer,Publicacion>();
 				 this.cargarRepo();
 			} catch (Exception eDAO) {
@@ -44,6 +47,30 @@ public class RepoPublicaciones {
 			return Publicaciones.get(id);
 		}
 		
+		public void addFoto(Foto foto) {
+			Publicaciones.put(foto.getId(), foto);
+		}
+		
+		public void addAlbum(Album album) {
+			Publicaciones.put(album.getId(), album);
+		}
+		
+		public void removeFoto(Foto foto) {
+			Publicaciones.remove(foto.getId());
+		}
+		
+		public void removeAlbum(Album album) {
+			Publicaciones.remove(album.getId());
+		}
+		
+		public Foto getFoto(int id) {
+			return (Foto) Publicaciones.get(id);
+		}
+		
+		public Album getAlbum(int id) {
+			return (Album) Publicaciones.get(id);
+		}
+		
 		public List<Publicacion> getPublicaciones(){
 			ArrayList<Publicacion> lista = new ArrayList<Publicacion>();
 			for (Publicacion publicacion: Publicaciones.values())
@@ -52,8 +79,11 @@ public class RepoPublicaciones {
 		}
 		
 		private void cargarRepo() throws Exception {
-			List<Publicacion> PublicacionesBD = adaptadorPublicacion.recuperarTodasPublicaciones();
-			for (Publicacion Publicacion: PublicacionesBD)
-				Publicaciones.put(Publicacion.getId(), Publicacion);			 
+			List<Foto> FotosBD = adaptadorFoto.recuperarTodasFotos();
+			List<Album> AlbumsBD = adaptadorAlbum.recuperarTodasAlbums();
+			for (Foto f : FotosBD)
+				Publicaciones.put(f.getId(), f);
+			for(Album a : AlbumsBD)
+				Publicaciones.put(a.getId(), a);
 		}
 }
