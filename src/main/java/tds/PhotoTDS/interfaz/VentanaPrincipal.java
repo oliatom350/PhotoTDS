@@ -28,6 +28,7 @@ import pulsador.Luz;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
+import java.awt.Component;
 
 public class VentanaPrincipal extends JFrame {
 
@@ -47,6 +48,14 @@ public class VentanaPrincipal extends JFrame {
 	private JLabel lblNewLabel;
 	private JLabel lblNewLabel1;
 	private JPanel panel_1;
+	private JPanel panel_3;
+	private JPanel panel_4;
+	private JPanel panel_5;
+	private JButton btnNewButton;
+	private JButton btnNewButton_1;
+	private JLabel lblNewLabel_1;
+	private JLabel lblNewLabel_2;
+	private JLabel lblNewLabel_3;
 
 	/**
 	 * Launch the application.
@@ -109,6 +118,37 @@ public class VentanaPrincipal extends JFrame {
 		Image iconAddFoto = new ImageIcon(VentanaPrincipal.class.getResource("/images/arbol.png")).getImage().getScaledInstance(100, 100, DO_NOTHING_ON_CLOSE);
 		lblNewLabel.setIcon(new ImageIcon(iconAddFoto));
 		
+		panel_3 = new JPanel();
+		panel.add(panel_3, BorderLayout.CENTER);
+		panel_3.setLayout(new BoxLayout(panel_3, BoxLayout.Y_AXIS));
+		
+		panel_4 = new JPanel();
+		panel_3.add(panel_4);
+		
+		btnNewButton = new JButton("New button");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		panel_4.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+		panel_4.add(btnNewButton);
+		
+		btnNewButton_1 = new JButton("New button");
+		panel_4.add(btnNewButton_1);
+		
+		lblNewLabel_1 = new JLabel("New label");
+		panel_4.add(lblNewLabel_1);
+		
+		panel_5 = new JPanel();
+		panel_3.add(panel_5);
+		panel_5.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+		
+		lblNewLabel_2 = new JLabel("New label");
+		panel_5.add(lblNewLabel_2);
+		
+		lblNewLabel_3 = new JLabel("New label");
+		panel_5.add(lblNewLabel_3);
+		
 		panel_1 = new JPanel();
 		GridBagConstraints gbc_panel_1 = new GridBagConstraints();
 		gbc_panel_1.fill = GridBagConstraints.HORIZONTAL;
@@ -146,7 +186,6 @@ public class VentanaPrincipal extends JFrame {
 		addFoto = new JButton("");
 		iconAddFoto = new ImageIcon(VentanaPrincipal.class.getResource("/images/iconoplus.png")).getImage();
 		addFoto.setIcon(new ImageIcon(iconAddFoto.getScaledInstance(20, 20, DO_NOTHING_ON_CLOSE)));
-		addFoto.setBackground(Color.WHITE);
 		panelCentral2.add(addFoto);
 		
 		textField = new JTextField();
@@ -154,6 +193,8 @@ public class VentanaPrincipal extends JFrame {
 		panelCentral2.add(textField);
 		
 		searchButton = new JButton("Insertar lupa");
+		iconAddFoto = new ImageIcon(VentanaPrincipal.class.getResource("/images/iconolupa.png")).getImage();
+		searchButton.setIcon(new ImageIcon(iconAddFoto.getScaledInstance(15, 15, DO_NOTHING_ON_CLOSE)));
 		panelCentral2.add(searchButton);
 		
 		xmlLoaderButton = new Luz();
