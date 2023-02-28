@@ -192,7 +192,7 @@ public class VentanaPrincipal extends JFrame {
 		textField.setColumns(10);
 		panelCentral2.add(textField);
 		
-		searchButton = new JButton("Insertar lupa");
+		searchButton = new JButton("");
 		iconAddFoto = new ImageIcon(VentanaPrincipal.class.getResource("/images/iconolupa.png")).getImage();
 		searchButton.setIcon(new ImageIcon(iconAddFoto.getScaledInstance(15, 15, DO_NOTHING_ON_CLOSE)));
 		panelCentral2.add(searchButton);
