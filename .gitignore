@@ -191,7 +191,7 @@ fabric.properties
 .mtj.tmp/
 
 # Package Files #
-*.jar
+#*.jar
 *.war
 *.nar
 *.ear
@@ -266,9 +266,9 @@ buildNumber.properties
 
 # Eclipse m2e generated files
 # Eclipse Core
-.project
+#.project
 # JDT-specific (Eclipse Java Development Tools)
-.classpath
+#.classpath
 
 ### Windows ###
 # Windows thumbnail cache files
