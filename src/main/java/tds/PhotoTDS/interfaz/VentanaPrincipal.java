@@ -40,7 +40,6 @@ public class VentanaPrincipal extends JFrame {
 	private JPanel panelNorteCentral;
 	private JPanel panelNorteOeste;
 	private JPanel panelNorteEste;
-	private JLabel lblNewLabel;
 	private JPanel panel;
 	private JPanel panel_1;
 	private JLabel lblNewLabel_1;
@@ -48,6 +47,8 @@ public class VentanaPrincipal extends JFrame {
 	private JLabel lblNewLabel_2;
 	private JButton btnNewButton;
 
+	
+	ArrayList<Foto> fotos = new ArrayList<Foto>();
 	/**
 	 * Launch the application.
 	 */
@@ -113,19 +114,26 @@ public class VentanaPrincipal extends JFrame {
 		panelCentral.setLayout(new BorderLayout(0, 0));
 		contentPane.add(scrollPane,BorderLayout.CENTER);
 		
+		Foto f = new Foto("Arbol", "Vegetacion", new ArrayList<String>(), usuario.getNombre(), "/images/arbol.png");
+		fotos.add(f);
+		f = new Foto("Caballo", "Hola", new ArrayList<String>(), usuario.getNombre(), "/images/caballoatardecer.png");
+		fotos.add(f);
+		f = new Foto("Egipto", "PiramideDeGiza", new ArrayList<String>(), usuario.getNombre(), "/images/piramide.png");
+		fotos.add(f);
+		
 		JPanel panelCentralCentro = new JPanel();
 		panelCentral.add(panelCentralCentro, BorderLayout.CENTER);
-		//TODO Cuando tengamos el ArrayList de las fotos que vamos a mostrar, entonces sustituimos el primer 1 por el ArrayList.Size o Length o lo que sea
-		panelCentralCentro.setLayout(new GridLayout(1, 1, 0, 8));
+		//TODO Cuando tengamos el ArrayList de las fotos que vamos a mostrar, entonces sustituimos el primer 1 por el ArrayList.Size
+		panelCentralCentro.setLayout(new GridLayout(fotos.size(), 1, 0, 8));
 		
+		for (Foto foto : fotos) {
+			panelCentralCentro.add(new PanelItemFoto(foto));
+		}
 		
 		///////
 		
-		panel = new JPanel();
-		panelCentralCentro.add(panel);
-		panel.setLayout(new BorderLayout(0, 0));
 		
-		panel_1 = new JPanel();
+		/*panel_1 = new JPanel();
 		panel.add(panel_1, BorderLayout.WEST);
 		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.X_AXIS));
 		
@@ -141,13 +149,9 @@ public class VentanaPrincipal extends JFrame {
 		panel_2.add(lblNewLabel_2);
 		
 		btnNewButton = new JButton("New button");
-		panel_2.add(btnNewButton);
+		panel_2.add(btnNewButton);*/
 		
 		///////
-		
-		Foto f = new Foto("Caballo", "Hola", new ArrayList<String>(), usuario.getNombre(), "/images/caballoatardecer.png");
-		PanelItemFoto prueba = new PanelItemFoto(f);
-		panelCentralCentro.add(prueba);
 		
 		
 	}
