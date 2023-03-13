@@ -114,12 +114,13 @@ public class VentanaPrincipal extends JFrame {
 		panelCentral.setLayout(new BorderLayout(0, 0));
 		contentPane.add(scrollPane,BorderLayout.CENTER);
 		
-		Foto f = new Foto("Arbol", "Vegetacion", new ArrayList<String>(), usuario.getNombre(), "/images/arbol.png");
-		fotos.add(f);
-		f = new Foto("Caballo", "Hola", new ArrayList<String>(), usuario.getNombre(), "/images/caballoatardecer.png");
-		fotos.add(f);
-		f = new Foto("Egipto", "PiramideDeGiza", new ArrayList<String>(), usuario.getNombre(), "/images/piramide.png");
-		fotos.add(f);
+		Foto f1 = new Foto("Arbol", "Vegetacion", new ArrayList<String>(), usuario.getNombre(), "/images/arbol.png");
+		fotos.add(f1);
+		Foto f3 = new Foto("Grecia", "Coloso", new ArrayList<String>(), usuario.getNombre(), "/images/zeus.png");
+		fotos.add(f3);
+		Foto f2 = new Foto("Caballo", "Hola", new ArrayList<String>(), usuario.getNombre(), "/images/caballoatardecer.png");
+		fotos.add(f2);
+		
 		
 		JPanel panelCentralCentro = new JPanel();
 		panelCentral.add(panelCentralCentro, BorderLayout.CENTER);
