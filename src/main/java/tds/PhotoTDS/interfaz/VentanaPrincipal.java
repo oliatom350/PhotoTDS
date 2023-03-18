@@ -116,7 +116,7 @@ public class VentanaPrincipal extends JFrame {
 		
 		Foto f1 = new Foto("Arbol", "Vegetacion", new ArrayList<String>(), usuario.getNombre(), "/images/arbol.png");
 		fotos.add(f1);
-		Foto f3 = new Foto("Grecia", "Coloso", new ArrayList<String>(), usuario.getNombre(), "/images/zeus.png");
+		Foto f3 = new Foto("Grecia", "Coloso", new ArrayList<String>(), usuario.getNombre(), "/images/colosorodas2.png");
 		fotos.add(f3);
 		Foto f2 = new Foto("Caballo", "Hola", new ArrayList<String>(), usuario.getNombre(), "/images/caballoatardecer.png");
 		fotos.add(f2);
@@ -130,30 +130,6 @@ public class VentanaPrincipal extends JFrame {
 		for (Foto foto : fotos) {
 			panelCentralCentro.add(new PanelItemFoto(foto));
 		}
-		
-		///////
-		
-		
-		/*panel_1 = new JPanel();
-		panel.add(panel_1, BorderLayout.WEST);
-		panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.X_AXIS));
-		
-		lblNewLabel_1 = new JLabel("");
-		lblNewLabel_1.setIcon(new ImageIcon(VentanaPrincipal.class.getResource("/images/leopardo.png")));
-		panel_1.add(lblNewLabel_1);
-		
-		panel_2 = new JPanel();
-		panel.add(panel_2, BorderLayout.CENTER);
-		panel_2.setLayout(new BoxLayout(panel_2, BoxLayout.Y_AXIS));
-		
-		lblNewLabel_2 = new JLabel("New label");
-		panel_2.add(lblNewLabel_2);
-		
-		btnNewButton = new JButton("New button");
-		panel_2.add(btnNewButton);*/
-		
-		///////
-		
 		
 	}
 

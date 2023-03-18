@@ -9,8 +9,8 @@ import tds.PhotoTDS.Foto;
 public class PanelItemFoto extends JPanel {
 
 private static final long serialVersionUID = 1L;
-private static final int width = 150;
-private static final int height = 100;
+private static final int width = 200;
+private static final int height = 150;
 
 public PanelItemFoto (Foto f) {
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
