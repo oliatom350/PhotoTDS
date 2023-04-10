@@ -24,7 +24,13 @@ import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetDropEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -32,9 +38,15 @@ import java.nio.file.StandardCopyOption;
 import java.util.List;
 import java.awt.Component;
 
-public class VentanaAddFoto {
+public class VentanaAddFoto extends JFrame{
 
-	private JFrame frame;
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	private static String usuario;
+	
+	//private JFrame frame;
 
 	/**
 	 * Launch the application.
@@ -43,8 +55,8 @@ public class VentanaAddFoto {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VentanaAddFoto window = new VentanaAddFoto();
-					window.frame.setVisible(true);
+					VentanaAddFoto window = new VentanaAddFoto(usuario);
+					window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -55,18 +67,22 @@ public class VentanaAddFoto {
 	/**
 	 * Create the application.
 	 */
-	public VentanaAddFoto() {
-		initialize();
+	public VentanaAddFoto(String usuario) {
+		initialize(usuario);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize() {
-		frame = new JFrame();
+	private void initialize(String usuario) {
+		/*frame = new JFrame();
 		frame.setBounds(100, 100, 550, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setResizable(false);
+		frame.setResizable(false);*/
+		setBounds(100, 100, 550, 400);
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
+		
 		GridBagConstraints gbc_editorPane_1_1 = new GridBagConstraints();
 		gbc_editorPane_1_1.insets = new Insets(0, 0, 5, 5);
 		gbc_editorPane_1_1.gridx = 4;
@@ -76,7 +92,7 @@ public class VentanaAddFoto {
 		gridBagLayout.rowHeights = new int[]{65, 0, 0, 0, 0};
 		gridBagLayout.columnWeights = new double[]{0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayout.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		frame.getContentPane().setLayout(gridBagLayout);
+		getContentPane().setLayout(gridBagLayout);
 		
 		JEditorPane editorPane = new JEditorPane();
 		editorPane.setAlignmentX(5.0f);
@@ -84,7 +100,7 @@ public class VentanaAddFoto {
 		gbc_editorPane_1_1.anchor = GridBagConstraints.NORTHWEST;
 		gbc_editorPane_1_1.gridx = 1;
 		gbc_editorPane_1_1.gridy = 1;
-		frame.getContentPane().add(editorPane, gbc_editorPane_1_1);
+		getContentPane().add(editorPane, gbc_editorPane_1_1);
 		editorPane.setContentType("text/html");
 		editorPane.setText("<h1>Agregar Foto</h1><p>Comparte una foto con tus seguidores. <br> Puedes arrastrar el fichero aquí. </p>");
 		editorPane.setEditable(false);
@@ -102,30 +118,37 @@ public class VentanaAddFoto {
 				}
 		 		}
 		 });
+		//TODO AÑADIR FOTO ARRASTRANDO
+		
 		
 		JButton btnNewButton = new JButton("Selecciona una foto de tu ordenador");
 		btnNewButton.addActionListener(ev -> {
 			JFileChooser chooser = new JFileChooser();
-			chooser.showOpenDialog(frame.getContentPane());
+			chooser.showOpenDialog(getContentPane());
 			File currentFile = chooser.getSelectedFile();
-			copyFile(currentFile);
-			VentanaAddFotoComentario vA = new VentanaAddFotoComentario("/images/" + currentFile.getName());
+			try {
+				copyFile(currentFile);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+			VentanaAddFotoComentario vA = new VentanaAddFotoComentario(currentFile.getName(), usuario);
 			vA.setVisible(true);
-			frame.dispose();
+			dispose();
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.anchor = GridBagConstraints.NORTH;
 		gbc_btnNewButton.gridx = 1;
 		gbc_btnNewButton.gridy = 3;
-		frame.getContentPane().add(btnNewButton, gbc_btnNewButton);
+		getContentPane().add(btnNewButton, gbc_btnNewButton);
 	}
 
-	private void copyFile(File currentFile) {
-		// TODO Auto-generated method stub
-		//String filePath = "/images/"+currentFile.getName();
-		//File 
-		//Files.copy(currentFile.getPath());
+	private void copyFile(File currentFile) throws Exception {
+		FileSystem fileSys = FileSystems.getDefault();
+	    Path srcPath = fileSys.getPath(currentFile.getAbsolutePath());
+	    Path destPath = fileSys.getPath("src/main/java/images/"+currentFile.getName());
+		Files.copy(srcPath, destPath, StandardCopyOption.REPLACE_EXISTING);
 	}
 
 }
