@@ -8,6 +8,7 @@ import tds.PhotoTDS.Foto;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.BevelBorder;
 import java.awt.Color;
+import java.awt.GridLayout;
 import java.awt.BorderLayout;
 
 public class PanelItemFoto extends JPanel {
@@ -40,6 +41,7 @@ public PanelItemFoto (Foto f) {
 		icon = new ImageIcon(PanelItemFoto.class.getResource("/images/comment.png")).getImage();
 		panelInfo.setLayout(new BorderLayout(0, 0));
 		commentButton.setIcon(new ImageIcon(icon.getScaledInstance(15, 15, 15)));
+		
 		JPanel panelBotonInfo = new JPanel();
 		panelBotonInfo.setLayout(new BoxLayout(panelBotonInfo, BoxLayout.X_AXIS));
 		JLabel aux = new JLabel("  ");
@@ -47,9 +49,24 @@ public PanelItemFoto (Foto f) {
 		panelBotonInfo.add(aux);
 		panelBotonInfo.add(commentButton);
 		panelBotonInfo.add(mgLabel);
-		panelInfo.add(panelBotonInfo);
+		
+		JPanel panelInfoUsuario = new JPanel();
+		panelInfoUsuario.setLayout(new BoxLayout(panelInfoUsuario, BoxLayout.X_AXIS));
+		JLabel fotoUsuario = new JLabel();
+		JLabel usuario = new JLabel("   " + f.getUsuario());
+		
+		panelInfoUsuario.add(usuario);
+		
+		JPanel panelIntermedio = new JPanel();
+		panelIntermedio.setLayout(new GridLayout(2, 1));
+		panelIntermedio.add(panelBotonInfo);
+		panelIntermedio.add(panelInfoUsuario);
+		panelInfo.add(panelIntermedio);
+		
+		JPanel espacio = new JPanel();
+		panelInfo.add(espacio, BorderLayout.WEST);
 		
 		JPanel panel = new JPanel();
-		panelInfo.add(panel, BorderLayout.WEST);
+		panelInfo.add(panel, BorderLayout.NORTH);
 	}
 }
