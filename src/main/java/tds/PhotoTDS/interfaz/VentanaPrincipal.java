@@ -40,14 +40,7 @@ public class VentanaPrincipal extends JFrame {
 	private JPanel panelNorteCentral;
 	private JPanel panelNorteOeste;
 	private JPanel panelNorteEste;
-	private JPanel panel;
-	private JPanel panel_1;
-	private JLabel lblNewLabel_1;
-	private JPanel panel_2;
-	private JLabel lblNewLabel_2;
-	private JButton btnNewButton;
-
-	
+	//Array de fotos a mostrar en la ventana principal
 	ArrayList<Foto> fotos = new ArrayList<Foto>();
 	/**
 	 * Launch the application.
@@ -124,7 +117,6 @@ public class VentanaPrincipal extends JFrame {
 		
 		JPanel panelCentralCentro = new JPanel();
 		panelCentral.add(panelCentralCentro, BorderLayout.CENTER);
-		//TODO Cuando tengamos el ArrayList de las fotos que vamos a mostrar, entonces sustituimos el primer 1 por el ArrayList.Size
 		panelCentralCentro.setLayout(new GridLayout(fotos.size(), 1, 0, 8));
 		
 		for (Foto foto : fotos) {
