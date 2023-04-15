@@ -4,31 +4,19 @@ import java.awt.EventQueue;
 import java.awt.Image;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import tds.PhotoTDS.Foto;
 import tds.PhotoTDS.Usuario;
-import javax.swing.BoxLayout;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
-import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.awt.event.ActionEvent;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.FlowLayout;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
-import javax.swing.JList;
 import javax.swing.JScrollPane;
 import pulsador.Luz;
-import java.awt.GridBagLayout;
-import java.awt.GridBagConstraints;
-import java.awt.Insets;
-import java.awt.Component;
 
 public class VentanaPrincipal extends JFrame {
 
@@ -60,8 +48,8 @@ public class VentanaPrincipal extends JFrame {
 	}
 
 	
-	public VentanaPrincipal(Usuario usuario) {
-		this.usuario = usuario;
+	public VentanaPrincipal(Usuario user) {
+		usuario = user;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
 		setBounds(100, 100, 550, 600);
@@ -121,6 +109,18 @@ public class VentanaPrincipal extends JFrame {
 		panelCentralCentro.setLayout(new GridLayout(fotos.size(), 1, 0, 8));
 		
 		for (Foto foto : fotos) {
+			
+			//TODO Necesitamos que el PanelItemFoto muestre la imagen del usuario dueño de la foto
+			
+			//Problema: Foto hereda de Publicación, la cual almacena el String "nombreUsuario", 
+			//y con eso no podemos recuperarlo del repositorio para hacer su getFotoPerfil() ya que necesitamos su id.
+			
+			//Solución 1: Almacenar la foto de perfil del usuario en el fichero Publicación.java
+			//Solución 2: Almacenar un objeto Usuario como dueño de la foto en el fichero Publicación.java
+			//Solución 3: ???
+			
+			/*PhotoTDS controlador = PhotoTDS.getUnicaInstancia();
+			controlador.getRepUsers().getUsuario(id);*/
 			panelCentralCentro.add(new PanelItemFoto(foto));
 		}
 		

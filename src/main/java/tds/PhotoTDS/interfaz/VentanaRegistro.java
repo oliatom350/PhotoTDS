@@ -1,10 +1,7 @@
 package tds.PhotoTDS.interfaz;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 import javax.swing.border.*;
-
-import org.eclipse.persistence.internal.expressions.ArgumentListFunctionExpression;
 
 import tds.PhotoTDS.PhotoTDS;
 import tds.PhotoTDS.Usuario;
@@ -14,6 +11,9 @@ import java.util.Date;
 
 public class VentanaRegistro extends JFrame {
 
+	
+	private static final long serialVersionUID = -1897859737632306368L;
+	
 	private JPanel contentPane;
 	private JTextField textField_Email;
 	private JTextField textField_Nombre;
@@ -27,9 +27,6 @@ public class VentanaRegistro extends JFrame {
 	private String rutaFoto = "";
 	private String descripcion = "";
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -44,9 +41,6 @@ public class VentanaRegistro extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	@SuppressWarnings("deprecation")
 	public VentanaRegistro() {
 		setResizable(false);
