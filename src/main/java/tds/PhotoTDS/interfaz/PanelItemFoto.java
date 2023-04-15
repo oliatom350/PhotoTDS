@@ -13,12 +13,13 @@ import java.awt.BorderLayout;
 
 public class PanelItemFoto extends JPanel {
 
-private static final long serialVersionUID = 1L;
-private static final int width = 200;
-private static final int height = 150;
-
-public PanelItemFoto (Foto f) {
-	setBorder(UIManager.getBorder("CheckBox.border"));
+	private static final long serialVersionUID = -6672653773330799809L;
+	
+	private static final int width = 200;
+	private static final int height = 150;
+	
+	public PanelItemFoto (Foto f) {
+		setBorder(UIManager.getBorder("CheckBox.border"));
 		this.setLayout(new BoxLayout(this, BoxLayout.X_AXIS));
 		JPanel panelFoto = new JPanel();
 		panelFoto.setBorder(new CompoundBorder(new BevelBorder(BevelBorder.RAISED, new Color(128, 128, 128), null, null, null), new BevelBorder(BevelBorder.RAISED, null, null, null, null)));

@@ -32,6 +32,8 @@ import java.awt.Component;
 
 public class VentanaPrincipal extends JFrame {
 
+	private static final long serialVersionUID = -2940916222961478615L;
+	
 	private JPanel contentPane;
 	private static Usuario usuario;
 	private JButton searchButton;
@@ -42,13 +44,12 @@ public class VentanaPrincipal extends JFrame {
 	private JPanel panelNorteEste;
 	//Array de fotos a mostrar en la ventana principal
 	ArrayList<Foto> fotos = new ArrayList<Foto>();
-	/**
-	 * Launch the application.
-	 */
+	
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
+					//El array 'fotos' debe inicializarse aquí
 					VentanaPrincipal frame = new VentanaPrincipal(usuario);
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -58,9 +59,7 @@ public class VentanaPrincipal extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
+	
 	public VentanaPrincipal(Usuario usuario) {
 		this.usuario = usuario;
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -113,6 +112,8 @@ public class VentanaPrincipal extends JFrame {
 		fotos.add(f3);
 		Foto f2 = new Foto("Caballo", "Hola", new ArrayList<String>(), usuario.getNombre(), "/images/caballoatardecer.png");
 		fotos.add(f2);
+		Foto f4 = new Foto("Pajaros", "Aves", new ArrayList<String>(), usuario.getNombre(), "/images/pajaros.png");
+		fotos.add(f4);
 		
 		
 		JPanel panelCentralCentro = new JPanel();
