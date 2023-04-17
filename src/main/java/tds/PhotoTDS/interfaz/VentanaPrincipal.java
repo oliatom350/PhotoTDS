@@ -109,8 +109,6 @@ public class VentanaPrincipal extends JFrame {
 		panelCentralCentro.setLayout(new GridLayout(fotos.size(), 1, 0, 8));
 		
 		for (Foto foto : fotos) {
-			/*PhotoTDS controlador = PhotoTDS.getUnicaInstancia();
-			controlador.getRepUsers().getUsuario(id);*/
 			panelCentralCentro.add(new PanelItemFoto(foto));
 		}
 		

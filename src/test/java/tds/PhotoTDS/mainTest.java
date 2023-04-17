@@ -1,17 +1,6 @@
 package tds.PhotoTDS;
 
-import java.lang.reflect.Array;
-import java.sql.Date;
-import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Arrays;
-
-import beans.Entidad;
-import beans.Propiedad;
-import tds.driver.FactoriaServicioPersistencia;
-import tds.driver.ServicioPersistencia;
-import umu.tds.fotos.*;
-import tds.PhotoTDS.dao.*;
 
 public class mainTest {
 

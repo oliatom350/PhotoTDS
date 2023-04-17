@@ -18,4 +18,14 @@ public class Foto extends Publicacion {
 		return path;
 	}
 	
+	public String getFotoPerfil(int idUsuario) {
+		PhotoTDS controlador = PhotoTDS.getUnicaInstancia();
+		return controlador.getRepUsers().getUsuario(idUsuario).getFotoPerfil();
+	}
+	
+	public String getNickUsuario(int idUsuario) {
+		PhotoTDS controlador = PhotoTDS.getUnicaInstancia();
+		return controlador.getRepUsers().getUsuario(idUsuario).getNombre();
+	}
+	
 }

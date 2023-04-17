@@ -5,6 +5,8 @@ import java.awt.Image;
 import javax.swing.*;
 
 import tds.PhotoTDS.Foto;
+import tds.PhotoTDS.PhotoTDS;
+
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.BevelBorder;
 import java.awt.Color;
@@ -54,8 +56,11 @@ public class PanelItemFoto extends JPanel {
 		JPanel panelInfoUsuario = new JPanel();
 		panelInfoUsuario.setLayout(new BoxLayout(panelInfoUsuario, BoxLayout.X_AXIS));
 		JLabel fotoUsuario = new JLabel();
-		JLabel usuario = new JLabel("   " + f.getUsuario());
+		icon = new ImageIcon(f.getFotoPerfil(f.getUsuario())).getImage();
+		fotoUsuario.setIcon(new ImageIcon(icon.getScaledInstance(20, 20, 20)));
+		JLabel usuario = new JLabel("   " + f.getNickUsuario(f.getUsuario()));
 		
+		panelInfoUsuario.add(fotoUsuario);
 		panelInfoUsuario.add(usuario);
 		
 		JPanel panelIntermedio = new JPanel();
