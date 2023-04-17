@@ -58,11 +58,21 @@ public class VentanaAddFoto extends JFrame{
 		});
 	}
 
+	/**
+	 * Create the application.
+	 */
 	public VentanaAddFoto(int usuario) {
 		initialize(usuario);
 	}
 
+	/**
+	 * Initialize the contents of the frame.
+	 */
 	private void initialize(int usuario) {
+		/*frame = new JFrame();
+		frame.setBounds(100, 100, 550, 400);
+		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		frame.setResizable(false);*/
 		setBounds(100, 100, 550, 400);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
@@ -89,22 +99,24 @@ public class VentanaAddFoto extends JFrame{
 		editorPane.setText("<h1>Agregar Foto</h1><p>Comparte una foto con tus seguidores. <br> Puedes arrastrar el fichero aquí. </p>");
 		editorPane.setEditable(false);
 		editorPane.setDropTarget(new DropTarget() {
-			private static final long serialVersionUID = -2809380727723921853L;
-
-		public synchronized void drop(DropTargetDropEvent evt) {
-			try {
-				evt.acceptDrop(DnDConstants.ACTION_COPY);
-				@SuppressWarnings("unchecked")
-				List<File> droppedFiles = (List<File>)
-				evt.getTransferable().getTransferData(DataFlavor.javaFileListFlavor);
-				for (File file : droppedFiles) {
-					System.out.println(file.getPath()); }
-				} catch (Exception ex) {
-					ex.printStackTrace();
-				}
-		 		}
-		 });
-		//TODO AÑADIR FOTO ARRASTRANDO
+			public synchronized void drop(DropTargetDropEvent evt) {
+				try {
+					evt.acceptDrop(DnDConstants.ACTION_COPY);
+					@SuppressWarnings("unchecked")
+					List<File> droppedFiles = (List<File>) evt.getTransferable().getTransferData(DataFlavor.javaFileListFlavor);
+					if (droppedFiles.size() == 1) {
+						File droppedFile = droppedFiles.get(0);
+						copyFile(droppedFile);
+						VentanaAddFotoComentario vA = new VentanaAddFotoComentario(droppedFile.getName(), usuario);
+						vA.setVisible(true);
+						dispose();
+					}
+				}catch (Exception e) {
+						// TODO: handle exception
+					}
+			}
+		});
+		//TODO ÑADIR FOTO ARRASTRANDO
 		
 		
 		JButton btnNewButton = new JButton("Selecciona una foto de tu ordenador");
