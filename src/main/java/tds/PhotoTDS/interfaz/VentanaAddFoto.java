@@ -7,6 +7,9 @@ import javax.swing.JLabel;
 import java.awt.BorderLayout;
 import java.awt.Font;
 import javax.swing.SwingConstants;
+
+import tds.PhotoTDS.PhotoTDS;
+
 import javax.swing.JButton;
 import javax.swing.JEditorPane;
 import javax.swing.JFileChooser;
@@ -98,7 +101,7 @@ public class VentanaAddFoto extends JFrame{
 					List<File> droppedFiles = (List<File>) evt.getTransferable().getTransferData(DataFlavor.javaFileListFlavor);
 					if (droppedFiles.size() == 1) {
 						File droppedFile = droppedFiles.get(0);
-						copyFile(droppedFile);
+						PhotoTDS.copyFile(droppedFile);
 						VentanaAddFotoComentario vA = new VentanaAddFotoComentario(droppedFile.getName(), usuario);
 						vA.setVisible(true);
 						dispose();
@@ -117,7 +120,7 @@ public class VentanaAddFoto extends JFrame{
 			chooser.showOpenDialog(getContentPane());
 			File currentFile = chooser.getSelectedFile();
 			try {
-				copyFile(currentFile);
+				PhotoTDS.copyFile(currentFile);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
@@ -133,14 +136,4 @@ public class VentanaAddFoto extends JFrame{
 		gbc_btnNewButton.gridy = 3;
 		getContentPane().add(btnNewButton, gbc_btnNewButton);
 	}
-
-	public void copyFile(File currentFile) throws Exception {
-		if (currentFile != null) {
-			FileSystem fileSys = FileSystems.getDefault();
-			Path srcPath = fileSys.getPath(currentFile.getAbsolutePath());
-			Path destPath = fileSys.getPath("src/main/java/images/"+currentFile.getName());
-			Files.copy(srcPath, destPath, StandardCopyOption.REPLACE_EXISTING);
-		}
-	}
-
 }

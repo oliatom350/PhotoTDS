@@ -124,7 +124,6 @@ public class VentanaAddFotoComentario extends JFrame {
 			dispose();
 		});
 		panel.add(btnNewButton);
-		
 		JButton btnNewButton_1 = new JButton("Cancelar");
 		btnNewButton_1.addActionListener(ev -> {
 			VentanaAddFoto vAF = new VentanaAddFoto(usuario);

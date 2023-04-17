@@ -1,5 +1,12 @@
 package tds.PhotoTDS;
 
+import java.io.File;
+import java.nio.file.FileSystem;
+import java.nio.file.FileSystems;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardCopyOption;
+
 import tds.PhotoTDS.CargadorFotos.FotosEvent;
 import tds.PhotoTDS.CargadorFotos.FotosListener;
 import tds.PhotoTDS.dao.FactoriaDAO;
@@ -106,5 +113,14 @@ public class PhotoTDS implements FotosListener {
 	@Override
 	public void cargarFotos(FotosEvent e) {
 		//TODO
+	}
+	
+	public static void copyFile(File currentFile) throws Exception {
+		if (currentFile != null) {
+			FileSystem fileSys = FileSystems.getDefault();
+			Path srcPath = fileSys.getPath(currentFile.getAbsolutePath());
+			Path destPath = fileSys.getPath("src/main/java/images/"+currentFile.getName());
+			Files.copy(srcPath, destPath, StandardCopyOption.REPLACE_EXISTING);
+		}
 	}
 }
