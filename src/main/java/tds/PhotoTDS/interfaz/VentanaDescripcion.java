@@ -77,6 +77,8 @@ public class VentanaDescripcion extends JFrame {
 		panelCentral.add(panel_1);
 		
 		JTextArea textArea = new JTextArea();
+		textArea.setLineWrap(true);
+		textArea.setWrapStyleWord(true);
 		panelCentral.add(textArea);
 		
 		JPanel panelSur = new JPanel();
@@ -95,5 +97,4 @@ public class VentanaDescripcion extends JFrame {
 			this.dispose();
 		});
 	}
-
 }
