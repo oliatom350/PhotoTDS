@@ -115,12 +115,14 @@ public class PhotoTDS implements FotosListener {
 		//TODO
 	}
 	
-	public static void copyFile(File currentFile) throws Exception {
+	public static Path copyFile(File currentFile) throws Exception {
 		if (currentFile != null) {
 			FileSystem fileSys = FileSystems.getDefault();
 			Path srcPath = fileSys.getPath(currentFile.getAbsolutePath());
 			Path destPath = fileSys.getPath("src/main/java/images/"+currentFile.getName());
 			Files.copy(srcPath, destPath, StandardCopyOption.REPLACE_EXISTING);
+			return destPath;
 		}
+		return null;
 	}
 }

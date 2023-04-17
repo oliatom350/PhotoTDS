@@ -1,19 +1,19 @@
 package tds.PhotoTDS.interfaz;
 
 import java.awt.EventQueue;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.*;
 import javax.swing.*;
 import javax.swing.filechooser.FileNameExtensionFilter;
-import java.awt.FlowLayout;
+
+import tds.PhotoTDS.PhotoTDS;
+
 import java.awt.BorderLayout;
  
 public class VentanaSeleccionarFotoPerfil extends JFrame {
  
-    private JPanel contentPane;
-    private JTextArea textArea;
     
+	private static final long serialVersionUID = -8875294651683696548L;
+	private JPanel contentPane;
     private File fichero;
     
     private static VentanaRegistro vr;
@@ -92,8 +92,13 @@ public class VentanaSeleccionarFotoPerfil extends JFrame {
         	 
         	    //Seleccionamos el fichero
         	    fichero=fc.getSelectedFile();
-        	 
-        	    textField.setText(fichero.getAbsolutePath());
+        	    String path = "";
+        	    try {
+					path = PhotoTDS.copyFile(fichero).toString();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+        	    textField.setText(path);
         	}
         });
         

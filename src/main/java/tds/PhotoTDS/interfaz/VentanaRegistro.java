@@ -284,7 +284,7 @@ public class VentanaRegistro extends JFrame {
 			controlador.registrarUsuario(new Usuario(textField_Usuario.getText(), 
 					 						textField_Email.getText(),
 					 						textField_Nombre.getText(),
-											new Date(Integer.parseInt(textField_Año.getText()), 
+											new Date(Integer.parseInt(textField_Año.getText())-1900,
 													 Integer.parseInt(textField_Mes.getText()), 
 													 Integer.parseInt(textField_Dia.getText())),
 											false,

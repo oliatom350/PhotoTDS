@@ -5,8 +5,6 @@ import java.awt.Image;
 import javax.swing.*;
 
 import tds.PhotoTDS.Foto;
-import tds.PhotoTDS.PhotoTDS;
-
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.BevelBorder;
 import java.awt.Color;

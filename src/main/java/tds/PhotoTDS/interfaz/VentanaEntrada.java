@@ -9,8 +9,6 @@ import javax.swing.border.*;
 import tds.PhotoTDS.PhotoTDS;
 import tds.PhotoTDS.Usuario;
 
-import java.awt.event.*;
-
 public class VentanaEntrada extends JFrame {
 
 	private static final long serialVersionUID = -7097360127064459377L;

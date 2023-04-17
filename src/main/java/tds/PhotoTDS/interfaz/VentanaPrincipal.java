@@ -4,6 +4,7 @@ import java.awt.EventQueue;
 import java.awt.Image;
 
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
@@ -70,6 +71,10 @@ public class VentanaPrincipal extends JFrame {
 		panelNorte.add(panelNorteOeste, BorderLayout.WEST);
 		
 		panelNorteEste = new JPanel();
+		JLabel fotoPerfil = new JLabel();
+		Image icon = new ImageIcon(usuario.getFotoPerfil()).getImage();
+		fotoPerfil.setIcon(new ImageIcon(icon.getScaledInstance(30, 30, DO_NOTHING_ON_CLOSE)));
+		panelNorteEste.add(fotoPerfil);
 		panelNorte.add(panelNorteEste, BorderLayout.EAST);
 		
 		JButton addFoto = new JButton("");
@@ -94,6 +99,7 @@ public class VentanaPrincipal extends JFrame {
 		panelCentral.setLayout(new BorderLayout(0, 0));
 		contentPane.add(scrollPane,BorderLayout.CENTER);
 		
+		//TODO En vez de introducir estas fotos manualmente, debemos buscar de las fotos más recientes subidas entre el usuario y el seguidor
 		Foto f1 = new Foto("Arbol", "Vegetacion", new ArrayList<String>(), usuario.getId(), "/images/arbol.png");
 		fotos.add(f1);
 		Foto f3 = new Foto("Grecia", "Coloso", new ArrayList<String>(), usuario.getId(), "/images/colosorodas2.png");
