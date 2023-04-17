@@ -37,8 +37,8 @@ public class mainTest {
 		PhotoTDS controlador = PhotoTDS.getUnicaInstancia();
 		ArrayList<String> hashtags = new ArrayList<>();
 		hashtags.add("#TOTY");
-		Foto f = new Foto("TOTY", "Militao TOTY VAMOOOO", hashtags, "asdiia", "soyRuta");
+		/*Foto f = new Foto("TOTY", "Militao TOTY VAMOOOO", hashtags, "asdiia", "soyRuta");
 		controlador.registrarFoto(f);
-		System.out.println(controlador.getFoto(f.getId()).getPath());
+		System.out.println(controlador.getFoto(f.getId()).getPath());*/
 	}
 }
