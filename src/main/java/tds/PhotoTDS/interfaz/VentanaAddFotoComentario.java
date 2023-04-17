@@ -24,6 +24,7 @@ import tds.PhotoTDS.Foto;
 import tds.PhotoTDS.PhotoTDS;
 
 import java.awt.Font;
+import javax.swing.JTextArea;
 
 public class VentanaAddFotoComentario extends JFrame {
 
@@ -33,8 +34,6 @@ public class VentanaAddFotoComentario extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private static String urlFoto;
 	private static int usuario;
-	private JTextField textField;
-	private JTextField txtAsdfasdf;
 
 	/**
 	 * Launch the application.
@@ -84,23 +83,29 @@ public class VentanaAddFotoComentario extends JFrame {
 		
 		JPanel panelComenatrio = new JPanel();
 		panelFotoComentario.add(panelComenatrio);
-		panelComenatrio.setLayout(new BoxLayout(panelComenatrio, BoxLayout.Y_AXIS));
+		panelComenatrio.setLayout(new BoxLayout(panelComenatrio, BoxLayout.PAGE_AXIS));
 		
 		JLabel lblNewLabel_2 = new JLabel("Pon un título a la foto:");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panelComenatrio.add(lblNewLabel_2);
 		
-		txtAsdfasdf = new JTextField();
-		panelComenatrio.add(txtAsdfasdf);
-		txtAsdfasdf.setColumns(10);
+		JPanel panel_4 = new JPanel();
+		panelComenatrio.add(panel_4);
+		
+		JTextArea textArea = new JTextArea(7, 7);
+		panel_4.add(textArea);
+		textArea.setAutoscrolls(true);
 		
 		JLabel lblNewLabel_1 = new JLabel("Añade una descripción:");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panelComenatrio.add(lblNewLabel_1);
 		
-		textField = new JTextField();
-		panelComenatrio.add(textField);
-		textField.setColumns(10);
+		JPanel panel_5 = new JPanel();
+		panelComenatrio.add(panel_5);
+		
+		JTextArea textArea_1 = new JTextArea(7,7);
+		panel_5.add(textArea_1);
+		
 		
 		JPanel panel_3 = new JPanel();
 		panelFotoComentario.add(panel_3);
@@ -113,8 +118,8 @@ public class VentanaAddFotoComentario extends JFrame {
 		
 		JButton btnNewButton = new JButton("Compartir");
 		btnNewButton.addActionListener(ev -> {
-			String descp = textField.getText();
-			Foto f = new Foto(txtAsdfasdf.getText(), descp, getHashtags(descp), usuario, "/images/"+urlFoto);
+			String descp = textArea_1.getText();
+			Foto f = new Foto(textArea.getText(), descp, getHashtags(descp), usuario, "/images/"+urlFoto);
 			addFoto(f);
 			dispose();
 		});

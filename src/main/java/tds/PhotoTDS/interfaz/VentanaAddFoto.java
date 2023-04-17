@@ -22,21 +22,13 @@ import java.awt.datatransfer.DataFlavor;
 import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetDropEvent;
-import java.awt.event.ActionListener;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.nio.file.FileSystem;
 import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.util.List;
-import java.awt.Component;
 
 public class VentanaAddFoto extends JFrame{
 
@@ -142,11 +134,13 @@ public class VentanaAddFoto extends JFrame{
 		getContentPane().add(btnNewButton, gbc_btnNewButton);
 	}
 
-	private void copyFile(File currentFile) throws Exception {
-		FileSystem fileSys = FileSystems.getDefault();
-	    Path srcPath = fileSys.getPath(currentFile.getAbsolutePath());
-	    Path destPath = fileSys.getPath("src/main/java/images/"+currentFile.getName());
-		Files.copy(srcPath, destPath, StandardCopyOption.REPLACE_EXISTING);
+	public void copyFile(File currentFile) throws Exception {
+		if (currentFile != null) {
+			FileSystem fileSys = FileSystems.getDefault();
+			Path srcPath = fileSys.getPath(currentFile.getAbsolutePath());
+			Path destPath = fileSys.getPath("src/main/java/images/"+currentFile.getName());
+			Files.copy(srcPath, destPath, StandardCopyOption.REPLACE_EXISTING);
+		}
 	}
 
 }
