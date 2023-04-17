@@ -40,7 +40,7 @@ public class AdaptadorTDSFotoDAO implements IAdaptadorFotoDAO{
 						new Propiedad("descripcion", foto.getDescripcion()),
 						new Propiedad("meGusta", String.valueOf(foto.getMeGusta())),
 						new Propiedad("hashtags", AuxiliarDAO.obtenerCadenaDeIds(foto.getHashtags())),
-						new Propiedad("usuario", foto.getUsuario()),
+						new Propiedad("usuario", String.valueOf(foto.getUsuario())),
 						new Propiedad("comentarios", AuxiliarDAO.obtenerIdsComentarios(foto.getComentarios())),
 						new Propiedad("ruta", foto.getPath())))
 		);
@@ -99,14 +99,14 @@ public class AdaptadorTDSFotoDAO implements IAdaptadorFotoDAO{
 		int meGusta = 0;
 		ArrayList<String> hashtags = null;
 		ArrayList<Comentario> comentarios = null;
-		String usuario = null;
+		int usuario = 0;
 		String ruta = null;
 		
 		Entidad eFoto = servPersistencia.recuperarEntidad(codigo);
 		titulo = servPersistencia.recuperarPropiedadEntidad(eFoto, "titulo");
 		descripcion = servPersistencia.recuperarPropiedadEntidad(eFoto, "descripcion");
 		meGusta = Integer.parseInt(servPersistencia.recuperarPropiedadEntidad(eFoto, "meGusta"));
-		usuario = servPersistencia.recuperarPropiedadEntidad(eFoto, "usuario");
+		usuario = Integer.parseInt(servPersistencia.recuperarPropiedadEntidad(eFoto, "usuario"));
 		ruta = servPersistencia.recuperarPropiedadEntidad(eFoto, "ruta");
 		try {
 			fecha = dateFormat.parse(servPersistencia.recuperarPropiedadEntidad(eFoto, "fecha"));

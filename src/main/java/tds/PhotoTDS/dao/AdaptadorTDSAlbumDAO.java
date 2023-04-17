@@ -43,7 +43,7 @@ public class AdaptadorTDSAlbumDAO implements IAdaptadorTDSAlbumDAO{
 						new Propiedad("descripcion", album.getDescripcion()),
 						new Propiedad("meGusta", String.valueOf(album.getMeGusta())),
 						new Propiedad("hashtags", AuxiliarDAO.obtenerCadenaDeIds(album.getHashtags())),
-						new Propiedad("usuario", album.getUsuario()),
+						new Propiedad("usuario", String.valueOf(album.getUsuario())),
 						new Propiedad("comentarios", AuxiliarDAO.obtenerIdsComentarios(album.getComentarios())),
 						new Propiedad("fotos", AuxiliarDAO.obtenerCadenaDeIds(album.getFotos().stream()
 																				.map(f -> String.valueOf(f.getId()))
@@ -106,14 +106,14 @@ public class AdaptadorTDSAlbumDAO implements IAdaptadorTDSAlbumDAO{
 		int meGusta = 0;
 		ArrayList<String> hashtags = null;
 		ArrayList<Comentario> comentarios = null;
-		String usuario = null;
+		int usuario = 0;
 		List<String> idfotos = null;
 		
 		Entidad eAlbum = servPersistencia.recuperarEntidad(codigo);
 		titulo = servPersistencia.recuperarPropiedadEntidad(eAlbum, "titulo");
 		descripcion = servPersistencia.recuperarPropiedadEntidad(eAlbum, "descripcion");
 		meGusta = Integer.parseInt(servPersistencia.recuperarPropiedadEntidad(eAlbum, "meGusta"));
-		usuario = servPersistencia.recuperarPropiedadEntidad(eAlbum, "usuario");
+		usuario = Integer.parseInt(servPersistencia.recuperarPropiedadEntidad(eAlbum, "usuario"));
 		idfotos = AuxiliarDAO.obtenerListaDeIds(servPersistencia.recuperarPropiedadEntidad(eAlbum, "fotos"));
 		try {
 			fecha = dateFormat.parse(servPersistencia.recuperarPropiedadEntidad(eAlbum, "fecha"));

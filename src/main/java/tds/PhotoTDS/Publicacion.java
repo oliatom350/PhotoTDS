@@ -12,10 +12,10 @@ public class Publicacion {
 	private int meGusta;
 	private ArrayList<String> hashtags;
 	private ArrayList<Comentario> comentarios;
-	private String usuario;
+	private int usuario;
 	
 	//Constructor
-	public Publicacion(String titulo, String descripcion, ArrayList<String> hashtags, String usuario) {
+	public Publicacion(String titulo, String descripcion, ArrayList<String> hashtags, int usuario) {
 		this.titulo = titulo;
 		this.descripcion = descripcion;
 		this.hashtags = hashtags;
@@ -51,7 +51,7 @@ public class Publicacion {
 		return comentarios;
 	}
 
-	public String getUsuario() {
+	public int getUsuario() {
 		return usuario;
 	}
 	

@@ -32,7 +32,7 @@ public class VentanaAddFotoComentario extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L;
 	private static String urlFoto;
-	private static String usuario;
+	private static int usuario;
 	private JTextField textField;
 	private JTextField txtAsdfasdf;
 
@@ -55,14 +55,14 @@ public class VentanaAddFotoComentario extends JFrame {
 	/**
 	 * Create the application.
 	 */
-	public VentanaAddFotoComentario(String urlFoto, String usuario) {
+	public VentanaAddFotoComentario(String urlFoto, int usuario) {
 		initialize(urlFoto, usuario);
 	}
 
 	/**
 	 * Initialize the contents of the frame.
 	 */
-	private void initialize(String urlFoto, String usuario) {
+	private void initialize(String urlFoto, int usuario) {
 		setBounds(100, 100, 550, 350);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);

@@ -8,7 +8,7 @@ public class Foto extends Publicacion {
 	private String path;
 	
 	//Constructor
-	public Foto(String titulo, String descripcion, ArrayList<String> hashtags, String usuario, String ruta) {
+	public Foto(String titulo, String descripcion, ArrayList<String> hashtags, int usuario, String ruta) {
 		super(titulo, descripcion, hashtags, usuario);
 		this.path = ruta;
 	}

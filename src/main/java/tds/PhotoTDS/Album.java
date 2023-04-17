@@ -9,7 +9,7 @@ public class Album extends Publicacion {
 	private LinkedList<Foto> fotos;
 
 	//Constructor
-	public Album(String titulo, String descripcion, ArrayList<String> hashtags, String usuario, LinkedList<Foto> fotos) {
+	public Album(String titulo, String descripcion, ArrayList<String> hashtags, int usuario, LinkedList<Foto> fotos) {
 		super(titulo, descripcion, hashtags, usuario);
 		this.fotos = fotos;
 	}

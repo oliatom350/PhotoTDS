@@ -5,7 +5,6 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
-import java.util.LinkedList;
 import java.util.List;
 
 import beans.Entidad;
@@ -43,7 +42,7 @@ public class AdaptadorTDSPublicacionDAO implements IAdaptadorPublicacionDAO {
 						new Propiedad("descripcion", publicacion.getDescripcion()),
 						new Propiedad("meGusta", String.valueOf(publicacion.getMeGusta())),
 						new Propiedad("hashtags", AuxiliarDAO.obtenerCadenaDeIds(publicacion.getHashtags())),
-						new Propiedad("usuario", publicacion.getUsuario()),
+						new Propiedad("usuario", String.valueOf(publicacion.getUsuario())),
 						new Propiedad("comentarios", AuxiliarDAO.obtenerIdsComentarios(publicacion.getComentarios()))
 		))
 		);
@@ -99,13 +98,13 @@ public class AdaptadorTDSPublicacionDAO implements IAdaptadorPublicacionDAO {
 		int meGusta = 0;
 		ArrayList<String> hashtags = null;
 		ArrayList<Comentario> comentarios = null;
-		String usuario = null;
+		int usuario = 0;
 		
 		Entidad ePublicacion = servPersistencia.recuperarEntidad(codigo);
 		titulo = servPersistencia.recuperarPropiedadEntidad(ePublicacion, "titulo");
 		descripcion = servPersistencia.recuperarPropiedadEntidad(ePublicacion, "descripcion");
 		meGusta = Integer.parseInt(servPersistencia.recuperarPropiedadEntidad(ePublicacion, "meGusta"));
-		usuario = servPersistencia.recuperarPropiedadEntidad(ePublicacion, "usuario");
+		usuario = Integer.parseInt(servPersistencia.recuperarPropiedadEntidad(ePublicacion, "usuario"));
 		try {
 			fecha = dateFormat.parse(servPersistencia.recuperarPropiedadEntidad(ePublicacion, "fecha"));
 		} catch (ParseException e) {

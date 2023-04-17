@@ -40,17 +40,11 @@ import java.awt.Component;
 
 public class VentanaAddFoto extends JFrame{
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
-	private static String usuario;
+	private static int usuario;
 	
 	//private JFrame frame;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -64,21 +58,11 @@ public class VentanaAddFoto extends JFrame{
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
-	public VentanaAddFoto(String usuario) {
+	public VentanaAddFoto(int usuario) {
 		initialize(usuario);
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize(String usuario) {
-		/*frame = new JFrame();
-		frame.setBounds(100, 100, 550, 400);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setResizable(false);*/
+	private void initialize(int usuario) {
 		setBounds(100, 100, 550, 400);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
@@ -105,6 +89,8 @@ public class VentanaAddFoto extends JFrame{
 		editorPane.setText("<h1>Agregar Foto</h1><p>Comparte una foto con tus seguidores. <br> Puedes arrastrar el fichero aquí. </p>");
 		editorPane.setEditable(false);
 		editorPane.setDropTarget(new DropTarget() {
+			private static final long serialVersionUID = -2809380727723921853L;
+
 		public synchronized void drop(DropTargetDropEvent evt) {
 			try {
 				evt.acceptDrop(DnDConstants.ACTION_COPY);

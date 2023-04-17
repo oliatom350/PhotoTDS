@@ -13,6 +13,7 @@ import java.awt.event.*;
 
 public class VentanaEntrada extends JFrame {
 
+	private static final long serialVersionUID = -7097360127064459377L;
 	private JPanel contentPane;
 	private JTextField usuario;
 	private JTextField password;

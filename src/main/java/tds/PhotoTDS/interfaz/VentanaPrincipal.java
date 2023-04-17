@@ -94,13 +94,13 @@ public class VentanaPrincipal extends JFrame {
 		panelCentral.setLayout(new BorderLayout(0, 0));
 		contentPane.add(scrollPane,BorderLayout.CENTER);
 		
-		Foto f1 = new Foto("Arbol", "Vegetacion", new ArrayList<String>(), usuario.getNombre(), "/images/arbol.png");
+		Foto f1 = new Foto("Arbol", "Vegetacion", new ArrayList<String>(), usuario.getId(), "/images/arbol.png");
 		fotos.add(f1);
-		Foto f3 = new Foto("Grecia", "Coloso", new ArrayList<String>(), usuario.getNombre(), "/images/colosorodas2.png");
+		Foto f3 = new Foto("Grecia", "Coloso", new ArrayList<String>(), usuario.getId(), "/images/colosorodas2.png");
 		fotos.add(f3);
-		Foto f2 = new Foto("Caballo", "Hola", new ArrayList<String>(), usuario.getNombre(), "/images/caballoatardecer.png");
+		Foto f2 = new Foto("Caballo", "Hola", new ArrayList<String>(), usuario.getId(), "/images/caballoatardecer.png");
 		fotos.add(f2);
-		Foto f4 = new Foto("Pajaros", "Aves", new ArrayList<String>(), usuario.getNombre(), "/images/pajaros.png");
+		Foto f4 = new Foto("Pajaros", "Aves", new ArrayList<String>(), usuario.getId(), "/images/pajaros.png");
 		fotos.add(f4);
 		
 		
@@ -109,16 +109,6 @@ public class VentanaPrincipal extends JFrame {
 		panelCentralCentro.setLayout(new GridLayout(fotos.size(), 1, 0, 8));
 		
 		for (Foto foto : fotos) {
-			
-			//TODO Necesitamos que el PanelItemFoto muestre la imagen del usuario dueño de la foto
-			
-			//Problema: Foto hereda de Publicación, la cual almacena el String "nombreUsuario", 
-			//y con eso no podemos recuperarlo del repositorio para hacer su getFotoPerfil() ya que necesitamos su id.
-			
-			//Solución 1: Almacenar la foto de perfil del usuario en el fichero Publicación.java
-			//Solución 2: Almacenar un objeto Usuario como dueño de la foto en el fichero Publicación.java
-			//Solución 3: ???
-			
 			/*PhotoTDS controlador = PhotoTDS.getUnicaInstancia();
 			controlador.getRepUsers().getUsuario(id);*/
 			panelCentralCentro.add(new PanelItemFoto(foto));
