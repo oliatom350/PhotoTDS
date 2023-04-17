@@ -81,30 +81,33 @@ public class VentanaAddFotoComentario extends JFrame {
 		JPanel panel_1 = new JPanel();
 		panelFotoComentario.add(panel_1);
 		
-		JPanel panelComenatrio = new JPanel();
-		panelFotoComentario.add(panelComenatrio);
-		panelComenatrio.setLayout(new BoxLayout(panelComenatrio, BoxLayout.PAGE_AXIS));
+		JPanel panelComentario = new JPanel();
+		panelFotoComentario.add(panelComentario);
+		panelComentario.setLayout(new BoxLayout(panelComentario, BoxLayout.PAGE_AXIS));
 		
 		JLabel lblNewLabel_2 = new JLabel("Pon un título a la foto:");
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panelComenatrio.add(lblNewLabel_2);
+		panelComentario.add(lblNewLabel_2);
 		
 		JPanel panel_4 = new JPanel();
-		panelComenatrio.add(panel_4);
+		panelComentario.add(panel_4);
+		panel_4.setLayout(new BorderLayout(0, 0));
 		
-		JTextArea textArea = new JTextArea(7, 7);
-		panel_4.add(textArea);
-		textArea.setAutoscrolls(true);
+		JTextArea textArea = new JTextArea();
+		panel_4.add(textArea, BorderLayout.NORTH);
+		textArea.setLineWrap(true);
 		
 		JLabel lblNewLabel_1 = new JLabel("Añade una descripción:");
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		panelComenatrio.add(lblNewLabel_1);
+		panelComentario.add(lblNewLabel_1);
 		
 		JPanel panel_5 = new JPanel();
-		panelComenatrio.add(panel_5);
+		panelComentario.add(panel_5);
+		panel_5.setLayout(new BorderLayout(0, 0));
 		
-		JTextArea textArea_1 = new JTextArea(7,7);
-		panel_5.add(textArea_1);
+		JTextArea textArea_1 = new JTextArea();
+		textArea_1.setLineWrap(true);
+		panel_5.add(textArea_1, BorderLayout.NORTH);
 		
 		
 		JPanel panel_3 = new JPanel();
