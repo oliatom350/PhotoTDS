@@ -7,20 +7,14 @@ import javax.swing.JLabel;
 import java.awt.BorderLayout;
 import javax.swing.JPanel;
 import javax.swing.JButton;
-import javax.swing.JFileChooser;
-
 import java.awt.FlowLayout;
 import java.awt.Image;
-import java.awt.Label;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
-import javax.swing.JTextField;
-
 import tds.PhotoTDS.Foto;
 import tds.PhotoTDS.PhotoTDS;
 
@@ -30,16 +24,10 @@ import javax.swing.SwingConstants;
 
 public class VentanaAddFotoDescripcion extends JFrame {
 
-	/**
-	 * 
-	 */
 	private static final long serialVersionUID = 1L;
 	private static String urlFoto;
 	private static int usuario;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -53,16 +41,10 @@ public class VentanaAddFotoDescripcion extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
 	public VentanaAddFotoDescripcion(String urlFoto, int usuario) {
 		initialize(urlFoto, usuario);
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
 	private void initialize(String urlFoto, int usuario) {
 		
 		//TODO REVISAR SI SOBRA TIEMPO
@@ -131,7 +113,7 @@ public class VentanaAddFotoDescripcion extends JFrame {
 			Foto f = new Foto(textArea.getText(), descp, getHashtags(descp), usuario, "/images/"+urlFoto);
 			addFoto(f);
 			try {
-				VentanaPrincipal vP = new VentanaPrincipal(PhotoTDS.getUnicaInstancia().getUsuario(usuario));
+				VentanaPrincipal vP = new VentanaPrincipal(usuario);
 				vP.setVisible(true);
 			} catch (Exception e) {
 				// TODO Auto-generated catch block

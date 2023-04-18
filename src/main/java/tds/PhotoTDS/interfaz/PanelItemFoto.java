@@ -5,6 +5,8 @@ import java.awt.Image;
 import javax.swing.*;
 
 import tds.PhotoTDS.Foto;
+import tds.PhotoTDS.PhotoTDS;
+
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.BevelBorder;
 import java.awt.Color;
@@ -39,6 +41,8 @@ public class PanelItemFoto extends JPanel {
 		icon = new ImageIcon(PanelItemFoto.class.getResource("/images/me-gusta.png")).getImage();
 		mgButton.setIcon(new ImageIcon(icon.getScaledInstance(15, 15, 15)));
 		mgButton.addActionListener(ev -> {
+			PhotoTDS controlador = PhotoTDS.getUnicaInstancia();
+			controlador.addMeGusta(f);
 			f.addMeGusta();
 			String newMg = Integer.toString(f.getMeGusta());
 			mgLabel.setText("   " + newMg + " me gusta");

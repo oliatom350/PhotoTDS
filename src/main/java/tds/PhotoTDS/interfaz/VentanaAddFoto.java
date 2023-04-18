@@ -3,21 +3,13 @@ package tds.PhotoTDS.interfaz;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
-import javax.swing.JLabel;
-import java.awt.BorderLayout;
 import java.awt.Font;
-import javax.swing.SwingConstants;
-
 import tds.PhotoTDS.PhotoTDS;
 
 import javax.swing.JButton;
 import javax.swing.JEditorPane;
 import javax.swing.JFileChooser;
 
-import java.awt.FlowLayout;
-import javax.swing.BoxLayout;
-import javax.swing.JPanel;
-import java.awt.GridLayout;
 import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
@@ -26,11 +18,6 @@ import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetDropEvent;
 import java.io.File;
-import java.nio.file.FileSystem;
-import java.nio.file.FileSystems;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.StandardCopyOption;
 import java.util.List;
 
 public class VentanaAddFoto extends JFrame{
@@ -53,16 +40,11 @@ public class VentanaAddFoto extends JFrame{
 		});
 	}
 
-	/**
-	 * Create the application.
-	 */
 	public VentanaAddFoto(int usuario) {
 		initialize(usuario);
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
+	@SuppressWarnings("serial")
 	private void initialize(int usuario) {
 		/*frame = new JFrame();
 		frame.setBounds(100, 100, 550, 400);

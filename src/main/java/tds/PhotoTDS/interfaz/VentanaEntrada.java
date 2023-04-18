@@ -120,7 +120,7 @@ public class VentanaEntrada extends JFrame {
 			String passUsuario = password.getText();
 			Usuario usuario = iniciarSesion(nombreUsuario, passUsuario);
 			if(!usuario.equals(null)) {
-				VentanaPrincipal vP = new VentanaPrincipal(usuario);
+				VentanaPrincipal vP = new VentanaPrincipal(usuario.getId());
 				vP.setVisible(true);
 				this.setVisible(false);
 				this.setEnabled(false);
