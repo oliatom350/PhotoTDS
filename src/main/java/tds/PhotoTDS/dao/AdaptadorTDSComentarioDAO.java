@@ -33,7 +33,7 @@ public class AdaptadorTDSComentarioDAO implements IAdaptadorComentarioDAO {
 		eComentario.setPropiedades(
 				new ArrayList<Propiedad>(Arrays.asList(
 						new Propiedad("texto", comentario.getTexto()),
-						new Propiedad("usuario", comentario.getUsuario())
+						new Propiedad("usuario", String.valueOf(comentario.getUsuario()))
 		))
 		);
 		eComentario = servPersistencia.registrarEntidad(eComentario);
@@ -58,7 +58,7 @@ public class AdaptadorTDSComentarioDAO implements IAdaptadorComentarioDAO {
 				propiedad.setValor(comentario.getTexto());
 			}
 			if(propiedad.getNombre().equals("usuario")) {
-				propiedad.setValor(comentario.getUsuario());
+				propiedad.setValor(String.valueOf(comentario.getUsuario()));
 			}
 		}
 	}
@@ -68,11 +68,11 @@ public class AdaptadorTDSComentarioDAO implements IAdaptadorComentarioDAO {
 		if (poolComentarios.contains(codigo)) return (Comentario) poolComentarios.getObject(codigo);
 		
 		String texto = null;
-		String usuario = null;
+		int usuario = 0;
 		
 		Entidad eComentario = servPersistencia.recuperarEntidad(codigo);
 		texto = servPersistencia.recuperarPropiedadEntidad(eComentario, "texto");
-		usuario = servPersistencia.recuperarPropiedadEntidad(eComentario, "usuario");
+		usuario = Integer.parseInt(servPersistencia.recuperarPropiedadEntidad(eComentario, "usuario"));
 	
 		Comentario comentario = new Comentario(texto, usuario);
 		comentario.setId(codigo);

@@ -147,13 +147,7 @@ public class VentanaEntrada extends JFrame {
 
 	private Usuario iniciarSesion(String nombreUsuario, String passUsuario) {
 		PhotoTDS controlador = PhotoTDS.getUnicaInstancia();
-		for(Usuario usuario : controlador.getRepUsers().getUsuarios()) {
-			if((usuario.getEmail().equals(nombreUsuario) || usuario.getNombre().equals(nombreUsuario)) && usuario.getPassword().equals(passUsuario))
-				return usuario;
-		}
-		System.out.println("Nombre de usuario, email o contraseña incorrectos");
-		return null;
+		return controlador.iniciarSesion(nombreUsuario, passUsuario);
 	}
-
 }
 

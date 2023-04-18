@@ -115,7 +115,7 @@ public class VentanaPrincipal extends JFrame {
 		panelCentralCentro.setLayout(new GridLayout(fotos.size(), 1, 0, 8));
 		
 		for (Foto foto : fotos) {
-			panelCentralCentro.add(new PanelItemFoto(foto));
+			panelCentralCentro.add(new PanelItemFoto(foto, usuario.getId()));
 		}
 		
 	}

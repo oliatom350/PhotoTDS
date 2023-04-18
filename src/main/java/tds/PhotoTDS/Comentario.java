@@ -5,11 +5,11 @@ public class Comentario {
 	//Atributos
 	private int id;
 	private String texto;
-	private String usuario;
+	private int usuario;
 	
 	
 	//Constructor
-	public Comentario(String texto, String usuario) {
+	public Comentario(String texto, int usuario) {
 		this.texto = texto;
 		this.usuario = usuario;
 	}
@@ -19,7 +19,7 @@ public class Comentario {
 		return texto;
 	}
 	
-	public String getUsuario() {
+	public int getUsuario() {
 		return usuario;
 	}
 

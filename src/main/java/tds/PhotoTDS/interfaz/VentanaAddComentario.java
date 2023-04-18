@@ -5,6 +5,11 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import tds.PhotoTDS.Comentario;
+import tds.PhotoTDS.Foto;
+import tds.PhotoTDS.PhotoTDS;
+
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.BoxLayout;
@@ -13,19 +18,22 @@ import javax.swing.JTextArea;
 import javax.swing.JButton;
 import java.awt.FlowLayout;
 
-public class VentanaDescripcion extends JFrame {
+public class VentanaAddComentario extends JFrame {
 
 	private static final long serialVersionUID = -6906524484620549062L;
 
 	private JPanel contentPane;
-
-	private static VentanaRegistro vr;
+	
+	private static int usuario;
+	private static Foto foto;
+	
+	private final int longitudMaxima = 120;
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VentanaDescripcion frame = new VentanaDescripcion(vr);
+					VentanaAddComentario frame = new VentanaAddComentario(usuario, foto);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -34,11 +42,9 @@ public class VentanaDescripcion extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
-	public VentanaDescripcion(VentanaRegistro ventana) {
-		vr = ventana;
+	public VentanaAddComentario(int user, Foto f) {
+		usuario = user;
+		foto = f;
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -63,7 +69,7 @@ public class VentanaDescripcion extends JFrame {
 		panelNorte.add(panel_2);
 		panel_2.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 		
-		JLabel lblNewLabel = new JLabel("Introduce una descripción para tu perfil:");
+		JLabel lblNewLabel = new JLabel("Comparte un comentario (máx. 120 caracteres):");
 		lblNewLabel.setFont(new Font("Segoe UI Historic", Font.PLAIN, 17));
 		panel_2.add(lblNewLabel);
 		
@@ -85,8 +91,14 @@ public class VentanaDescripcion extends JFrame {
 		JButton btnFinalizar = new JButton("Finalizar");
 		panelSur.add(btnFinalizar);
 		btnFinalizar.addActionListener(ev -> {
-			vr.setDescripcion(textArea.getText());
-			this.setVisible(false);
+			if (VerificaLongitud(textArea.getText())) {
+				Comentario coment = new Comentario(textArea.getText(), user);
+				PhotoTDS controlador = PhotoTDS.getUnicaInstancia();
+				controlador.addComentario(coment, f);
+				this.setVisible(false);
+			} else {
+				textArea.setText(textArea.getText().substring(0, longitudMaxima));
+			}
 		});
 		
 		JButton btnCancelar = new JButton("Cancelar");
@@ -94,5 +106,14 @@ public class VentanaDescripcion extends JFrame {
 		btnCancelar.addActionListener(ev -> {
 			this.dispose();
 		});
+	}
+	
+	public boolean VerificaLongitud(String text) {
+		if (text.length() > longitudMaxima) {
+			VentanaWarningLongitudComentario vent = new VentanaWarningLongitudComentario();
+			vent.setVisible(true);
+			return false;
+		}
+		return true;
 	}
 }
