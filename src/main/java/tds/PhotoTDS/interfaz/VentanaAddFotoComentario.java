@@ -130,7 +130,13 @@ public class VentanaAddFotoComentario extends JFrame {
 			String descp = textArea_1.getText();
 			Foto f = new Foto(textArea.getText(), descp, getHashtags(descp), usuario, "/images/"+urlFoto);
 			addFoto(f);
-			VentanaPrincipal vP = new VentanaPrincipal();
+			try {
+				VentanaPrincipal vP = new VentanaPrincipal(PhotoTDS.getUnicaInstancia().getUsuario(usuario));
+				vP.setVisible(true);
+			} catch (Exception e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 			dispose();
 		});
 		panel.add(btnNewButton);

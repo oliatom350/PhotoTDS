@@ -112,7 +112,7 @@ public class PhotoTDS implements FotosListener {
 
 	@Override
 	public void cargarFotos(FotosEvent e) {
-		//TODO
+		//TODO Java Beans
 	}
 	
 	public Usuario getUsuario(int id) throws Exception {
