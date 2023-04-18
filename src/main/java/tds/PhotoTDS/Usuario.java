@@ -12,8 +12,8 @@ public class Usuario {
 	private String nombreCompleto;
 	private Date fechaNacimiento;
 	private boolean isPremium;
-	private ArrayList<String> usuariosSeguidores;
-	private ArrayList<String> usuariosSeguidos;
+	private ArrayList<Integer> usuariosSeguidores;
+	private ArrayList<Integer> usuariosSeguidos;
 	private ArrayList<Notificacion> notificaciones;
 	private String password;
 	private String fotoPerfil;
@@ -25,9 +25,9 @@ public class Usuario {
 		this.nombreCompleto = nombreCompleto;
 		this.fechaNacimiento = fechaNacimiento;
 		this.isPremium = isPremium;
-		this.usuariosSeguidores = new ArrayList<String>();
+		this.usuariosSeguidores = new ArrayList<Integer>();
 		this.notificaciones = new ArrayList<Notificacion>();
-		this.usuariosSeguidos = new ArrayList<String>();
+		this.usuariosSeguidos = new ArrayList<Integer>();
 		this.password = password;
 		this.fotoPerfil = fotoPerfil;
 		this.presentacion = presentacion;
@@ -84,11 +84,11 @@ public class Usuario {
 		return notificaciones;
 	}
 	
-	public ArrayList<String> getUsuariosSeguidores() {
+	public ArrayList<Integer> getUsuariosSeguidores() {
 		return usuariosSeguidores;
 	}
 
-	public ArrayList<String> getUsuariosSeguidos(){
+	public ArrayList<Integer> getUsuariosSeguidos(){
 		return usuariosSeguidos;
 	}
 	
@@ -96,7 +96,7 @@ public class Usuario {
 		return password;
 	}
 	
-	public void setUsuariosSeguidores(ArrayList<String> usuariosSeguidores) {
+	public void setUsuariosSeguidores(ArrayList<Integer> usuariosSeguidores) {
 		this.usuariosSeguidores = usuariosSeguidores;
 	}
 
@@ -112,11 +112,11 @@ public class Usuario {
 		this.password = password;
 	}
 	
-	public void addSeguidor(String seguidor) {
+	public void addSeguidor(int seguidor) {
 		this.usuariosSeguidores.add(seguidor);
 	}
 	
-	public void addSeguido(String seguido) {
+	public void addSeguido(int seguido) {
 		this.usuariosSeguidos.add(seguido);
 	}
 	

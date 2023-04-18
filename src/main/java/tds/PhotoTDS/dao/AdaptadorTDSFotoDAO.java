@@ -126,11 +126,16 @@ public class AdaptadorTDSFotoDAO implements IAdaptadorFotoDAO{
 	}
 
 	@Override
-	public List<Foto> recuperarTodasFotos() throws Exception {
+	public List<Foto> recuperarTodasFotos() {
 		List<Foto> fotoes = new ArrayList<Foto>();
         List<Entidad> eFotoes = servPersistencia.recuperarEntidades("foto");
         for(Entidad e : eFotoes) {
-        	fotoes.add(recuperarFoto(e.getId()));
+        	try {
+				fotoes.add(recuperarFoto(e.getId()));
+			} catch (Exception e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}
         }
         return fotoes;
 	}

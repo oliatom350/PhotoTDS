@@ -47,8 +47,8 @@ public class AdaptadorTDSUsuarioDAO implements IAdaptadorUsuarioDAO{
 						new Propiedad("nombreCompleto", usuario.getNombreCompleto()),
 						new Propiedad("fechaNacimiento", dateFormat.format(usuario.getFechaNacimiento())),
 						new Propiedad("isPremium", String.valueOf(usuario.isPremium())),
-						new Propiedad("usuariosSeguidores", AuxiliarDAO.obtenerCadenaDeIds(usuario.getUsuariosSeguidores())),
-						new Propiedad("usuariosSeguidos", AuxiliarDAO.obtenerCadenaDeIds(usuario.getUsuariosSeguidos())),
+						new Propiedad("usuariosSeguidores", AuxiliarDAO.obtenerCadenaDeIdsInt(usuario.getUsuariosSeguidores())),
+						new Propiedad("usuariosSeguidos", AuxiliarDAO.obtenerCadenaDeIdsInt(usuario.getUsuariosSeguidos())),
 						new Propiedad("notificaciones", AuxiliarDAO.obtenerIdsNotificaciones(usuario.getNotificaciones())),
 						new Propiedad("password", usuario.getPassword()),
 						new Propiedad("fotoPerfil", usuario.getFotoPerfil()),
@@ -89,13 +89,13 @@ public class AdaptadorTDSUsuarioDAO implements IAdaptadorUsuarioDAO{
 				propiedad.setValor(String.valueOf(usuario.isPremium()));
 			}
 			if(propiedad.getNombre().equals("usuariosSeguidores")) {
-				propiedad.setValor(AuxiliarDAO.obtenerCadenaDeIds(usuario.getUsuariosSeguidores()));
+				propiedad.setValor(AuxiliarDAO.obtenerCadenaDeIdsInt(usuario.getUsuariosSeguidores()));
 			}
 			if(propiedad.getNombre().equals("notificaciones")) {
 				propiedad.setValor(AuxiliarDAO.obtenerIdsNotificaciones(usuario.getNotificaciones()));
 			}
 			if(propiedad.getNombre().equals("usuariosSeguidos")) {
-				propiedad.setValor(AuxiliarDAO.obtenerCadenaDeIds(usuario.getUsuariosSeguidos()));
+				propiedad.setValor(AuxiliarDAO.obtenerCadenaDeIdsInt(usuario.getUsuariosSeguidos()));
 			}
 			if(propiedad.getNombre().equals("password")) {
 				propiedad.setValor(usuario.getPassword());
@@ -111,7 +111,7 @@ public class AdaptadorTDSUsuarioDAO implements IAdaptadorUsuarioDAO{
 	}
 
 	@Override
-	public Usuario recuperarUsuario(int codigo) throws Exception {
+	public Usuario recuperarUsuario(int codigo) {
 		if (poolUsuarios.contains(codigo)) return (Usuario) poolUsuarios.getObject(codigo);
 		
 		Date fecha = null;
@@ -129,18 +129,24 @@ public class AdaptadorTDSUsuarioDAO implements IAdaptadorUsuarioDAO{
 		String fotoPerfil = servPersistencia.recuperarPropiedadEntidad(eUsuario, "fotoPerfil");
 		String presentacion = servPersistencia.recuperarPropiedadEntidad(eUsuario, "presentacion");
 		boolean isPremium = Boolean.parseBoolean(servPersistencia.recuperarPropiedadEntidad(eUsuario, "isPremium"));
-		List<String> usuariosSeguidores = AuxiliarDAO.obtenerListaDeIds(servPersistencia.recuperarPropiedadEntidad(eUsuario, "usuariosSeguidores"));
-		List<Notificacion> notificaciones = AuxiliarDAO.obtenerNotificacionesDesdeIds(servPersistencia.recuperarPropiedadEntidad(eUsuario, "notificaciones"));
-		List<String> usuariosSeguidos = AuxiliarDAO.obtenerListaDeIds(servPersistencia.recuperarPropiedadEntidad(eUsuario, "usuariosSeguidos"));
+		List<Integer> usuariosSeguidores = AuxiliarDAO.obtenerListaDeIdsInt(servPersistencia.recuperarPropiedadEntidad(eUsuario, "usuariosSeguidores"));
+		List<Notificacion> notificaciones = new ArrayList<Notificacion>();
+		try {
+			notificaciones = AuxiliarDAO.obtenerNotificacionesDesdeIds(servPersistencia.recuperarPropiedadEntidad(eUsuario, "notificaciones"));
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		List<Integer> usuariosSeguidos = AuxiliarDAO.obtenerListaDeIdsInt(servPersistencia.recuperarPropiedadEntidad(eUsuario, "usuariosSeguidos"));
 		
 		Usuario usuario = new Usuario(nombre, email, nombreCompleto, fecha, isPremium, password, fotoPerfil, presentacion);
-		for(String usuarioId : usuariosSeguidores) {
+		for(int usuarioId : usuariosSeguidores) {
 			usuario.addSeguidor(usuarioId);
 		}
 		for(Notificacion notificacion : notificaciones) {
 			usuario.addNotificacion(notificacion);
 		}
-		for(String usuarioId : usuariosSeguidos) {
+		for(int usuarioId : usuariosSeguidos) {
 			usuario.addSeguidor(usuarioId);
 		}
 		

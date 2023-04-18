@@ -38,12 +38,35 @@ public class AuxiliarDAO {
 		return lineas.trim();
 	}
 	
+	public static String obtenerCadenaDeIdsInt(List<Integer> ids) {
+		String lineas = "";
+		if (ids != null) {
+			for(int linea : ids) {
+				lineas += linea + " ";
+			}
+		}
+		return lineas.trim();
+	}
+	
 	public static List<String> obtenerListaDeIds(String lineas) {
 		List<String> ids = new ArrayList<String>();
 		if(lineas != null) {
 			StringTokenizer strTok = new StringTokenizer(lineas, " ");
 			while (strTok.hasMoreTokens()) {
 				ids.add((String)strTok.nextElement());
+				//usuarios.add(FactoriaDAO.getFactoriaDAO().getUsuarioDAO().recuperarTodosUsuarios(Integer.valueOf((String)strTok.nextElement())));
+			}
+		}
+		return ids;
+
+	}
+	
+	public static List<Integer> obtenerListaDeIdsInt(String lineas) {
+		List<Integer> ids = new ArrayList<Integer>();
+		if(lineas != null) {
+			StringTokenizer strTok = new StringTokenizer(lineas, " ");
+			while (strTok.hasMoreTokens()) {
+				ids.add(Integer.parseInt((String)strTok.nextElement()));
 				//usuarios.add(FactoriaDAO.getFactoriaDAO().getUsuarioDAO().recuperarTodosUsuarios(Integer.valueOf((String)strTok.nextElement())));
 			}
 		}

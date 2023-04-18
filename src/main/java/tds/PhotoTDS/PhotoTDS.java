@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -166,6 +167,7 @@ public class PhotoTDS implements FotosListener {
 		return usuariosMatch;
 	}
 	
+	//Función para la búsqueda de hashtags
 	public Map<String, Integer> getHashtagsBusqueda(String hashtag) throws Exception {
 		ArrayList<Foto> fotos = (ArrayList<Foto>) adaptadorFoto.recuperarTodasFotos();
 		ArrayList<String> hashtags = (ArrayList<String>) fotos.stream()
@@ -193,6 +195,34 @@ public class PhotoTDS implements FotosListener {
 			seguidores = 0;
 		}
 		return resultado;
+	}
+	
+	//Método que devuelve las fotos de un usuario
+	public ArrayList<Foto> getFotosUsuario(int id) throws Exception {
+		Usuario usuario = adaptadorUsuario.recuperarUsuario(id);
+		return (ArrayList<Foto>) adaptadorFoto.recuperarTodasFotos().stream()
+				.filter(f -> f.getUsuario() == usuario.getId())
+				.collect(Collectors.toList());
+	}
+	
+	//Método que devuelve las fotos de los seguidos por un usuario
+	public ArrayList<Foto> getFotosSeguidos(int id) throws Exception{
+		Usuario usuario = adaptadorUsuario.recuperarUsuario(id);
+		ArrayList<Foto> fotos = (ArrayList<Foto>) usuario.getUsuariosSeguidos().stream()
+								.flatMap(uId -> {
+									try {
+										return getFotosUsuario(uId).stream();
+									} catch (Exception e) {
+										// TODO Auto-generated catch block
+										e.printStackTrace();
+									}
+									return null;
+								})
+								.collect(Collectors.toList());
+		fotos.addAll(getFotosUsuario(id));
+		return (ArrayList<Foto>) fotos.stream()
+				.sorted(Comparator.comparing(Foto::getFecha))
+				.collect(Collectors.toList());
 	}
 	
 }
