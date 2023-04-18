@@ -110,7 +110,7 @@ public class VentanaAddComentario extends JFrame {
 	
 	public boolean VerificaLongitud(String text) {
 		if (text.length() > longitudMaxima) {
-			VentanaWarningLongitudComentario vent = new VentanaWarningLongitudComentario();
+			VentanaWarning vent = new VentanaWarning("Longitud de comentario superada");
 			vent.setVisible(true);
 			return false;
 		}
