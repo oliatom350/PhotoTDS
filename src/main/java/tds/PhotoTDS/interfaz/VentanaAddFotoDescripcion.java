@@ -28,7 +28,7 @@ import java.awt.Font;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
-public class VentanaAddFotoComentario extends JFrame {
+public class VentanaAddFotoDescripcion extends JFrame {
 
 	/**
 	 * 
@@ -44,7 +44,7 @@ public class VentanaAddFotoComentario extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VentanaAddFotoComentario window = new VentanaAddFotoComentario(urlFoto, usuario);
+					VentanaAddFotoDescripcion window = new VentanaAddFotoDescripcion(urlFoto, usuario);
 					window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -56,7 +56,7 @@ public class VentanaAddFotoComentario extends JFrame {
 	/**
 	 * Create the application.
 	 */
-	public VentanaAddFotoComentario(String urlFoto, int usuario) {
+	public VentanaAddFotoDescripcion(String urlFoto, int usuario) {
 		initialize(urlFoto, usuario);
 	}
 
@@ -75,7 +75,7 @@ public class VentanaAddFotoComentario extends JFrame {
 		panelFotoComentario.setLayout(new BoxLayout(panelFotoComentario, BoxLayout.X_AXIS));
 		
 		JLabel lblNewLabel = new JLabel("");
-		Image foto = new ImageIcon(VentanaAddFotoComentario.class.getResource("/images/"+urlFoto)).getImage();
+		Image foto = new ImageIcon(VentanaAddFotoDescripcion.class.getResource("/images/"+urlFoto)).getImage();
 		
 		JPanel panel_2 = new JPanel();
 		panelFotoComentario.add(panel_2);

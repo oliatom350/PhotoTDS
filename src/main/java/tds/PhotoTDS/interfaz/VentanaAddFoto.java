@@ -102,7 +102,7 @@ public class VentanaAddFoto extends JFrame{
 					if (droppedFiles.size() == 1) {
 						File droppedFile = droppedFiles.get(0);
 						PhotoTDS.copyFile(droppedFile);
-						VentanaAddFotoComentario vA = new VentanaAddFotoComentario(droppedFile.getName(), usuario);
+						VentanaAddFotoDescripcion vA = new VentanaAddFotoDescripcion(droppedFile.getName(), usuario);
 						vA.setVisible(true);
 						dispose();
 					}
@@ -125,7 +125,7 @@ public class VentanaAddFoto extends JFrame{
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			VentanaAddFotoComentario vA = new VentanaAddFotoComentario(currentFile.getName(), usuario);
+			VentanaAddFotoDescripcion vA = new VentanaAddFotoDescripcion(currentFile.getName(), usuario);
 			vA.setVisible(true);
 			dispose();
 		});

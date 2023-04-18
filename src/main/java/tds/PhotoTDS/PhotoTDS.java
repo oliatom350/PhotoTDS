@@ -6,6 +6,12 @@ import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.stream.Collectors;
 
 import tds.PhotoTDS.CargadorFotos.FotosEvent;
 import tds.PhotoTDS.CargadorFotos.FotosListener;
@@ -93,6 +99,9 @@ public class PhotoTDS implements FotosListener {
 	
 	public void registrarAlbum(Album album) {
 		adaptadorAlbum.registrarAlbum(album);
+		for(Foto f : album.getFotos()) {
+			adaptadorFoto.registrarFoto(f);
+		}
 		repPublicaciones.addAlbum(album);
 	}
 	
@@ -138,4 +147,43 @@ public class PhotoTDS implements FotosListener {
 		}
 		return null;
 	}
+	
+	//Función para la búsqueda de usuarios
+	public ArrayList<Usuario> getUsuariosBusqueda(String nombre) throws Exception{
+		ArrayList<Usuario> usuarios = (ArrayList<Usuario>) adaptadorUsuario.recuperarTodosUsuarios();
+		ArrayList<Usuario> usuariosMatch = (ArrayList<Usuario>) usuarios.stream()
+											.filter(u -> u.getNombre().contains(nombre) || u.getEmail().contains(nombre))
+											.collect(Collectors.toList());
+		return usuariosMatch;
+	}
+	
+	public Map<String, Integer> getHashtagsBusqueda(String hashtag) throws Exception {
+		ArrayList<Foto> fotos = (ArrayList<Foto>) adaptadorFoto.recuperarTodasFotos();
+		ArrayList<String> hashtags = (ArrayList<String>) fotos.stream()
+										.flatMap(f -> f.getHashtags().stream())
+										.filter(h -> h.contains(hashtag))
+										.collect(Collectors.toList());
+		int seguidores = 0;
+		Map<String, Integer> resultado = new HashMap<String, Integer>();
+		for (String h : hashtags) {
+			seguidores = fotos.stream()
+				.filter(f -> f.getHashtags().contains(h))
+				.map(f -> f.getUsuario())
+				.distinct()
+				.collect(Collectors.summingInt(u -> {
+					int r = 0;
+					try {
+						r = adaptadorUsuario.recuperarUsuario(u).getUsuariosSeguidos().size();
+					} catch (Exception e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					}
+					return r;
+				}));
+			resultado.put(h, seguidores);
+			seguidores = 0;
+		}
+		return resultado;
+	}
+	
 }
