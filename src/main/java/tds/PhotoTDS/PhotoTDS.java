@@ -115,6 +115,19 @@ public class PhotoTDS implements FotosListener {
 		//TODO
 	}
 	
+	public Usuario getUsuario(int id) throws Exception {
+		return adaptadorUsuario.recuperarUsuario(id);
+	}
+	
+	public Usuario iniciarSesion(String nombreUsuario, String passUsuario) {
+        for(Usuario usuario : unicaInstancia.getRepUsers().getUsuarios()) {
+            if((usuario.getEmail().equals(nombreUsuario) || usuario.getNombre().equals(nombreUsuario)) && usuario.getPassword().equals(passUsuario))
+                return usuario;
+        }
+        System.out.println("Nombre de usuario, email o contraseña incorrectos");
+        return null;
+    }
+	
 	public static Path copyFile(File currentFile) throws Exception {
 		if (currentFile != null) {
 			FileSystem fileSys = FileSystems.getDefault();

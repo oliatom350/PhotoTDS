@@ -11,6 +11,7 @@ import javax.swing.JFileChooser;
 
 import java.awt.FlowLayout;
 import java.awt.Image;
+import java.awt.Label;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
@@ -25,6 +26,7 @@ import tds.PhotoTDS.PhotoTDS;
 
 import java.awt.Font;
 import javax.swing.JTextArea;
+import javax.swing.SwingConstants;
 
 public class VentanaAddFotoComentario extends JFrame {
 
@@ -62,6 +64,8 @@ public class VentanaAddFotoComentario extends JFrame {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize(String urlFoto, int usuario) {
+		
+		//TODO REVISAR SI SOBRA TIEMPO
 		setBounds(100, 100, 550, 350);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
@@ -86,28 +90,30 @@ public class VentanaAddFotoComentario extends JFrame {
 		panelComentario.setLayout(new BoxLayout(panelComentario, BoxLayout.PAGE_AXIS));
 		
 		JLabel lblNewLabel_2 = new JLabel("Pon un título a la foto:");
+		lblNewLabel_2.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panelComentario.add(lblNewLabel_2);
 		
 		JPanel panel_4 = new JPanel();
 		panelComentario.add(panel_4);
-		panel_4.setLayout(new BorderLayout(0, 0));
+		panel_4.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JTextArea textArea = new JTextArea();
-		panel_4.add(textArea, BorderLayout.NORTH);
+		panel_4.add(textArea);
 		textArea.setLineWrap(true);
 		
 		JLabel lblNewLabel_1 = new JLabel("Añade una descripción:");
+		lblNewLabel_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		panelComentario.add(lblNewLabel_1);
 		
 		JPanel panel_5 = new JPanel();
 		panelComentario.add(panel_5);
-		panel_5.setLayout(new BorderLayout(0, 0));
+		panel_5.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
 		
 		JTextArea textArea_1 = new JTextArea();
 		textArea_1.setLineWrap(true);
-		panel_5.add(textArea_1, BorderLayout.NORTH);
+		panel_5.add(textArea_1);
 		
 		
 		JPanel panel_3 = new JPanel();
@@ -124,6 +130,7 @@ public class VentanaAddFotoComentario extends JFrame {
 			String descp = textArea_1.getText();
 			Foto f = new Foto(textArea.getText(), descp, getHashtags(descp), usuario, "/images/"+urlFoto);
 			addFoto(f);
+			VentanaPrincipal vP = new VentanaPrincipal();
 			dispose();
 		});
 		panel.add(btnNewButton);
@@ -136,7 +143,6 @@ public class VentanaAddFotoComentario extends JFrame {
 		panel.add(btnNewButton_1);
 		
 	}
-	
 	private ArrayList<String> getHashtags(String descripcion){
 		Pattern pt = Pattern.compile("#(\\S+)");
 		Matcher m = pt.matcher(descripcion);
