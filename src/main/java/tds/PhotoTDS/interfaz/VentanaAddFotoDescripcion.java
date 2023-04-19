@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import java.awt.FlowLayout;
 import java.awt.Image;
+import java.io.File;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -57,7 +58,9 @@ public class VentanaAddFotoDescripcion extends JFrame {
 		panelFotoComentario.setLayout(new BoxLayout(panelFotoComentario, BoxLayout.X_AXIS));
 		
 		JLabel lblNewLabel = new JLabel("");
-		Image foto = new ImageIcon(VentanaAddFotoDescripcion.class.getResource("/images/"+urlFoto)).getImage();
+		//Image foto = new ImageIcon(VentanaAddFotoDescripcion.class.getResource("/images/"+urlFoto)).getImage();
+		Image foto = new ImageIcon(System.getProperty("user.dir")+"/src/main/java/images/"+urlFoto).getImage();
+		
 		
 		JPanel panel_2 = new JPanel();
 		panelFotoComentario.add(panel_2);

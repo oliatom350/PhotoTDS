@@ -103,13 +103,13 @@ public class VentanaAddFoto extends JFrame{
 			File currentFile = chooser.getSelectedFile();
 			try {
 				PhotoTDS.copyFile(currentFile);
+				VentanaAddFotoDescripcion vA = new VentanaAddFotoDescripcion(currentFile.getName(), usuario); //REVISAR
+				vA.setVisible(true);
+				dispose();
 			} catch (Exception e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-			VentanaAddFotoDescripcion vA = new VentanaAddFotoDescripcion(currentFile.getName(), usuario);
-			vA.setVisible(true);
-			dispose();
 		});
 		btnNewButton.setFont(new Font("Tahoma", Font.PLAIN, 12));
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
