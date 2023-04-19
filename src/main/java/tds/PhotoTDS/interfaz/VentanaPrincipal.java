@@ -107,6 +107,9 @@ public class VentanaPrincipal extends JFrame {
 		searchButton = new JButton("");
 		iconAddFoto = new ImageIcon(VentanaPrincipal.class.getResource("/images/iconolupa.png")).getImage();
 		searchButton.setIcon(new ImageIcon(iconAddFoto.getScaledInstance(15, 15, DO_NOTHING_ON_CLOSE)));
+		searchButton.addActionListener(ev -> {
+			abreBusqueda(textField.getText());
+		});
 		panelNorteCentral.add(searchButton);
 		
 		xmlLoaderButton = new Luz();
@@ -118,14 +121,14 @@ public class VentanaPrincipal extends JFrame {
 		contentPane.add(scrollPane,BorderLayout.CENTER);
 		
 		//TODO En vez de introducir estas fotos manualmente, debemos buscar de las fotos más recientes subidas entre el usuario y el seguidor
-		Foto f1 = new Foto("Arbol", "Vegetacion", new ArrayList<String>(), usuario, "/images/arbol.png");
+		/*Foto f1 = new Foto("Arbol", "Vegetacion", new ArrayList<String>(), usuario, "/images/arbol.png");
 		fotos.add(f1);
 		Foto f3 = new Foto("Grecia", "Coloso", new ArrayList<String>(), usuario, "/images/colosorodas2.png");
 		fotos.add(f3);
 		Foto f2 = new Foto("Caballo", "Hola", new ArrayList<String>(), usuario, "/images/caballoatardecer.png");
 		fotos.add(f2);
 		Foto f4 = new Foto("Pajaros", "Aves", new ArrayList<String>(), usuario, "/images/pajaros.png");
-		fotos.add(f4);
+		fotos.add(f4);*/
 		
 		JPanel panelCentralCentro = new JPanel();
 		panelCentral.add(panelCentralCentro, BorderLayout.CENTER);
@@ -144,6 +147,27 @@ public class VentanaPrincipal extends JFrame {
 	
 	public void abrePerfil() {
 		//TODO ¿Cambiar aspecto de la VentanaPrincipal o abrir VentanaPerfil nueva? Abrir nueva tonto
+	}
+	
+	public void abreBusqueda(String entrada) {
+		// Abre ventana de busqueda en funcion de si el primer caracter un # o no
+		String primerCaracter = entrada.substring(0, 1);
+		PhotoTDS controlador = PhotoTDS.getUnicaInstancia();
+		if (primerCaracter.equals("#")) {
+			try {
+				VentanaBusquedaHashtag vbh = new VentanaBusquedaHashtag(controlador.getHashtagsBusqueda(entrada.substring(1)));
+				vbh.setVisible(true);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}else {
+			try {
+				VentanaBusquedaUsuario vbu = new VentanaBusquedaUsuario(controlador.getUsuariosBusqueda(entrada));
+				vbu.setVisible(true);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
 	}
 
 }

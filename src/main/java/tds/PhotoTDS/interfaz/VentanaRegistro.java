@@ -285,7 +285,7 @@ public class VentanaRegistro extends JFrame {
 					 						textField_Email.getText(),
 					 						textField_Nombre.getText(),
 											new Date(Integer.parseInt(textField_Año.getText())-1900,
-													 Integer.parseInt(textField_Mes.getText()), 
+													 Integer.parseInt(textField_Mes.getText())-1, 
 													 Integer.parseInt(textField_Dia.getText())),
 											false,
 											textField_Contraseña.getText(),

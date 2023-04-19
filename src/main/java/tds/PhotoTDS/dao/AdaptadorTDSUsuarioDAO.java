@@ -134,7 +134,6 @@ public class AdaptadorTDSUsuarioDAO implements IAdaptadorUsuarioDAO{
 		try {
 			notificaciones = AuxiliarDAO.obtenerNotificacionesDesdeIds(servPersistencia.recuperarPropiedadEntidad(eUsuario, "notificaciones"));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		List<Integer> usuariosSeguidos = AuxiliarDAO.obtenerListaDeIdsInt(servPersistencia.recuperarPropiedadEntidad(eUsuario, "usuariosSeguidos"));
