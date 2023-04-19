@@ -148,7 +148,7 @@ public class AdaptadorTDSUsuarioDAO implements IAdaptadorUsuarioDAO{
 		for(int usuarioId : usuariosSeguidos) {
 			usuario.addSeguidor(usuarioId);
 		}
-		
+		usuario.setId(codigo);
 		
 		poolUsuarios.addObject(codigo, usuario);
 		

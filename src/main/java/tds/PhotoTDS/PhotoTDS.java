@@ -139,7 +139,13 @@ public class PhotoTDS implements FotosListener {
 	}
 	
 	public Usuario iniciarSesion(String nombreUsuario, String passUsuario) {
-        for(Usuario usuario : unicaInstancia.getRepUsers().getUsuarios()) {
+        List<Usuario> list = new ArrayList<Usuario>();
+		try {
+			list = unicaInstancia.adaptadorUsuario.recuperarTodosUsuarios();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		for(Usuario usuario : list) {
             if((usuario.getEmail().equals(nombreUsuario) || usuario.getNombre().equals(nombreUsuario)) && usuario.getPassword().equals(passUsuario))
                 return usuario;
         }
