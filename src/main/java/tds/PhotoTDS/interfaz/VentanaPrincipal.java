@@ -143,7 +143,7 @@ public class VentanaPrincipal extends JFrame {
 	}
 	
 	public void abrePerfil() {
-		//TODO ¿Cambiar aspecto de la VentanaPrincipal o abrir VentanaPerfil nueva?
+		//TODO ¿Cambiar aspecto de la VentanaPrincipal o abrir VentanaPerfil nueva? Abrir nueva tonto
 	}
 
 }
