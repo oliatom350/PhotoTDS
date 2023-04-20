@@ -10,7 +10,6 @@ import java.util.List;
 import beans.Entidad;
 import beans.Propiedad;
 import tds.PhotoTDS.Notificacion;
-import tds.PhotoTDS.Publicacion;
 import tds.driver.FactoriaServicioPersistencia;
 import tds.driver.ServicioPersistencia;
 

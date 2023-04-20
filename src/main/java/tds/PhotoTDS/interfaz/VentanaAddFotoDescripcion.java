@@ -9,7 +9,6 @@ import javax.swing.JPanel;
 import javax.swing.JButton;
 import java.awt.FlowLayout;
 import java.awt.Image;
-import java.io.File;
 import java.util.ArrayList;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

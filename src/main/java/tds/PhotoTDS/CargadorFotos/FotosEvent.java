@@ -4,6 +4,7 @@ import java.util.EventObject;
 
 import umu.tds.fotos.Fotos;
 
+@SuppressWarnings("serial")
 public class FotosEvent extends EventObject{
 	
 	protected Fotos fotos;

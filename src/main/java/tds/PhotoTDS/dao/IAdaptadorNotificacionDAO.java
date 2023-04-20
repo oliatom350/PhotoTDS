@@ -2,7 +2,6 @@ package tds.PhotoTDS.dao;
 
 import java.util.List;
 
-import tds.PhotoTDS.Usuario;
 import tds.PhotoTDS.Notificacion;
 
 public interface IAdaptadorNotificacionDAO {
