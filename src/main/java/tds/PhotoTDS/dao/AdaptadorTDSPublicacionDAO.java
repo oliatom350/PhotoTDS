@@ -68,7 +68,7 @@ public class AdaptadorTDSPublicacionDAO implements IAdaptadorPublicacionDAO {
 				propiedad.setValor(publicacion.getTitulo());
 			}
 			if(propiedad.getNombre().equals("fecha")) {
-				propiedad.setValor(publicacion.getFecha().toString());
+				propiedad.setValor(dateFormat.format(publicacion.getFecha()));
 			}
 			if(propiedad.getNombre().equals("descripcion")) {
 				propiedad.setValor(publicacion.getDescripcion());
@@ -85,6 +85,8 @@ public class AdaptadorTDSPublicacionDAO implements IAdaptadorPublicacionDAO {
 			if(propiedad.getNombre().equals("comentarios")) {
 				propiedad.setValor(AuxiliarDAO.obtenerIdsComentarios(publicacion.getComentarios()));
 			}
+			
+			servPersistencia.modificarPropiedad(propiedad);
 		}
 	}
 

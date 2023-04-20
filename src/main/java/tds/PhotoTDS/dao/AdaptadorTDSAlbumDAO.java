@@ -71,7 +71,7 @@ public class AdaptadorTDSAlbumDAO implements IAdaptadorTDSAlbumDAO{
 				propiedad.setValor(album.getTitulo());
 			}
 			if(propiedad.getNombre().equals("fecha")) {
-				propiedad.setValor(album.getFecha().toString());
+				propiedad.setValor(dateFormat.format(album.getFecha()));
 			}
 			if(propiedad.getNombre().equals("descripcion")) {
 				propiedad.setValor(album.getDescripcion());
@@ -93,6 +93,8 @@ public class AdaptadorTDSAlbumDAO implements IAdaptadorTDSAlbumDAO{
 									.map(f -> String.valueOf(f.getId()))
 									.collect(Collectors.toList())));
 			}
+			
+			servPersistencia.modificarPropiedad(propiedad);
 		}
 	}
 

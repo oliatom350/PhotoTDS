@@ -63,13 +63,14 @@ public class AdaptadorTDSNotificacionDAO implements IAdaptadorNotificacionDAO{
 		
 		for (Propiedad propiedad : eNotificacion.getPropiedades()) {
 			if(propiedad.getNombre().equals("fecha")) {
-				propiedad.setValor(notificacion.getFecha().toString());
+				propiedad.setValor(dateFormat.format(notificacion.getFecha()));
 			}
 			if(propiedad.getNombre().equals("publicacion")) {
 				propiedad.setValor(Integer.toString(notificacion.getPublicacion()));
 			}
+			servPersistencia.modificarPropiedad(propiedad);
 		}
-		servPersistencia.modificarEntidad(eNotificacion);
+		//servPersistencia.modificarEntidad(eNotificacion);
 	}
 
 	@Override

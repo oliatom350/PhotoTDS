@@ -60,6 +60,7 @@ public class AdaptadorTDSComentarioDAO implements IAdaptadorComentarioDAO {
 			if(propiedad.getNombre().equals("usuario")) {
 				propiedad.setValor(String.valueOf(comentario.getUsuario()));
 			}
+			servPersistencia.modificarPropiedad(propiedad);
 		}
 	}
 

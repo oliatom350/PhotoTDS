@@ -83,7 +83,7 @@ public class AdaptadorTDSUsuarioDAO implements IAdaptadorUsuarioDAO{
 				propiedad.setValor(usuario.getNombreCompleto());
 			}
 			if(propiedad.getNombre().equals("fechaNacimiento")) {
-				propiedad.setValor(usuario.getFechaNacimiento().toString());
+				propiedad.setValor(dateFormat.format(usuario.getFechaNacimiento()));
 			}
 			if(propiedad.getNombre().equals("isPremium")) {
 				propiedad.setValor(String.valueOf(usuario.isPremium()));
@@ -106,8 +106,10 @@ public class AdaptadorTDSUsuarioDAO implements IAdaptadorUsuarioDAO{
 			if(propiedad.getNombre().equals("presentacion")) {
 				propiedad.setValor(usuario.getPresentacion());
 			}
+			
+			servPersistencia.modificarPropiedad(propiedad);
 		}
-		servPersistencia.modificarEntidad(eUsuario);
+		//servPersistencia.modificarEntidad(eUsuario);
 	}
 
 	@Override

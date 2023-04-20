@@ -66,7 +66,7 @@ public class AdaptadorTDSFotoDAO implements IAdaptadorFotoDAO{
 				propiedad.setValor(foto.getTitulo());
 			}
 			if(propiedad.getNombre().equals("fecha")) {
-				propiedad.setValor(foto.getFecha().toString());
+				propiedad.setValor(dateFormat.format(foto.getFecha()));
 			}
 			if(propiedad.getNombre().equals("descripcion")) {
 				propiedad.setValor(foto.getDescripcion());
@@ -86,6 +86,8 @@ public class AdaptadorTDSFotoDAO implements IAdaptadorFotoDAO{
 			if(propiedad.getNombre().equals("ruta")) {
 				propiedad.setValor(foto.getPath());
 			}
+			
+			servPersistencia.modificarPropiedad(propiedad);
 		}
 	}
 
