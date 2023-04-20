@@ -113,6 +113,8 @@ public class VentanaAddFotoDescripcion extends JFrame {
 			String descp = textArea_1.getText();
 			Foto f = new Foto(textArea.getText(), descp, getHashtags(descp), usuario, urlFoto);
 			addFoto(f);
+			VentanaPrincipal vP = new VentanaPrincipal(usuario);
+			vP.setVisible(true);
 			dispose();
 		});
 		panel.add(btnNewButton);

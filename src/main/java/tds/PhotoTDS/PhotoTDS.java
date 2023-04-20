@@ -217,7 +217,7 @@ public class PhotoTDS implements FotosListener {
 	//Método que devuelve las fotos de los seguidos por un usuario
 	public ArrayList<Foto> getFotosSeguidos(int id) throws Exception{
 		Usuario usuario = repUsuarios.getUsuario(id);
-		ArrayList<Foto> fotos = (ArrayList<Foto>) usuario.getUsuariosSeguidos().stream()
+		ArrayList<Foto> fotos = new ArrayList<Foto> (usuario.getUsuariosSeguidos().stream()
 								.flatMap(uId -> {
 									try {
 										return getFotosUsuario(uId).stream();
@@ -227,7 +227,7 @@ public class PhotoTDS implements FotosListener {
 									}
 									return null;
 								})
-								.collect(Collectors.toList());
+								.collect(Collectors.toList()));
 		fotos.addAll(getFotosUsuario(id));
 		return (ArrayList<Foto>) fotos.stream()
 				.sorted(Comparator.comparing(Foto::getFecha))

@@ -37,13 +37,13 @@ public class PanelItemFoto extends JPanel {
 		
 		String mg = Integer.toString(f.getMeGusta());
 		JLabel mgLabel = new JLabel("   " + mg + " me gusta");
+		
 		JButton mgButton = new JButton("");
 		icon = new ImageIcon(PanelItemFoto.class.getResource("/images/me-gusta.png")).getImage();
 		mgButton.setIcon(new ImageIcon(icon.getScaledInstance(15, 15, 15)));
 		mgButton.addActionListener(ev -> {
 			PhotoTDS controlador = PhotoTDS.getUnicaInstancia();
 			controlador.addMeGusta(f);
-			f.addMeGusta();
 			String newMg = Integer.toString(f.getMeGusta());
 			mgLabel.setText("   " + newMg + " me gusta");
 		});

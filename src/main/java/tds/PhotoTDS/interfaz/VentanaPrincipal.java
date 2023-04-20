@@ -1,6 +1,8 @@
 package tds.PhotoTDS.interfaz;
 
 import java.awt.EventQueue;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -17,6 +19,7 @@ import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.util.ArrayList;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.JScrollPane;
 import pulsador.Luz;
@@ -40,7 +43,6 @@ public class VentanaPrincipal extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					//El array 'fotos' debe inicializarse aquí
 					VentanaPrincipal frame = new VentanaPrincipal(usuario);
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -55,6 +57,11 @@ public class VentanaPrincipal extends JFrame {
 		
 		usuario = user;
 		PhotoTDS controlador = PhotoTDS.getUnicaInstancia();
+		try {
+			fotos = controlador.getFotosSeguidos(user);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setResizable(false);
@@ -123,15 +130,21 @@ public class VentanaPrincipal extends JFrame {
 		
 		JPanel panelCentralCentro = new JPanel();
 		panelCentral.add(panelCentralCentro, BorderLayout.CENTER);
-		try {
-			fotos = controlador.getFotosSeguidos(user);
-		} catch (Exception e1) {
-			e1.printStackTrace();
-		}
-		panelCentralCentro.setLayout(new GridLayout(fotos.size(), 1, 0, 8));
+		GridBagLayout gbl = new GridBagLayout();
+		panelCentralCentro.setLayout(gbl);
+		int cont = 0;
 		
 		for (Foto foto : fotos) {
-			panelCentralCentro.add(new PanelItemFoto(foto, usuario));
+			PanelItemFoto pif = new PanelItemFoto(foto, usuario);
+			pif.setMaximumSize(new Dimension(523, 150));
+			pif.setMinimumSize(new Dimension(523, 150));
+			pif.setPreferredSize(new Dimension(523, 150));
+			GridBagConstraints gbc = new GridBagConstraints();
+	        gbc.anchor = GridBagConstraints.NORTH;
+	        gbc.weighty = 1;
+	        gbc.gridy = cont;
+	        cont++;
+			panelCentralCentro.add(pif, gbc);
 		}
 		
 	}
