@@ -96,6 +96,7 @@ public class VentanaPrincipal extends JFrame {
 		Image iconAddFoto = new ImageIcon(VentanaPrincipal.class.getResource("/images/iconoplus.png")).getImage();
 		addFoto.setIcon(new ImageIcon(iconAddFoto.getScaledInstance(20, 20, DO_NOTHING_ON_CLOSE)));
 		addFoto.addActionListener(ev -> {
+			this.setVisible(false);
 			nuevaFoto();
 		});
 		panelNorteCentral.add(addFoto);
@@ -120,18 +121,13 @@ public class VentanaPrincipal extends JFrame {
 		panelCentral.setLayout(new BorderLayout(0, 0));
 		contentPane.add(scrollPane,BorderLayout.CENTER);
 		
-		//TODO En vez de introducir estas fotos manualmente, debemos buscar de las fotos más recientes subidas entre el usuario y el seguidor
-		/*Foto f1 = new Foto("Arbol", "Vegetacion", new ArrayList<String>(), usuario, "/images/arbol.png");
-		fotos.add(f1);
-		Foto f3 = new Foto("Grecia", "Coloso", new ArrayList<String>(), usuario, "/images/colosorodas2.png");
-		fotos.add(f3);
-		Foto f2 = new Foto("Caballo", "Hola", new ArrayList<String>(), usuario, "/images/caballoatardecer.png");
-		fotos.add(f2);
-		Foto f4 = new Foto("Pajaros", "Aves", new ArrayList<String>(), usuario, "/images/pajaros.png");
-		fotos.add(f4);*/
-		
 		JPanel panelCentralCentro = new JPanel();
 		panelCentral.add(panelCentralCentro, BorderLayout.CENTER);
+		try {
+			fotos = controlador.getFotosSeguidos(user);
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
 		panelCentralCentro.setLayout(new GridLayout(fotos.size(), 1, 0, 8));
 		
 		for (Foto foto : fotos) {
