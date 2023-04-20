@@ -19,7 +19,7 @@ public class RepoPublicaciones {
 		private IAdaptadorFotoDAO adaptadorFoto;
 		private IAdaptadorTDSAlbumDAO adaptadorAlbum;
 		
-		public RepoPublicaciones() {
+		private RepoPublicaciones() {
 			try {
 				 dao = FactoriaDAO.getFactoriaDAO(FactoriaDAO.DAO_TDS);
 				 adaptadorFoto = dao.getFotoDAO();

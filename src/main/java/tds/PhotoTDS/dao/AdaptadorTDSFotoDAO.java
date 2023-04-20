@@ -121,6 +121,7 @@ public class AdaptadorTDSFotoDAO implements IAdaptadorFotoDAO{
 		foto.setComentarios(comentarios);
 		foto.setFecha(fecha);
 		foto.setMeGusta(meGusta);
+		foto.setId(codigo);
 		
 		return foto;
 	}

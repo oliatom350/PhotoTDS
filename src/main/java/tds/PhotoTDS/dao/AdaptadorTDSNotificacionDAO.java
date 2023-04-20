@@ -90,6 +90,7 @@ public class AdaptadorTDSNotificacionDAO implements IAdaptadorNotificacionDAO{
 		int publicacion = Integer.parseInt(servPersistencia.recuperarPropiedadEntidad(eNotificacion, "publicacion"));
 		
 		Notificacion notificacion = new Notificacion(fecha, publicacion);
+		notificacion.setId(id);
 		
 		return notificacion;
 	}

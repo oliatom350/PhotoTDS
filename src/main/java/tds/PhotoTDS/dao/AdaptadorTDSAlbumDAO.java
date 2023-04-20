@@ -133,6 +133,7 @@ public class AdaptadorTDSAlbumDAO implements IAdaptadorTDSAlbumDAO{
 		album.setComentarios(comentarios);
 		album.setFecha(fecha);
 		album.setMeGusta(meGusta);
+		album.setId(codigo);
 		
 		return album;
 	}

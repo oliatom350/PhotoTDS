@@ -118,6 +118,7 @@ public class AdaptadorTDSPublicacionDAO implements IAdaptadorPublicacionDAO {
 		publicacion.setComentarios(comentarios);
 		publicacion.setFecha(fecha);
 		publicacion.setMeGusta(meGusta);
+		publicacion.setId(codigo);
 		
 		return publicacion;
 	}
