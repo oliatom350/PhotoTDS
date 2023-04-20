@@ -9,6 +9,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
+import tds.PhotoTDS.PhotoTDS;
 import tds.PhotoTDS.Usuario;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
@@ -64,35 +65,13 @@ public class VentanaBusquedaUsuario extends JFrame {
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		contentPane.add(scrollPane,BorderLayout.CENTER);
 		
-		/*JPanel panel_1 = new JPanel();
-		panel.add(panel_1);
-		
-		//Prueba----------
-		String nUsuario = "Jose Antonio Sánchez";
-		String pathFoto = "/images/SUUU.png";
-		//Prueba----------
-		
-		JLabel lblNewLabel = new JLabel("");
-		Image icon = new ImageIcon(VentanaBusquedaUsuario.class.getResource(pathFoto)).getImage();
-		panel_1.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
-		lblNewLabel.setIcon(new ImageIcon(icon.getScaledInstance(70, 70, java.awt.Image.SCALE_SMOOTH)));
-		panel_1.add(lblNewLabel);
-		
-		JPanel panel_2 = new JPanel();
-		panel_1.add(panel_2);
-		panel_2.setLayout(null);
-		
-		JLabel lblNewLabel_1 = new JLabel(nUsuario);
-		panel_1.add(lblNewLabel_1);*/
-		
-		
 		
 		for (Usuario usuario : usuarios) {
 			JPanel panel_1 = new JPanel();
 			panel.add(panel_1);
 			
 			JLabel lblNewLabel = new JLabel("");
-			Image icon = new ImageIcon(VentanaBusquedaUsuario.class.getResource(usuario.getFotoPerfil())).getImage();
+			Image icon = new ImageIcon(System.getProperty("user.dir")+PhotoTDS.pathFotos+usuario.getFotoPerfil()).getImage();
 			panel_1.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 			lblNewLabel.setIcon(new ImageIcon(icon.getScaledInstance(70, 70, java.awt.Image.SCALE_SMOOTH)));
 			panel_1.add(lblNewLabel);

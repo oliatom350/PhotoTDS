@@ -37,6 +37,9 @@ public class PhotoTDS implements FotosListener {
 	private IAdaptadorFotoDAO adaptadorFoto;
 	private IAdaptadorTDSAlbumDAO adaptadorAlbum;
 	
+	//Ruta de imágenes
+	public static String pathFotos = "/src/main/java/images/";
+	
 	//Constructor
 	public PhotoTDS() {
 		inicializarAdaptadores();
@@ -126,7 +129,7 @@ public class PhotoTDS implements FotosListener {
 	}
 	
 	public Foto getFoto(int id) throws Exception {
-		return adaptadorFoto.recuperarFoto(id);
+		return repPublicaciones.getFoto(id);
 	}
 
 	@Override
@@ -135,13 +138,13 @@ public class PhotoTDS implements FotosListener {
 	}
 	
 	public Usuario getUsuario(int id) throws Exception {
-		return adaptadorUsuario.recuperarUsuario(id);
+		return repUsuarios.getUsuario(id);
 	}
 	
 	public Usuario iniciarSesion(String nombreUsuario, String passUsuario) {
         List<Usuario> list = new ArrayList<Usuario>();
 		try {
-			list = unicaInstancia.adaptadorUsuario.recuperarTodosUsuarios();
+			list = unicaInstancia.adaptadorUsuario.recuperarTodosUsuarios(); //TODO CAMBIAR A ACCEDER REPOSITORIO EN VEZ DE ADAPTADOR
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -166,16 +169,16 @@ public class PhotoTDS implements FotosListener {
 	
 	//Función para la búsqueda de usuarios
 	public ArrayList<Usuario> getUsuariosBusqueda(String nombre) throws Exception{
-		ArrayList<Usuario> usuarios = (ArrayList<Usuario>) adaptadorUsuario.recuperarTodosUsuarios();
+		ArrayList<Usuario> usuarios = (ArrayList<Usuario>) repUsuarios.getUsuarios();
 		ArrayList<Usuario> usuariosMatch = (ArrayList<Usuario>) usuarios.stream()
 											.filter(u -> u.getNombre().contains(nombre) || u.getEmail().contains(nombre))
 											.collect(Collectors.toList());
 		return usuariosMatch;
 	}
 	
-	//Función para la búsqueda de hashtags
+	//Función para la búsqueda de hashtags (Sólo tiene en cuenta los MeGusta de las fotos, no de los álbumes)
 	public Map<String, Integer> getHashtagsBusqueda(String hashtag) throws Exception {
-		ArrayList<Foto> fotos = (ArrayList<Foto>) adaptadorFoto.recuperarTodasFotos();
+		ArrayList<Foto> fotos = (ArrayList<Foto>) repPublicaciones.getFotos();
 		ArrayList<String> hashtags = (ArrayList<String>) fotos.stream()
 										.flatMap(f -> f.getHashtags().stream())
 										.filter(h -> h.contains(hashtag))
@@ -190,7 +193,7 @@ public class PhotoTDS implements FotosListener {
 				.collect(Collectors.summingInt(u -> {
 					int r = 0;
 					try {
-						r = adaptadorUsuario.recuperarUsuario(u).getUsuariosSeguidos().size();
+						r = repUsuarios.getUsuario(u).getUsuariosSeguidos().size();
 					} catch (Exception e) {
 						// TODO Auto-generated catch block
 						e.printStackTrace();
@@ -205,15 +208,15 @@ public class PhotoTDS implements FotosListener {
 	
 	//Método que devuelve las fotos de un usuario
 	public ArrayList<Foto> getFotosUsuario(int id) throws Exception {
-		Usuario usuario = adaptadorUsuario.recuperarUsuario(id);
-		return (ArrayList<Foto>) adaptadorFoto.recuperarTodasFotos().stream()
+		Usuario usuario = repUsuarios.getUsuario(id);
+		return (ArrayList<Foto>) repPublicaciones.getFotos().stream()
 				.filter(f -> f.getUsuario() == usuario.getId())
 				.collect(Collectors.toList());
 	}
 	
 	//Método que devuelve las fotos de los seguidos por un usuario
 	public ArrayList<Foto> getFotosSeguidos(int id) throws Exception{
-		Usuario usuario = adaptadorUsuario.recuperarUsuario(id);
+		Usuario usuario = repUsuarios.getUsuario(id);
 		ArrayList<Foto> fotos = (ArrayList<Foto>) usuario.getUsuariosSeguidos().stream()
 								.flatMap(uId -> {
 									try {

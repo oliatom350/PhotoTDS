@@ -58,8 +58,7 @@ public class VentanaAddFotoDescripcion extends JFrame {
 		panelFotoComentario.setLayout(new BoxLayout(panelFotoComentario, BoxLayout.X_AXIS));
 		
 		JLabel lblNewLabel = new JLabel("");
-		//Image foto = new ImageIcon(VentanaAddFotoDescripcion.class.getResource("/images/"+urlFoto)).getImage();
-		Image foto = new ImageIcon(System.getProperty("user.dir")+"/src/main/java/images/"+urlFoto).getImage();
+		Image foto = new ImageIcon(System.getProperty("user.dir")+PhotoTDS.pathFotos+urlFoto).getImage();
 		
 		
 		JPanel panel_2 = new JPanel();
