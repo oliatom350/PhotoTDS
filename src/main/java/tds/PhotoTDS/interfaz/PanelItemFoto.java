@@ -28,7 +28,7 @@ public class PanelItemFoto extends JPanel {
 		this.add(panelFoto);
 		JLabel fotoLabel = new JLabel("");
 		//TODO Problema de no visualizacion de fotos con alta resolucion
-		Image icon = new ImageIcon(VentanaPrincipal.class.getResource(f.getPath())).getImage();
+		Image icon = new ImageIcon(System.getProperty("user.dir")+PhotoTDS.pathFotos+f.getPath()).getImage();
 		panelFoto.setLayout(new BoxLayout(panelFoto, BoxLayout.X_AXIS));
 		fotoLabel.setIcon(new ImageIcon(icon.getScaledInstance(width, height, ABORT)));
 		panelFoto.add(fotoLabel);

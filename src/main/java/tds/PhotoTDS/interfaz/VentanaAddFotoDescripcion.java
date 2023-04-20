@@ -111,15 +111,8 @@ public class VentanaAddFotoDescripcion extends JFrame {
 		JButton btnNewButton = new JButton("Compartir");
 		btnNewButton.addActionListener(ev -> {
 			String descp = textArea_1.getText();
-			Foto f = new Foto(textArea.getText(), descp, getHashtags(descp), usuario, "/images/"+urlFoto);
+			Foto f = new Foto(textArea.getText(), descp, getHashtags(descp), usuario, urlFoto);
 			addFoto(f);
-			try {
-				VentanaPrincipal vP = new VentanaPrincipal(usuario);
-				vP.setVisible(true);
-			} catch (Exception e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
 			dispose();
 		});
 		panel.add(btnNewButton);
