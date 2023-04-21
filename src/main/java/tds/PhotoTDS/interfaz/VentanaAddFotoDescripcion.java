@@ -111,11 +111,16 @@ public class VentanaAddFotoDescripcion extends JFrame {
 		JButton btnNewButton = new JButton("Compartir");
 		btnNewButton.addActionListener(ev -> {
 			String descp = textArea_1.getText();
-			Foto f = new Foto(textArea.getText(), descp, getHashtags(descp), usuario, urlFoto);
-			addFoto(f);
-			VentanaPrincipal vP = new VentanaPrincipal(usuario);
-			vP.setVisible(true);
-			dispose();
+			ArrayList<String> hashtags = getHashtags(descp);
+			if (hashtags == null || descp.length() > 120) {
+				System.out.println("La descripción sobrepasa los 120 caracteres, contiene más de 4 hashtags o algún hashtag sobrepasa el límite.");
+			} else {
+				Foto f = new Foto(textArea.getText(), descp, hashtags, usuario, urlFoto);
+				addFoto(f);
+				VentanaPrincipal vP = new VentanaPrincipal(usuario);
+				vP.setVisible(true);
+				dispose();
+			}
 		});
 		panel.add(btnNewButton);
 		JButton btnNewButton_1 = new JButton("Cancelar");
@@ -134,6 +139,11 @@ public class VentanaAddFotoDescripcion extends JFrame {
 		while(m.find()) {
 			list.add(m.group(1));
 		}
+		
+		// Se comprueba que los hashtags no pasen el límite
+		if (list.stream()
+				.anyMatch(h -> h.length() > 15) || list.size() > 4)
+			return null;
 		return list;
 	}
 	
