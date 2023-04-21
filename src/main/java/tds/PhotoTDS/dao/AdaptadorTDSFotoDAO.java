@@ -42,7 +42,7 @@ public class AdaptadorTDSFotoDAO implements IAdaptadorFotoDAO{
 						new Propiedad("hashtags", AuxiliarDAO.obtenerCadenaDeIds(foto.getHashtags())),
 						new Propiedad("usuario", String.valueOf(foto.getUsuario())),
 						new Propiedad("comentarios", AuxiliarDAO.obtenerIdsComentarios(foto.getComentarios())),
-						new Propiedad("ruta", foto.getPath())))
+						new Propiedad("ruta", foto.getNombre())))
 		);
 		eFoto = servPersistencia.registrarEntidad(eFoto);
 		foto.setId(eFoto.getId());
@@ -84,7 +84,7 @@ public class AdaptadorTDSFotoDAO implements IAdaptadorFotoDAO{
 				propiedad.setValor(AuxiliarDAO.obtenerIdsComentarios(foto.getComentarios()));
 			}
 			if(propiedad.getNombre().equals("ruta")) {
-				propiedad.setValor(foto.getPath());
+				propiedad.setValor(foto.getNombre());
 			}
 			
 			servPersistencia.modificarPropiedad(propiedad);

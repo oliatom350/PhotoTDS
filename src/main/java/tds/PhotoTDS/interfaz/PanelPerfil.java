@@ -1,14 +1,9 @@
 package tds.PhotoTDS.interfaz;
 
 import java.awt.Image;
-import java.sql.Date;
-import java.util.ArrayList;
-
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListCellRenderer;
-import javax.swing.UIManager;
-
 import tds.PhotoTDS.Foto;
 import tds.PhotoTDS.PhotoTDS;
 import tds.PhotoTDS.Usuario;
@@ -20,7 +15,6 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 
 import java.awt.FlowLayout;
-import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
@@ -28,15 +22,12 @@ import java.awt.GridLayout;
 import java.awt.BorderLayout;
 import javax.swing.JButton;
 
+@SuppressWarnings("serial")
 public class PanelPerfil extends JPanel {
 
-	/**
-	 * Create the panel.
-	 */
 	private int ancho = 100;
 	private int alto = 100;
 	
-	@SuppressWarnings("deprecation")
 	public PanelPerfil(Usuario usuario, Usuario usuarioVP) {
 		PhotoTDS controlador = PhotoTDS.getUnicaInstancia();
 		
@@ -54,7 +45,8 @@ public class PanelPerfil extends JPanel {
 		panelInfoUsuario.add(panelFotoPerfil, BorderLayout.WEST);
 		
 		JLabel fotoLabel = new JLabel("");
-		Image foto = new ImageIcon(System.getProperty("user.dir")+PhotoTDS.pathFotos+usuario.getFotoPerfil()).getImage();
+		String path = usuario.getPathFotoPerfil();
+		Image foto = new ImageIcon(path).getImage();
 		panelFotoPerfil.setLayout(new FlowLayout(FlowLayout.LEADING, 5, 5));
 		fotoLabel.setIcon(new ImageIcon(foto.getScaledInstance(ancho, alto, java.awt.Image.SCALE_SMOOTH)));
 		panelFotoPerfil.add(fotoLabel);
@@ -85,7 +77,6 @@ public class PanelPerfil extends JPanel {
 		try {
 			nPublicaciones = controlador.getAlbumesUsuario(usuario.getId()).size() + controlador.getFotosUsuario(usuario.getId()).size();
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		nSeguidores = usuario.getUsuariosSeguidores().size();
@@ -112,10 +103,10 @@ public class PanelPerfil extends JPanel {
 		JPanel panelSeleccion = new JPanel();
 		add(panelSeleccion);
 		
-		JButton botonFotos = new JButton("New button");
+		JButton botonFotos = new JButton("Fotos");
 		panelSeleccion.add(botonFotos);
 		
-		JButton botonAlbumes = new JButton("New button");
+		JButton botonAlbumes = new JButton("Albumes");
 		panelSeleccion.add(botonAlbumes);
 		
 		JScrollPane panel_1 = new JScrollPane();
@@ -127,7 +118,6 @@ public class PanelPerfil extends JPanel {
 		try {
 			controlador.getFotosUsuario(usuario.getId()).forEach(f -> fotoslistModel.addElement(f));
 		} catch (Exception e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		listafotos.setLayoutOrientation(JList.HORIZONTAL_WRAP);
@@ -154,7 +144,7 @@ public class PanelPerfil extends JPanel {
 					JLabel label = (JLabel) c;
 					Foto foto = (Foto) value;
 					label.setText("");
-					label.setIcon(new ImageIcon((new ImageIcon(System.getProperty("user.dir")+PhotoTDS.pathFotos+foto.getPath()).getImage().getScaledInstance(70, 40, java.awt.Image.SCALE_SMOOTH))));
+					label.setIcon(new ImageIcon((new ImageIcon(foto.getPath()).getImage().getScaledInstance(70, 40, java.awt.Image.SCALE_SMOOTH))));
 				}
 				return c;
 			}

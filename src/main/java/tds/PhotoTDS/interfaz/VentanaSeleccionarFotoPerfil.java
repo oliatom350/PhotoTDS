@@ -110,7 +110,7 @@ public class VentanaSeleccionarFotoPerfil extends JFrame {
         panelSur.add(btnAceptar);
         btnAceptar.addActionListener(ev -> {
         	
-        	vr.setRutaFoto(System.getProperty("user.dir") + PhotoTDS.pathFotos + textField.getText());
+        	vr.setRutaFoto(textField.getText());
         	this.dispose();
         });
         

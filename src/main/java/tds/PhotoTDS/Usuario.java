@@ -40,6 +40,10 @@ public class Usuario {
 	public String getFotoPerfil() {
 		return fotoPerfil;
 	}
+	
+	public String getPathFotoPerfil() {
+		return System.getProperty("user.dir") + PhotoTDS.pathFotos + fotoPerfil;
+	}
 
 	public void setFotoPerfil(String fotoPerfil) {
 		this.fotoPerfil = fotoPerfil;

@@ -5,17 +5,21 @@ import java.util.ArrayList;
 public class Foto extends Publicacion {
 
 	//Atributos
-	private String path;
+	private String nombre;
 	
 	//Constructor
-	public Foto(String titulo, String descripcion, ArrayList<String> hashtags, int usuario, String ruta) {
+	public Foto(String titulo, String descripcion, ArrayList<String> hashtags, int usuario, String nombreFoto) {
 		super(titulo, descripcion, hashtags, usuario);
-		this.path = ruta;
+		this.nombre = nombreFoto;
 	}
 
 	//Metodos
+	public String getNombre() {
+		return nombre;
+	}
+	
 	public String getPath() {
-		return path;
+		return System.getProperty("user.dir") + PhotoTDS.pathFotos + nombre;
 	}
 	
 	public String getFotoPerfil(int idUsuario) {

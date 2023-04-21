@@ -75,7 +75,7 @@ public class VentanaBusquedaUsuario extends JFrame implements Observable{
 			panel.add(panel_1);
 			
 			JLabel lblNewLabel = new JLabel("");
-			Image icon = new ImageIcon(System.getProperty("user.dir")+PhotoTDS.pathFotos+usuario.getFotoPerfil()).getImage();
+			Image icon = new ImageIcon(usuario.getPathFotoPerfil()).getImage();
 			panel_1.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 			lblNewLabel.setIcon(new ImageIcon(icon.getScaledInstance(70, 70, java.awt.Image.SCALE_SMOOTH)));
 			lblNewLabel.addMouseListener(new MouseAdapter() {

@@ -68,6 +68,7 @@ public class VentanaPrincipal extends JFrame implements Observer {
 	public VentanaPrincipal(Usuario user) {
 		
 		int idUsuarioAct = user.getId();
+		usuarioAct = user;
 		PhotoTDS controlador = PhotoTDS.getUnicaInstancia();
 		try {
 			fotos = controlador.getFotosSeguidos(idUsuarioAct);
@@ -98,14 +99,15 @@ public class VentanaPrincipal extends JFrame implements Observer {
 		JLabel fotoPerfil = new JLabel();
 		Image icon = new ImageIcon().getImage();
 		try {
-			icon = new ImageIcon(controlador.getUsuario(idUsuarioAct).getFotoPerfil()).getImage();
+			String path = controlador.getUsuario(idUsuarioAct).getPathFotoPerfil();
+			icon = new ImageIcon(path).getImage();
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
 		fotoPerfil.setIcon(new ImageIcon(icon.getScaledInstance(30, 30, DO_NOTHING_ON_CLOSE)));
 		fotoPerfil.addMouseListener(new MouseAdapter() {
 			public void mouseClicked(MouseEvent e) {
-				abrePerfil();
+				update(user);
 			}
 		});
 		panelNorteEste.add(fotoPerfil);
@@ -188,10 +190,6 @@ public class VentanaPrincipal extends JFrame implements Observer {
 		//TODO Al cerrar la VentanaAddFoto se cierra también VentanaPrincipal
 	}
 	
-	public void abrePerfil() {
-		//TODO ¿Cambiar aspecto de la VentanaPrincipal o abrir VentanaPerfil nueva? Abrir nueva tonto
-	}
-	
 	public void abreBusqueda(String entrada) {
 		// Abre ventana de busqueda en funcion de si el primer caracter un # o no
 		String primerCaracter = entrada.substring(0, 1);
@@ -212,10 +210,6 @@ public class VentanaPrincipal extends JFrame implements Observer {
 				e.printStackTrace();
 			}
 		}
-	}
-	
-	public void menuPremium() {
-		
 	}
 
 
