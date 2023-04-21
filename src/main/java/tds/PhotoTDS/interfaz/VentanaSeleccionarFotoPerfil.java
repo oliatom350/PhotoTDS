@@ -92,13 +92,14 @@ public class VentanaSeleccionarFotoPerfil extends JFrame {
         	 
         	    //Seleccionamos el fichero
         	    fichero=fc.getSelectedFile();
-        	    String path = "";
+        	    String nombre = "";
         	    try {
-					path = PhotoTDS.copyFile(fichero).toString();
+					PhotoTDS.copyFile(fichero).toString();
+					nombre = fichero.getName();
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
-        	    textField.setText(path);
+        	    textField.setText(nombre);
         	}
         });
         
@@ -108,7 +109,8 @@ public class VentanaSeleccionarFotoPerfil extends JFrame {
         btnAceptar = new JButton("Aceptar");
         panelSur.add(btnAceptar);
         btnAceptar.addActionListener(ev -> {
-        	vr.setRutaFoto(textField.getText());
+        	
+        	vr.setRutaFoto(System.getProperty("user.dir") + PhotoTDS.pathFotos + textField.getText());
         	this.dispose();
         });
         

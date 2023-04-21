@@ -69,7 +69,7 @@ public class VentanaBusquedaUsuario extends JFrame implements Observable{
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		contentPane.add(scrollPane,BorderLayout.CENTER);
 		
-		boolean returnUsuario = false;
+		//??????????????????????boolean returnUsuario = false;
 		for (Usuario usuario : usuarios) {
 			JPanel panel_1 = new JPanel();
 			panel.add(panel_1);

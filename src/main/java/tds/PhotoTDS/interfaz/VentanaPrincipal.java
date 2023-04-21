@@ -15,7 +15,6 @@ import javax.swing.border.EmptyBorder;
 import tds.PhotoTDS.Foto;
 import tds.PhotoTDS.PhotoTDS;
 import tds.PhotoTDS.Usuario;
-import tds.PhotoTDS.interfaz.popup.PopMenuPremiumListener;
 import tds.PhotoTDS.interfaz.popup.PopupMenuPremium;
 
 import javax.swing.JTextField;
@@ -33,7 +32,6 @@ public class VentanaPrincipal extends JFrame implements Observer {
 	private static final long serialVersionUID = -2940916222961478615L;
 	
 	private JPanel contentPane;
-	private static int usuario;
 	private JButton searchButton;
 	private Luz xmlLoaderButton;
 	private JPanel panelNorte;
@@ -44,8 +42,9 @@ public class VentanaPrincipal extends JFrame implements Observer {
 	private JPanel panelCentral;
 	private CardLayout cardLayout;
 	private JScrollPane scrollPane;
+	@SuppressWarnings("unused")
 	private boolean mostrarPerfil = false;
-	private Usuario usuarioAct;
+	private static Usuario usuarioAct;
 	
 	private VentanaBusquedaUsuario vBU;
 	
@@ -56,7 +55,7 @@ public class VentanaPrincipal extends JFrame implements Observer {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VentanaPrincipal frame = new VentanaPrincipal(usuario);
+					VentanaPrincipal frame = new VentanaPrincipal(usuarioAct);
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -66,13 +65,12 @@ public class VentanaPrincipal extends JFrame implements Observer {
 	}
 
 	
-	public VentanaPrincipal(int user) {
+	public VentanaPrincipal(Usuario user) {
 		
-		usuario = user;
+		int idUsuarioAct = user.getId();
 		PhotoTDS controlador = PhotoTDS.getUnicaInstancia();
 		try {
-			usuarioAct = controlador.getUsuario(user);
-			fotos = controlador.getFotosSeguidos(user);
+			fotos = controlador.getFotosSeguidos(idUsuarioAct);
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
@@ -100,7 +98,7 @@ public class VentanaPrincipal extends JFrame implements Observer {
 		JLabel fotoPerfil = new JLabel();
 		Image icon = new ImageIcon().getImage();
 		try {
-			icon = new ImageIcon(controlador.getUsuario(user).getFotoPerfil()).getImage();
+			icon = new ImageIcon(controlador.getUsuario(idUsuarioAct).getFotoPerfil()).getImage();
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
@@ -114,10 +112,9 @@ public class VentanaPrincipal extends JFrame implements Observer {
 		JButton barrasMenuPremium = new JButton();
 		icon = new ImageIcon(VentanaPrincipal.class.getResource("/images/premium.png")).getImage();
 		barrasMenuPremium.setIcon(new ImageIcon(icon.getScaledInstance(30, 30, DO_NOTHING_ON_CLOSE)));
-		//barrasMenuPremium.addMouseListener(new PopMenuPremiumListener());
 		barrasMenuPremium.addActionListener(ev -> {
 			PopupMenuPremium menu = new PopupMenuPremium();
-			menu.setVisible(true);
+			menu.show(barrasMenuPremium, 0, barrasMenuPremium.getHeight());
 		});
 		panelNorteEste.add(barrasMenuPremium);
 		panelNorte.add(panelNorteEste, BorderLayout.EAST);
@@ -160,7 +157,7 @@ public class VentanaPrincipal extends JFrame implements Observer {
 		int cont = 0;
 		
 		for (Foto foto : fotos) {
-			PanelItemFoto pif = new PanelItemFoto(foto, usuario);
+			PanelItemFoto pif = new PanelItemFoto(foto, idUsuarioAct);
 			pif.setMaximumSize(new Dimension(523, 150));
 			pif.setMinimumSize(new Dimension(523, 150));
 			pif.setPreferredSize(new Dimension(523, 150));
@@ -186,7 +183,7 @@ public class VentanaPrincipal extends JFrame implements Observer {
 	}
 	
 	public void nuevaFoto() {
-		VentanaAddFoto vaf = new VentanaAddFoto(usuario);
+		VentanaAddFoto vaf = new VentanaAddFoto(usuarioAct.getId());
 		vaf.setVisible(true);
 		//TODO Al cerrar la VentanaAddFoto se cierra también VentanaPrincipal
 	}

@@ -113,13 +113,20 @@ public class VentanaAddFotoDescripcion extends JFrame {
 			String descp = textArea_1.getText();
 			ArrayList<String> hashtags = getHashtags(descp);
 			if (hashtags == null || descp.length() > 120) {
-				System.out.println("La descripción sobrepasa los 120 caracteres, contiene más de 4 hashtags o algún hashtag sobrepasa el límite.");
+				VentanaWarning vw = new VentanaWarning("La descripción sobrepasa los 120 caracteres, contiene más de 4 hashtags o algún hashtag sobrepasa el límite.");
+				vw.setVisible(true);
 			} else {
 				Foto f = new Foto(textArea.getText(), descp, hashtags, usuario, urlFoto);
 				addFoto(f);
-				VentanaPrincipal vP = new VentanaPrincipal(usuario);
-				vP.setVisible(true);
-				dispose();
+				PhotoTDS controlador = PhotoTDS.getUnicaInstancia();
+				VentanaPrincipal vP = null;
+				try {
+					vP = new VentanaPrincipal(controlador.getUsuario(usuario));
+					vP.setVisible(true);
+					dispose();
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
 			}
 		});
 		panel.add(btnNewButton);
