@@ -87,6 +87,15 @@ public class RepoPublicaciones {
 			return lista;
 		}
 		
+		public ArrayList<Album> getAlbumes(){
+			ArrayList<Album> lista = new ArrayList<Album>();
+			for (Publicacion p : Publicaciones.values()) {
+				if (p instanceof Album)
+					lista.add((Album)p);
+			}
+			return lista;
+		}
+		
 		private void cargarRepo() throws Exception {
 			List<Foto> FotosBD = adaptadorFoto.recuperarTodasFotos();
 			List<Album> AlbumsBD = adaptadorAlbum.recuperarTodasAlbums();

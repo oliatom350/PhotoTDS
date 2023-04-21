@@ -14,6 +14,7 @@ import javax.swing.border.EmptyBorder;
 
 import tds.PhotoTDS.Foto;
 import tds.PhotoTDS.PhotoTDS;
+import tds.PhotoTDS.Usuario;
 import tds.PhotoTDS.interfaz.popup.PopMenuPremiumListener;
 import tds.PhotoTDS.interfaz.popup.PopupMenuPremium;
 
@@ -26,7 +27,7 @@ import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import pulsador.Luz;
 
-public class VentanaPrincipal extends JFrame {
+public class VentanaPrincipal extends JFrame implements Observer {
 
 	private static final long serialVersionUID = -2940916222961478615L;
 	
@@ -38,6 +39,13 @@ public class VentanaPrincipal extends JFrame {
 	private JPanel panelNorteCentral;
 	private JPanel panelNorteOeste;
 	private JPanel panelNorteEste;
+	private JPanel panelCentralCentro;
+	private JPanel panelCentral;
+	private boolean mostrarPerfil = false;
+	private Usuario usuarioPerfil;
+	
+	private VentanaBusquedaUsuario vBU;
+	
 	//Array de fotos a mostrar en la ventana principal
 	ArrayList<Foto> fotos = new ArrayList<Foto>();
 	
@@ -134,12 +142,12 @@ public class VentanaPrincipal extends JFrame {
 		xmlLoaderButton = new Luz();
 		panelNorteCentral.add(xmlLoaderButton);
 		
-		JPanel panelCentral = new JPanel();
+		panelCentral = new JPanel();
 		JScrollPane scrollPane = new JScrollPane(panelCentral);
-		panelCentral.setLayout(new BorderLayout(0, 0));
+		//panelCentral.setLayout(new BorderLayout(0, 0));
 		contentPane.add(scrollPane,BorderLayout.CENTER);
 		
-		JPanel panelCentralCentro = new JPanel();
+		panelCentralCentro = new JPanel();
 		panelCentral.add(panelCentralCentro, BorderLayout.CENTER);
 		GridBagLayout gbl = new GridBagLayout();
 		panelCentralCentro.setLayout(gbl);
@@ -151,13 +159,12 @@ public class VentanaPrincipal extends JFrame {
 			pif.setMinimumSize(new Dimension(523, 150));
 			pif.setPreferredSize(new Dimension(523, 150));
 			GridBagConstraints gbc = new GridBagConstraints();
-	        gbc.anchor = GridBagConstraints.NORTH;
-	        gbc.weighty = 1;
-	        gbc.gridy = cont;
-	        cont++;
+			gbc.anchor = GridBagConstraints.NORTH;
+			gbc.weighty = 1;
+			gbc.gridy = cont;
+			cont++;
 			panelCentralCentro.add(pif, gbc);
 		}
-		
 	}
 	
 	public void nuevaFoto() {
@@ -183,8 +190,9 @@ public class VentanaPrincipal extends JFrame {
 			}
 		}else {
 			try {
-				VentanaBusquedaUsuario vbu = new VentanaBusquedaUsuario(controlador.getUsuariosBusqueda(entrada));
-				vbu.setVisible(true);
+				vBU = new VentanaBusquedaUsuario(controlador.getUsuariosBusqueda(entrada));
+				vBU.addObserver(this);
+				vBU.setVisible(true);
 			} catch (Exception e) {
 				e.printStackTrace();
 			}
@@ -193,6 +201,22 @@ public class VentanaPrincipal extends JFrame {
 	
 	public void menuPremium() {
 		
+	}
+
+
+	@Override
+	public void update(Usuario usuario) {
+		mostrarPerfil = true;
+		usuarioPerfil = usuario;
+		Usuario p = new Usuario("", "", "", null, false, "", "", "");
+		usuarioPerfil = p;
+		PanelPerfil panel_dos = new PanelPerfil(p,p);
+		contentPane.remove(panelCentralCentro);
+		panelCentralCentro = panel_dos;
+		contentPane.add(panel_dos, BorderLayout.CENTER);
+		contentPane.revalidate();
+		contentPane.repaint();
+		this.validate();
 	}
 
 }

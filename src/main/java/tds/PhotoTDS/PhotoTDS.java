@@ -213,6 +213,13 @@ public class PhotoTDS implements FotosListener {
 				.collect(Collectors.toList());
 	}
 	
+	public ArrayList<Album> getAlbumesUsuario(int id) throws Exception {
+		Usuario usuario = repUsuarios.getUsuario(id);
+		return (ArrayList<Album>) repPublicaciones.getAlbumes().stream()
+				.filter(a -> a.getUsuario() == usuario.getId())
+				.collect(Collectors.toList());
+	}
+	
 	//Método que devuelve las fotos de los seguidos por un usuario
 	public ArrayList<Foto> getFotosSeguidos(int id) throws Exception{
 		Usuario usuario = repUsuarios.getUsuario(id);

@@ -2,7 +2,10 @@ package tds.PhotoTDS.interfaz;
 
 import java.awt.EventQueue;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -18,11 +21,12 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import java.awt.FlowLayout;
 
-public class VentanaBusquedaUsuario extends JFrame {
+public class VentanaBusquedaUsuario extends JFrame implements Observable{
 
 	/**
 	 * 
 	 */
+	private List<Observer> observers = new ArrayList<Observer>();
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private static ArrayList<Usuario> usuarios;
@@ -65,7 +69,7 @@ public class VentanaBusquedaUsuario extends JFrame {
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
 		contentPane.add(scrollPane,BorderLayout.CENTER);
 		
-		
+		boolean returnUsuario = false;
 		for (Usuario usuario : usuarios) {
 			JPanel panel_1 = new JPanel();
 			panel.add(panel_1);
@@ -74,6 +78,12 @@ public class VentanaBusquedaUsuario extends JFrame {
 			Image icon = new ImageIcon(System.getProperty("user.dir")+PhotoTDS.pathFotos+usuario.getFotoPerfil()).getImage();
 			panel_1.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 			lblNewLabel.setIcon(new ImageIcon(icon.getScaledInstance(70, 70, java.awt.Image.SCALE_SMOOTH)));
+			lblNewLabel.addMouseListener(new MouseAdapter() {
+				public void mouseClicked(MouseEvent e) {
+                    //Insertar codigo para avisar a VentanaPrincipal para cambiar su apariencia
+					notifyObservers(usuario);
+                }
+			});
 			panel_1.add(lblNewLabel);
 			
 			JPanel panel_2 = new JPanel();
@@ -84,6 +94,23 @@ public class VentanaBusquedaUsuario extends JFrame {
 			panel_1.add(lblNewLabel_1);
 		}
 		
+	}
+
+	@Override
+	public void addObserver(Observer observer) {
+		observers.add(observer);
+	}
+
+	@Override
+	public void removeObserver(Observer observer) {
+		observers.remove(observer);
+	}
+
+	@Override
+	public void notifyObservers(Usuario usuario) {
+		for (Observer observer : observers) {
+            observer.update(usuario);
+        }
 	}
 
 }

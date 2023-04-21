@@ -211,7 +211,7 @@ public class VentanaRegistro extends JFrame {
 		panelCentralCentral.add(panelFotoPerfil);
 		
 		//Inicialmente, al usuario se le asignará la ruta de la foto default
-		fotoPerfil = "src/main/java/images/defaultUserProfile.jpg";
+		fotoPerfil = "defaultUserProfile.jpg";
 		
 		JLabel EtiquetaFoto = new JLabel("Foto de perfil (opcional)");
 		EtiquetaFoto.setFont(new Font("SansSerif", Font.PLAIN, 14));
