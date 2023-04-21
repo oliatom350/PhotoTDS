@@ -24,7 +24,7 @@ public class VentanaRegistro extends JFrame {
 	private JTextField textField_Año;
 	
 	//Inicialmente, rutaFoto y descripcion estarán vacías
-	private String rutaFoto = "";
+	private String fotoPerfil = "";
 	private String descripcion = "";
 
 	public static void main(String[] args) {
@@ -210,6 +210,9 @@ public class VentanaRegistro extends JFrame {
 		fl_panelFotoPerfil.setAlignment(FlowLayout.RIGHT);
 		panelCentralCentral.add(panelFotoPerfil);
 		
+		//Inicialmente, al usuario se le asignará la ruta de la foto default
+		fotoPerfil = "src/main/java/images/defaultUserProfile.jpg";
+		
 		JLabel EtiquetaFoto = new JLabel("Foto de perfil (opcional)");
 		EtiquetaFoto.setFont(new Font("SansSerif", Font.PLAIN, 14));
 		panelFotoPerfil.add(EtiquetaFoto);
@@ -289,7 +292,7 @@ public class VentanaRegistro extends JFrame {
 													 Integer.parseInt(textField_Dia.getText())),
 											false,
 											textField_Contraseña.getText(),
-											rutaFoto,
+											fotoPerfil,
 											descripcion
 					 						));
 			llamaVentanaLogin();
@@ -307,7 +310,7 @@ public class VentanaRegistro extends JFrame {
 	}
 	
 	protected void setRutaFoto(String ruta) {
-		rutaFoto = ruta;
+		fotoPerfil = ruta;
 	}
 	
 	private boolean checkStringNotNull(String s) {
