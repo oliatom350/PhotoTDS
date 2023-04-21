@@ -41,17 +41,12 @@ public class PanelPerfil extends JPanel {
 		PhotoTDS controlador = PhotoTDS.getUnicaInstancia();
 		
 		//USUARIO PARA PRUEBAS
-		usuario = new Usuario("jasf723", "jose@gmail.com", "JoseAntonio", new Date(2006, 10, 26), false, "1234", "SU.png", "Ofrezco: esquizofrenia, más guarro que la uña de un camionero, fimosis, virgen a los 40, en el paro, tengo la fp de mecánica");
-		ArrayList<Foto> fotosPrueba = new ArrayList<Foto>();
-		for(int i = 0; i < 1; i++) {
-			fotosPrueba.add(new Foto("", "", new ArrayList<String>() , 0, "SU.png"));
-			fotosPrueba.add(new Foto("", "", new ArrayList<String>() , 0, "SU.png"));
-		}
 		setLayout(new GridLayout(0, 1, 0, 0));
 		
 		JPanel panelInfoUsuario = new JPanel();
-		panelInfoUsuario.setMaximumSize(new Dimension(500, 150));
-		panelInfoUsuario.setMinimumSize(new Dimension(500, 150));
+		panelInfoUsuario.setMaximumSize(new Dimension(500, 100));
+		panelInfoUsuario.setMinimumSize(new Dimension(500, 100));
+		panelInfoUsuario.setPreferredSize(new Dimension(500, 100));
 		add(panelInfoUsuario);
 		panelInfoUsuario.setLayout(new BorderLayout(0, 0));
 		
@@ -59,10 +54,9 @@ public class PanelPerfil extends JPanel {
 		panelInfoUsuario.add(panelFotoPerfil, BorderLayout.WEST);
 		
 		JLabel fotoLabel = new JLabel("");
-		Image foto = new ImageIcon(PanelPerfil.class.getResource("/images/SU.png")).getImage();
+		Image foto = new ImageIcon(System.getProperty("user.dir")+PhotoTDS.pathFotos+usuario.getFotoPerfil()).getImage();
 		panelFotoPerfil.setLayout(new FlowLayout(FlowLayout.LEADING, 5, 5));
 		fotoLabel.setIcon(new ImageIcon(foto.getScaledInstance(ancho, alto, java.awt.Image.SCALE_SMOOTH)));
-		//fotoLabel.setIcon(new ImageIcon(System.getProperty("user.dir")+PhotoTDS.pathFotos+usuario.getFotoPerfil()));
 		panelFotoPerfil.add(fotoLabel);
 		
 		JPanel panelInfo = new JPanel();
@@ -89,7 +83,7 @@ public class PanelPerfil extends JPanel {
 		int nSeguidores = 0;
 		int nSeguidos = 0;
 		try {
-			//nPublicaciones = controlador.getAlbumesUsuario(usuario.getId()).size() + controlador.getFotosUsuario(usuario.getId()).size();
+			nPublicaciones = controlador.getAlbumesUsuario(usuario.getId()).size() + controlador.getFotosUsuario(usuario.getId()).size();
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -97,8 +91,7 @@ public class PanelPerfil extends JPanel {
 		nSeguidores = usuario.getUsuariosSeguidores().size();
 		nSeguidos = usuario.getUsuariosSeguidos().size();
 		
-		//JLabel publicLabel = new JLabel(Integer.toString(nPublicaciones) + " publicaciones");
-		JLabel publicLabel = new JLabel("n seguidores");
+		JLabel publicLabel = new JLabel(Integer.toString(nPublicaciones) + " publicaciones");
 		panelInfoPubli.add(publicLabel);
 		
 		JLabel seguidoresLabel = new JLabel(Integer.toString(nSeguidores) + " seguidores");
@@ -132,8 +125,7 @@ public class PanelPerfil extends JPanel {
 		DefaultListModel<Foto> fotoslistModel = new DefaultListModel<Foto>();
 		listafotos.setModel(fotoslistModel);
 		try {
-			//controlador.getFotosUsuario(usuario.getId()).forEach(f -> fotoslistModel.addElement(f));
-			fotosPrueba.stream().forEach(f -> fotoslistModel.addElement(f));
+			controlador.getFotosUsuario(usuario.getId()).forEach(f -> fotoslistModel.addElement(f));
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -153,8 +145,6 @@ public class PanelPerfil extends JPanel {
 			 * 
 			 */
 			private static final long serialVersionUID = 1L;
-			private Color background = new Color(0, 100, 255, 15);
-			private Color defaultBackground = (Color) UIManager.get("List.background");
 			@Override
 			public Component getListCellRendererComponent(JList<?> list, Object value,
 														int index, boolean isSelected,

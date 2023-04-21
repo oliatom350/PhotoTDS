@@ -23,6 +23,7 @@ import javax.swing.JButton;
 import javax.swing.ImageIcon;
 import java.util.ArrayList;
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import pulsador.Luz;
@@ -41,8 +42,10 @@ public class VentanaPrincipal extends JFrame implements Observer {
 	private JPanel panelNorteEste;
 	private JPanel panelCentralCentro;
 	private JPanel panelCentral;
+	private CardLayout cardLayout;
+	private JScrollPane scrollPane;
 	private boolean mostrarPerfil = false;
-	private Usuario usuarioPerfil;
+	private Usuario usuarioAct;
 	
 	private VentanaBusquedaUsuario vBU;
 	
@@ -68,6 +71,7 @@ public class VentanaPrincipal extends JFrame implements Observer {
 		usuario = user;
 		PhotoTDS controlador = PhotoTDS.getUnicaInstancia();
 		try {
+			usuarioAct = controlador.getUsuario(user);
 			fotos = controlador.getFotosSeguidos(user);
 		} catch (Exception e1) {
 			e1.printStackTrace();
@@ -143,8 +147,10 @@ public class VentanaPrincipal extends JFrame implements Observer {
 		panelNorteCentral.add(xmlLoaderButton);
 		
 		panelCentral = new JPanel();
-		JScrollPane scrollPane = new JScrollPane(panelCentral);
+		scrollPane = new JScrollPane(panelCentral);
 		//panelCentral.setLayout(new BorderLayout(0, 0));
+		cardLayout = new CardLayout();
+		panelCentral.setLayout(cardLayout);
 		contentPane.add(scrollPane,BorderLayout.CENTER);
 		
 		panelCentralCentro = new JPanel();
@@ -165,6 +171,18 @@ public class VentanaPrincipal extends JFrame implements Observer {
 			cont++;
 			panelCentralCentro.add(pif, gbc);
 		}
+		
+		//Nuevo boton de inicio
+		JButton inicioButton = new JButton("Inicio");
+		inicioButton.addActionListener(ev -> {
+			if (panelCentral.getComponent(0) != panelCentralCentro) {
+				panelCentral.add(panelCentralCentro, BorderLayout.CENTER);
+				cardLayout.next(panelCentral);
+				panelCentral.remove(0);
+			}
+		});
+		panelNorteCentral.add(inicioButton);
+		
 	}
 	
 	public void nuevaFoto() {
@@ -207,16 +225,10 @@ public class VentanaPrincipal extends JFrame implements Observer {
 	@Override
 	public void update(Usuario usuario) {
 		mostrarPerfil = true;
-		usuarioPerfil = usuario;
-		Usuario p = new Usuario("", "", "", null, false, "", "", "");
-		usuarioPerfil = p;
-		PanelPerfil panel_dos = new PanelPerfil(p,p);
-		contentPane.remove(panelCentralCentro);
-		panelCentralCentro = panel_dos;
-		contentPane.add(panel_dos, BorderLayout.CENTER);
-		contentPane.revalidate();
-		contentPane.repaint();
-		this.validate();
+		PanelPerfil panel_dos = new PanelPerfil(usuario, usuario);
+		panelCentral.add(panel_dos, BorderLayout.CENTER);
+		cardLayout.next(panelCentral);
+		panelCentral.remove(0);
 	}
 
 }
