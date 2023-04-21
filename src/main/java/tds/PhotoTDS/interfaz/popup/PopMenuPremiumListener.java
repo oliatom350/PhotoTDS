@@ -3,7 +3,7 @@ package tds.PhotoTDS.interfaz.popup;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
-public class PopMenuEdicionListener extends MouseAdapter {
+public class PopMenuPremiumListener extends MouseAdapter {
 	 public void mousePressed(MouseEvent e) {
 		 if (e.isPopupTrigger())
 			 mostrarMenu(e);
@@ -13,7 +13,7 @@ public class PopMenuEdicionListener extends MouseAdapter {
 			 mostrarMenu(e);
 	 }
 	 private void mostrarMenu(MouseEvent e) {
-		 PopupMenuFoto menu = new PopupMenuFoto();
+		 PopupMenuPremium menu = new PopupMenuPremium();
 		 menu.show(e.getComponent(), e.getX(), e.getY());
 	 }
 }

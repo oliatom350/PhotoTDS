@@ -14,6 +14,9 @@ import javax.swing.border.EmptyBorder;
 
 import tds.PhotoTDS.Foto;
 import tds.PhotoTDS.PhotoTDS;
+import tds.PhotoTDS.interfaz.popup.PopMenuPremiumListener;
+import tds.PhotoTDS.interfaz.popup.PopupMenuPremium;
+
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.ImageIcon;
@@ -96,9 +99,14 @@ public class VentanaPrincipal extends JFrame {
 			}
 		});
 		panelNorteEste.add(fotoPerfil);
-		JLabel barrasMenuPremium = new JLabel();
+		JButton barrasMenuPremium = new JButton();
 		icon = new ImageIcon(VentanaPrincipal.class.getResource("/images/premium.png")).getImage();
 		barrasMenuPremium.setIcon(new ImageIcon(icon.getScaledInstance(30, 30, DO_NOTHING_ON_CLOSE)));
+		//barrasMenuPremium.addMouseListener(new PopMenuPremiumListener());
+		barrasMenuPremium.addActionListener(ev -> {
+			PopupMenuPremium menu = new PopupMenuPremium();
+			menu.setVisible(true);
+		});
 		panelNorteEste.add(barrasMenuPremium);
 		panelNorte.add(panelNorteEste, BorderLayout.EAST);
 		
