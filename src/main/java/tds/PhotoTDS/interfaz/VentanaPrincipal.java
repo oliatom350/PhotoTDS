@@ -20,7 +20,6 @@ import javax.swing.ImageIcon;
 import java.util.ArrayList;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 import javax.swing.JScrollPane;
 import pulsador.Luz;
 

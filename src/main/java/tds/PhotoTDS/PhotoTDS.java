@@ -21,7 +21,6 @@ import tds.PhotoTDS.dao.IAdaptadorFotoDAO;
 import tds.PhotoTDS.dao.IAdaptadorNotificacionDAO;
 import tds.PhotoTDS.dao.IAdaptadorTDSAlbumDAO;
 import tds.PhotoTDS.dao.IAdaptadorUsuarioDAO;
-import tds.driver.ServicioPersistencia;
 
 public class PhotoTDS implements FotosListener {
 
