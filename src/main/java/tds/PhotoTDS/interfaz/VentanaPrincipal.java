@@ -96,6 +96,10 @@ public class VentanaPrincipal extends JFrame {
 			}
 		});
 		panelNorteEste.add(fotoPerfil);
+		JLabel barrasMenuPremium = new JLabel();
+		icon = new ImageIcon(VentanaPrincipal.class.getResource("/images/premium.png")).getImage();
+		barrasMenuPremium.setIcon(new ImageIcon(icon.getScaledInstance(30, 30, DO_NOTHING_ON_CLOSE)));
+		panelNorteEste.add(barrasMenuPremium);
 		panelNorte.add(panelNorteEste, BorderLayout.EAST);
 		
 		JButton addFoto = new JButton("");
@@ -151,6 +155,7 @@ public class VentanaPrincipal extends JFrame {
 	public void nuevaFoto() {
 		VentanaAddFoto vaf = new VentanaAddFoto(usuario);
 		vaf.setVisible(true);
+		//TODO Al cerrar la VentanaAddFoto se cierra también VentanaPrincipal
 	}
 	
 	public void abrePerfil() {
@@ -176,6 +181,10 @@ public class VentanaPrincipal extends JFrame {
 				e.printStackTrace();
 			}
 		}
+	}
+	
+	public void menuPremium() {
+		
 	}
 
 }

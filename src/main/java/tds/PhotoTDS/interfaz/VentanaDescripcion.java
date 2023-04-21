@@ -66,8 +66,8 @@ public class VentanaDescripcion extends JFrame {
 		panelNorte.add(panel_2);
 		panel_2.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 		
-		JLabel lblNewLabel = new JLabel("Introduce una descripción para tu perfil:");
-		lblNewLabel.setFont(new Font("Segoe UI Historic", Font.PLAIN, 17));
+		JLabel lblNewLabel = new JLabel("Introduce una descripción (máx. 200 caracteres) para tu perfil:");
+		lblNewLabel.setFont(new Font("Segoe UI Historic", Font.PLAIN, 14));
 		panel_2.add(lblNewLabel);
 		
 		JPanel panelCentral = new JPanel();
