@@ -5,6 +5,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import tds.PhotoTDS.Comentario;
+import tds.PhotoTDS.PhotoTDS;
+
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.BoxLayout;
@@ -18,6 +22,8 @@ public class VentanaDescripcion extends JFrame {
 	private static final long serialVersionUID = -6906524484620549062L;
 
 	private JPanel contentPane;
+
+	private final int longitudMaxima = 200;
 
 	private static VentanaRegistro vr;
 
@@ -85,8 +91,12 @@ public class VentanaDescripcion extends JFrame {
 		JButton btnFinalizar = new JButton("Finalizar");
 		panelSur.add(btnFinalizar);
 		btnFinalizar.addActionListener(ev -> {
-			vr.setDescripcion(textArea.getText());
-			this.setVisible(false);
+			if (VerificaLongitud(textArea.getText())) {
+				vr.setDescripcion(textArea.getText());
+				this.setVisible(false);
+			} else {
+				textArea.setText(textArea.getText().substring(0, longitudMaxima));
+			}
 		});
 		
 		JButton btnCancelar = new JButton("Cancelar");
@@ -94,5 +104,14 @@ public class VentanaDescripcion extends JFrame {
 		btnCancelar.addActionListener(ev -> {
 			this.dispose();
 		});
+	}
+	
+	public boolean VerificaLongitud(String text) {
+		if (text.length() > longitudMaxima) {
+			VentanaWarning vent = new VentanaWarning("Longitud de descripción superada");
+			vent.setVisible(true);
+			return false;
+		}
+		return true;
 	}
 }
