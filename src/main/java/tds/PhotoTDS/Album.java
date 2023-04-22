@@ -23,4 +23,13 @@ public class Album extends Publicacion {
 		this.fotos.add(foto);
 	}
 	
+	public void removeFoto(Foto foto) {
+		this.fotos.remove(foto);
+	}
+	
+	public void addMeGusta() {
+		super.addMeGusta();
+		fotos.stream().forEach(f -> f.addMeGusta());
+	}
+	
 }

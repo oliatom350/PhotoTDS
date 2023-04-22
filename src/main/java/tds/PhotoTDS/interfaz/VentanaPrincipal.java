@@ -1,9 +1,12 @@
 package tds.PhotoTDS.interfaz;
 
 import java.awt.EventQueue;
+import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
+import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -19,8 +22,10 @@ import tds.PhotoTDS.interfaz.popup.PopupMenuPremium;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import java.util.ArrayList;
+import java.util.concurrent.Flow;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Dimension;
@@ -40,6 +45,7 @@ public class VentanaPrincipal extends JFrame implements Observer {
 	private JPanel panelNorteEste;
 	private JPanel panelCentralCentro;
 	private JPanel panelCentral;
+	private JPanel panelCentralCard;
 	private CardLayout cardLayout;
 	private JScrollPane scrollPane;
 	@SuppressWarnings("unused")
@@ -146,12 +152,19 @@ public class VentanaPrincipal extends JFrame implements Observer {
 		xmlLoaderButton = new Luz();
 		panelNorteCentral.add(xmlLoaderButton);
 		
-		panelCentral = new JPanel();
-		scrollPane = new JScrollPane(panelCentral);
-		//panelCentral.setLayout(new BorderLayout(0, 0));
 		cardLayout = new CardLayout();
+		panelCentralCard = new JPanel();
+		panelCentralCard.setLayout(cardLayout);
+		
+		panelCentral = new JPanel();
+		//panelCentral.setLayout(new BorderLayout(0, 0));
 		panelCentral.setLayout(cardLayout);
+		//panelCentralCard.add(panelCentral);
+		
+		scrollPane = new JScrollPane(panelCentral);
+	
 		contentPane.add(scrollPane,BorderLayout.CENTER);
+		
 		
 		construirPanelFotos();
 		
@@ -161,12 +174,12 @@ public class VentanaPrincipal extends JFrame implements Observer {
 		
 		//Nuevo boton para crear album en el perfil del usuario
 		addAlbum = new JButton("A +");
-		
-		
-		
 		addAlbum.addActionListener(ev -> {
-			//TODO codigo para llamar a ventana que crea albumes;
+			VentanaAddAlbum vAA = new VentanaAddAlbum(usuarioAct.getId());
+			vAA.setVisible(true);
+			this.dispose();
 		});
+		
 		inicioButton.addActionListener(ev -> {
 			construirPanelFotos();
 			if (panelCentral.getComponent(0) != panelCentralCentro) {
@@ -191,7 +204,8 @@ public class VentanaPrincipal extends JFrame implements Observer {
 		panelCentralCentro = new JPanel();
 		panelCentral.add(panelCentralCentro, BorderLayout.CENTER);
 		GridBagLayout gbl = new GridBagLayout();
-		panelCentralCentro.setLayout(gbl);
+		//panelCentralCentro.setLayout(gbl);
+		panelCentralCentro.setLayout(new BoxLayout(panelCentralCentro, BoxLayout.Y_AXIS));
 		int cont = 0;
 		
 		for (Foto foto : fotos) {
@@ -202,6 +216,7 @@ public class VentanaPrincipal extends JFrame implements Observer {
 			GridBagConstraints gbc = new GridBagConstraints();
 			gbc.anchor = GridBagConstraints.NORTH;
 			gbc.weighty = 1;
+			gbc.insets = new Insets(0,0,0,0);
 			gbc.gridy = cont;
 			cont++;
 			panelCentralCentro.add(pif, gbc);

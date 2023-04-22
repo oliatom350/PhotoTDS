@@ -44,14 +44,13 @@ public class PanelPerfil extends JPanel {
 	private JList<Foto> listafotos;
 	private JList<Album> listaAlbumes;
 	private Usuario usuario;
+	private Usuario usuarioVP;
 	private JScrollPane panel_1;
 	
 	public PanelPerfil(Usuario usuario, Usuario usuarioVP) {
 		this.usuario = usuario;
+		this.usuarioVP = usuarioVP;
 		PhotoTDS controlador = PhotoTDS.getUnicaInstancia();
-		
-		//USUARIO PARA PRUEBAS
-		//setLayout(new GridLayout(0, 1, 0, 0));
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		JPanel panelInfoUsuario = new JPanel();
@@ -184,7 +183,8 @@ public class PanelPerfil extends JPanel {
             PhotoTDS.getUnicaInstancia().eliminarFoto(foto);
             cargarMatrizFotos();
         });
-        popupMenu.add(eliminarItem);
+        if (usuario.equals(usuarioVP))
+        	popupMenu.add(eliminarItem);
         popupMenu.show(e.getComponent(), e.getX(), e.getY());
 	}
 	
@@ -194,15 +194,33 @@ public class PanelPerfil extends JPanel {
         eliminarItem.addActionListener((ActionEvent event) -> {
             Album album = listaAlbumes.getSelectedValue();
             PhotoTDS.getUnicaInstancia().eliminarAlbum(album);
-            cargarMatrizFotos();
+            cargarMatrizAlbumes();
         });
-        JMenuItem editarItem = new JMenuItem("editar");
-        eliminarItem.addActionListener((ActionEvent event) -> {
+        JMenuItem editarItem = new JMenuItem("Editar");
+        editarItem.addActionListener((ActionEvent event) -> {
             Album album = listaAlbumes.getSelectedValue();
-            //TODO LLAMAR A VENTANA PARA VISUALIZAR ALBUM
+            VentanaEditarAlbum vEA = new VentanaEditarAlbum(usuario.getId(), album, !usuario.equals(usuarioVP));
+            vEA.setVisible(true);
         });
-        popupMenu.add(editarItem);
-        popupMenu.add(eliminarItem);
+        JMenuItem ver = new JMenuItem("Ver");
+        ver.addActionListener((ActionEvent event) -> {
+            Album album = listaAlbumes.getSelectedValue();
+            VentanaEditarAlbum vEA = new VentanaEditarAlbum(usuario.getId(), album, !usuario.equals(usuarioVP));
+            vEA.setVisible(true);
+        });
+        JMenuItem meGusta = new JMenuItem("Dar Me Gusta");
+        meGusta.addActionListener((ActionEvent event) -> {
+            Album album = listaAlbumes.getSelectedValue();
+            album.addMeGusta();
+        });
+        
+        if(usuario.equals(usuarioVP)) {
+        	popupMenu.add(editarItem);
+            popupMenu.add(eliminarItem);
+        } else {
+        	popupMenu.add(ver);
+        	popupMenu.add(meGusta);
+        }
         popupMenu.show(e.getComponent(), e.getX(), e.getY());
 	}
 	
@@ -251,7 +269,7 @@ public class PanelPerfil extends JPanel {
             	if (SwingUtilities.isRightMouseButton(e)) {
                     int index = listaAlbumes.locationToIndex(e.getPoint());
                     if (index != -1 && listaAlbumes.getCellBounds(index, index).contains(e.getPoint())) {
-                        listafotos.setSelectedIndex(index);
+                        listaAlbumes.setSelectedIndex(index);
                         mostrarMenuEmergenteAlbum(e);
                     }
                 }
@@ -297,7 +315,7 @@ public class PanelPerfil extends JPanel {
 				if (c instanceof JLabel) {
 					JLabel label = (JLabel) c;
 					Album album = (Album) value;
-					label.setText("");
+					label.setText("   " + album.getTitulo() + "   ");
 					label.setIcon(new ImageIcon((new ImageIcon(album.getFotos().getFirst().getPath()).getImage().getScaledInstance(anchof, altof, java.awt.Image.SCALE_SMOOTH))));
 				}
 				return c;
