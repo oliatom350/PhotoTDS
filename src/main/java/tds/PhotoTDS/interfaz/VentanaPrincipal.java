@@ -178,6 +178,9 @@ public class VentanaPrincipal extends JFrame implements Observer {
 				panelCentral.add(panelCentralCentro, BorderLayout.CENTER);
 				cardLayout.next(panelCentral);
 				panelCentral.remove(0);
+				this.revalidate();
+				this.repaint();
+				this.validate();
 			}
 		});
 		panelNorteCentral.add(inicioButton);

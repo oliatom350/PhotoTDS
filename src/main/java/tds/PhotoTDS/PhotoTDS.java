@@ -108,6 +108,11 @@ public class PhotoTDS implements FotosListener {
 		repPublicaciones.addFoto(foto);
 	}
 	
+	public void eliminarFoto(Foto foto) {
+		adaptadorFoto.borrarFoto(foto);
+		repPublicaciones.removeFoto(foto);
+	}
+	
 	public void registrarAlbum(Album album) {
 		adaptadorAlbum.registrarAlbum(album);
 		for(Foto f : album.getFotos()) {

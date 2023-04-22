@@ -1,18 +1,29 @@
 package tds.PhotoTDS.interfaz;
 
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+
 import javax.swing.JPanel;
+import javax.swing.JPopupMenu;
 import javax.swing.JScrollPane;
 import javax.swing.ListCellRenderer;
+import javax.swing.SwingUtilities;
+
 import tds.PhotoTDS.Foto;
 import tds.PhotoTDS.PhotoTDS;
 import tds.PhotoTDS.Usuario;
+import tds.PhotoTDS.interfaz.popup.PopMenuFotoListener;
+
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JMenuItem;
 
 import java.awt.FlowLayout;
 import java.awt.Color;
@@ -27,6 +38,7 @@ public class PanelPerfil extends JPanel {
 
 	private int ancho = 100;
 	private int alto = 100;
+	private JList<Foto> listafotos;
 	
 	public PanelPerfil(Usuario usuario, Usuario usuarioVP) {
 		PhotoTDS controlador = PhotoTDS.getUnicaInstancia();
@@ -112,7 +124,7 @@ public class PanelPerfil extends JPanel {
 		JScrollPane panel_1 = new JScrollPane();
 		panel_1.setBackground(Color.WHITE);
 		add(panel_1);
-		JList<Foto> listafotos = new JList<Foto>();
+		listafotos = new JList<Foto>();
 		DefaultListModel<Foto> fotoslistModel = new DefaultListModel<Foto>();
 		listafotos.setModel(fotoslistModel);
 		try {
@@ -124,6 +136,17 @@ public class PanelPerfil extends JPanel {
 		listafotos.setVisibleRowCount(-1);
 		listafotos.ensureIndexIsVisible(getHeight());
 		listafotos.setCellRenderer(createListRenderer());
+		listafotos.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
+            	if (SwingUtilities.isRightMouseButton(e)) {
+                    int index = listafotos.locationToIndex(e.getPoint());
+                    if (index != -1 && listafotos.getCellBounds(index, index).contains(e.getPoint())) {
+                        listafotos.setSelectedIndex(index);
+                        mostrarMenuEmergente(e);
+                    }
+                }
+            }
+        });
 		panel_1.setViewportView(listafotos);
 		//CREACION MATRIZ DE FOTOS
 		
@@ -159,6 +182,20 @@ public class PanelPerfil extends JPanel {
 		
 	}
 	
+	private void mostrarMenuEmergente(MouseEvent e) {
+		JPopupMenu popupMenu = new JPopupMenu();
+        JMenuItem eliminarItem = new JMenuItem("Eliminar");
+        eliminarItem.addActionListener((ActionEvent event) -> {
+            Foto foto = listafotos.getSelectedValue();
+            PhotoTDS.getUnicaInstancia().eliminarFoto(foto);
+            this.revalidate();
+            this.repaint();
+            this.validate();
+        });
+        popupMenu.add(eliminarItem);
+        popupMenu.show(e.getComponent(), e.getX(), e.getY());
+	}
+	
 	private static ListCellRenderer<? super Foto> createListRenderer() {
 		return new DefaultListCellRenderer() {
 			/**
@@ -174,7 +211,7 @@ public class PanelPerfil extends JPanel {
 					JLabel label = (JLabel) c;
 					Foto foto = (Foto) value;
 					label.setText("");
-					label.setIcon(new ImageIcon((new ImageIcon(foto.getPath()).getImage().getScaledInstance(70, 40, java.awt.Image.SCALE_SMOOTH))));
+					label.setIcon(new ImageIcon((new ImageIcon(foto.getPath()).getImage().getScaledInstance(90, 60, java.awt.Image.SCALE_SMOOTH))));
 				}
 				return c;
 			}
