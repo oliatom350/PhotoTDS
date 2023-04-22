@@ -12,6 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ListCellRenderer;
 import javax.swing.SwingUtilities;
 
+import tds.PhotoTDS.Album;
 import tds.PhotoTDS.Foto;
 import tds.PhotoTDS.PhotoTDS;
 import tds.PhotoTDS.Usuario;
@@ -38,18 +39,25 @@ public class PanelPerfil extends JPanel {
 
 	private int ancho = 100;
 	private int alto = 100;
+	private static int anchof = 100;
+	private static int altof = 70;
 	private JList<Foto> listafotos;
+	private JList<Album> listaAlbumes;
+	private Usuario usuario;
+	private JScrollPane panel_1;
 	
 	public PanelPerfil(Usuario usuario, Usuario usuarioVP) {
+		this.usuario = usuario;
 		PhotoTDS controlador = PhotoTDS.getUnicaInstancia();
 		
 		//USUARIO PARA PRUEBAS
-		setLayout(new GridLayout(0, 1, 0, 0));
+		//setLayout(new GridLayout(0, 1, 0, 0));
+		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		
 		JPanel panelInfoUsuario = new JPanel();
-		panelInfoUsuario.setMaximumSize(new Dimension(500, 100));
-		panelInfoUsuario.setMinimumSize(new Dimension(500, 100));
-		panelInfoUsuario.setPreferredSize(new Dimension(500, 100));
+		panelInfoUsuario.setMaximumSize(new Dimension(500, 110));
+		panelInfoUsuario.setMinimumSize(new Dimension(500, 110));
+		panelInfoUsuario.setPreferredSize(new Dimension(500, 110));
 		add(panelInfoUsuario);
 		panelInfoUsuario.setLayout(new BorderLayout(0, 0));
 		
@@ -87,7 +95,7 @@ public class PanelPerfil extends JPanel {
 		int nSeguidores = 0;
 		int nSeguidos = 0;
 		try {
-			//nPublicaciones = controlador.getAlbumesUsuario(usuario.getId()).size() + controlador.getFotosUsuario(usuario.getId()).size();
+			nPublicaciones = controlador.getAlbumesUsuario(usuario.getId()).size() + controlador.getFotosUsuario(usuario.getId()).size();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -114,41 +122,27 @@ public class PanelPerfil extends JPanel {
 		
 		JPanel panelSeleccion = new JPanel();
 		add(panelSeleccion);
+		panelSeleccion.setMaximumSize(new Dimension(500, 50));
+		panelSeleccion.setMinimumSize(new Dimension(500, 50));
+		panelSeleccion.setPreferredSize(new Dimension(500, 50));
 		
 		JButton botonFotos = new JButton("Fotos");
+		botonFotos.addActionListener(e -> {
+			cargarMatrizFotos();
+		});
 		panelSeleccion.add(botonFotos);
 		
 		JButton botonAlbumes = new JButton("Albumes");
+		botonAlbumes.addActionListener(e -> {
+			cargarMatrizAlbumes();
+		});
 		panelSeleccion.add(botonAlbumes);
 		
-		JScrollPane panel_1 = new JScrollPane();
+		panel_1 = new JScrollPane();
 		panel_1.setBackground(Color.WHITE);
 		add(panel_1);
-		listafotos = new JList<Foto>();
-		DefaultListModel<Foto> fotoslistModel = new DefaultListModel<Foto>();
-		listafotos.setModel(fotoslistModel);
-		try {
-			controlador.getFotosUsuario(usuario.getId()).forEach(f -> fotoslistModel.addElement(f));
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		listafotos.setLayoutOrientation(JList.HORIZONTAL_WRAP);
-		listafotos.setVisibleRowCount(-1);
-		listafotos.ensureIndexIsVisible(getHeight());
-		listafotos.setCellRenderer(createListRenderer());
-		listafotos.addMouseListener(new MouseAdapter() {
-            public void mousePressed(MouseEvent e) {
-            	if (SwingUtilities.isRightMouseButton(e)) {
-                    int index = listafotos.locationToIndex(e.getPoint());
-                    if (index != -1 && listafotos.getCellBounds(index, index).contains(e.getPoint())) {
-                        listafotos.setSelectedIndex(index);
-                        mostrarMenuEmergente(e);
-                    }
-                }
-            }
-        });
-		panel_1.setViewportView(listafotos);
-		//CREACION MATRIZ DE FOTOS
+		
+		cargarMatrizFotos();
 		
 		//Creación botones seguir o editar perfil
 		JButton botonEditarPerfil = new JButton("Editar Perfil");
@@ -188,13 +182,84 @@ public class PanelPerfil extends JPanel {
         eliminarItem.addActionListener((ActionEvent event) -> {
             Foto foto = listafotos.getSelectedValue();
             PhotoTDS.getUnicaInstancia().eliminarFoto(foto);
-            this.revalidate();
-            this.repaint();
-            this.validate();
+            cargarMatrizFotos();
         });
         popupMenu.add(eliminarItem);
         popupMenu.show(e.getComponent(), e.getX(), e.getY());
 	}
+	
+	private void mostrarMenuEmergenteAlbum(MouseEvent e) {
+		JPopupMenu popupMenu = new JPopupMenu();
+        JMenuItem eliminarItem = new JMenuItem("Eliminar");
+        eliminarItem.addActionListener((ActionEvent event) -> {
+            Album album = listaAlbumes.getSelectedValue();
+            PhotoTDS.getUnicaInstancia().eliminarAlbum(album);
+            cargarMatrizFotos();
+        });
+        JMenuItem editarItem = new JMenuItem("editar");
+        eliminarItem.addActionListener((ActionEvent event) -> {
+            Album album = listaAlbumes.getSelectedValue();
+            //TODO LLAMAR A VENTANA PARA VISUALIZAR ALBUM
+        });
+        popupMenu.add(editarItem);
+        popupMenu.add(eliminarItem);
+        popupMenu.show(e.getComponent(), e.getX(), e.getY());
+	}
+	
+	private void cargarMatrizFotos() {
+		listafotos = new JList<Foto>();
+		DefaultListModel<Foto> fotoslistModel = new DefaultListModel<Foto>();
+		listafotos.setModel(fotoslistModel);
+		try {
+			PhotoTDS.getUnicaInstancia().getFotosUsuario(usuario.getId()).forEach(f -> fotoslistModel.addElement(f));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		listafotos.setLayoutOrientation(JList.HORIZONTAL_WRAP);
+		listafotos.setVisibleRowCount(-1);
+		listafotos.ensureIndexIsVisible(getHeight());
+		listafotos.setCellRenderer(createListRenderer());
+		listafotos.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
+            	if (SwingUtilities.isRightMouseButton(e)) {
+                    int index = listafotos.locationToIndex(e.getPoint());
+                    if (index != -1 && listafotos.getCellBounds(index, index).contains(e.getPoint())) {
+                        listafotos.setSelectedIndex(index);
+                        mostrarMenuEmergente(e);
+                    }
+                }
+            }
+        });
+		panel_1.setViewportView(listafotos);
+	}
+	
+	private void cargarMatrizAlbumes() {
+		listaAlbumes = new JList<Album>();
+		DefaultListModel<Album> albumeslistModel = new DefaultListModel<Album>();
+		listaAlbumes.setModel(albumeslistModel);
+		try {
+			PhotoTDS.getUnicaInstancia().getAlbumesUsuario(usuario.getId()).forEach(f -> albumeslistModel.addElement(f));
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		listaAlbumes.setLayoutOrientation(JList.HORIZONTAL_WRAP);
+		listaAlbumes.setVisibleRowCount(-1);
+		listaAlbumes.ensureIndexIsVisible(getHeight());
+		listaAlbumes.setCellRenderer(createListRendererAlbum());
+		listaAlbumes.addMouseListener(new MouseAdapter() {
+            public void mousePressed(MouseEvent e) {
+            	if (SwingUtilities.isRightMouseButton(e)) {
+                    int index = listaAlbumes.locationToIndex(e.getPoint());
+                    if (index != -1 && listaAlbumes.getCellBounds(index, index).contains(e.getPoint())) {
+                        listafotos.setSelectedIndex(index);
+                        mostrarMenuEmergenteAlbum(e);
+                    }
+                }
+            }
+        });
+		panel_1.setViewportView(listaAlbumes);
+	}
+	
 	
 	private static ListCellRenderer<? super Foto> createListRenderer() {
 		return new DefaultListCellRenderer() {
@@ -211,14 +276,34 @@ public class PanelPerfil extends JPanel {
 					JLabel label = (JLabel) c;
 					Foto foto = (Foto) value;
 					label.setText("");
-					label.setIcon(new ImageIcon((new ImageIcon(foto.getPath()).getImage().getScaledInstance(90, 60, java.awt.Image.SCALE_SMOOTH))));
+					label.setIcon(new ImageIcon((new ImageIcon(foto.getPath()).getImage().getScaledInstance(anchof, altof, java.awt.Image.SCALE_SMOOTH))));
 				}
 				return c;
 			}
 		 }; 
 	}
-
-
+	
+	private static ListCellRenderer<? super Album> createListRendererAlbum() {
+		return new DefaultListCellRenderer() {
+			/**
+			 * 
+			 */
+			private static final long serialVersionUID = 1L;
+			@Override
+			public Component getListCellRendererComponent(JList<?> list, Object value,
+														int index, boolean isSelected,
+														boolean cellHasFocus) {
+				Component c = super.getListCellRendererComponent(list, value, index, isSelected, cellHasFocus);
+				if (c instanceof JLabel) {
+					JLabel label = (JLabel) c;
+					Album album = (Album) value;
+					label.setText("");
+					label.setIcon(new ImageIcon((new ImageIcon(album.getFotos().getFirst().getPath()).getImage().getScaledInstance(anchof, altof, java.awt.Image.SCALE_SMOOTH))));
+				}
+				return c;
+			}
+		 }; 
+	}
 }
 
 

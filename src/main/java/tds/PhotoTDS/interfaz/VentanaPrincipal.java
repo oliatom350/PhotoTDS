@@ -45,6 +45,7 @@ public class VentanaPrincipal extends JFrame implements Observer {
 	@SuppressWarnings("unused")
 	private boolean mostrarPerfil = false;
 	private static Usuario usuarioAct;
+	private JButton addAlbum; 
 	
 	private VentanaBusquedaUsuario vBU;
 	
@@ -152,6 +153,41 @@ public class VentanaPrincipal extends JFrame implements Observer {
 		panelCentral.setLayout(cardLayout);
 		contentPane.add(scrollPane,BorderLayout.CENTER);
 		
+		construirPanelFotos();
+		
+		//Nuevo boton de inicio
+		JButton inicioButton = new JButton("Inicio");
+		panelNorteCentral.add(inicioButton);
+		
+		//Nuevo boton para crear album en el perfil del usuario
+		addAlbum = new JButton("A +");
+		
+		
+		
+		addAlbum.addActionListener(ev -> {
+			//TODO codigo para llamar a ventana que crea albumes;
+		});
+		inicioButton.addActionListener(ev -> {
+			construirPanelFotos();
+			if (panelCentral.getComponent(0) != panelCentralCentro) {
+				panelCentral.add(panelCentralCentro, BorderLayout.CENTER);
+				cardLayout.next(panelCentral);
+				panelCentral.remove(0);
+				panelNorteCentral.remove(addAlbum);
+				panelNorteCentral.revalidate();
+				panelNorteCentral.repaint();
+			}
+		});
+		
+	}
+	
+	public void construirPanelFotos() {
+		try {
+			fotos = PhotoTDS.getUnicaInstancia().getFotosSeguidos(usuarioAct.getId());
+		} catch (Exception e1) {
+			e1.printStackTrace();
+		}
+		
 		panelCentralCentro = new JPanel();
 		panelCentral.add(panelCentralCentro, BorderLayout.CENTER);
 		GridBagLayout gbl = new GridBagLayout();
@@ -159,7 +195,7 @@ public class VentanaPrincipal extends JFrame implements Observer {
 		int cont = 0;
 		
 		for (Foto foto : fotos) {
-			PanelItemFoto pif = new PanelItemFoto(foto, idUsuarioAct);
+			PanelItemFoto pif = new PanelItemFoto(foto, usuarioAct.getId());
 			pif.setMaximumSize(new Dimension(523, 150));
 			pif.setMinimumSize(new Dimension(523, 150));
 			pif.setPreferredSize(new Dimension(523, 150));
@@ -170,22 +206,8 @@ public class VentanaPrincipal extends JFrame implements Observer {
 			cont++;
 			panelCentralCentro.add(pif, gbc);
 		}
-		
-		//Nuevo boton de inicio
-		JButton inicioButton = new JButton("Inicio");
-		inicioButton.addActionListener(ev -> {
-			if (panelCentral.getComponent(0) != panelCentralCentro) {
-				panelCentral.add(panelCentralCentro, BorderLayout.CENTER);
-				cardLayout.next(panelCentral);
-				panelCentral.remove(0);
-				this.revalidate();
-				this.repaint();
-				this.validate();
-			}
-		});
-		panelNorteCentral.add(inicioButton);
-		
 	}
+	
 	
 	public void nuevaFoto() {
 		VentanaAddFoto vaf = new VentanaAddFoto(usuarioAct.getId());
@@ -218,7 +240,12 @@ public class VentanaPrincipal extends JFrame implements Observer {
 
 	@Override
 	public void update(Usuario usuario) {
-		mostrarPerfil = true;
+		if (usuario.equals(usuarioAct)) {
+			mostrarPerfil = true;
+			panelNorteCentral.add(addAlbum);
+			panelNorteCentral.revalidate();
+			panelNorteCentral.repaint();
+		}
 		PanelPerfil panel_dos = new PanelPerfil(usuario, usuarioAct);
 		panelCentral.add(panel_dos, BorderLayout.CENTER);
 		cardLayout.next(panelCentral);
