@@ -216,7 +216,7 @@ public class VentanaPrincipal extends JFrame implements Observer {
 	@Override
 	public void update(Usuario usuario) {
 		mostrarPerfil = true;
-		PanelPerfil panel_dos = new PanelPerfil(usuario, usuario);
+		PanelPerfil panel_dos = new PanelPerfil(usuario, usuarioAct);
 		panelCentral.add(panel_dos, BorderLayout.CENTER);
 		cardLayout.next(panelCentral);
 		panelCentral.remove(0);
