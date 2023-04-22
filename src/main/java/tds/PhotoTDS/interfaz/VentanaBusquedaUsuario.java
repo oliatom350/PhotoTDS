@@ -111,6 +111,7 @@ public class VentanaBusquedaUsuario extends JFrame implements Observable{
 		for (Observer observer : observers) {
             observer.update(usuario);
         }
+		this.dispose();
 	}
 
 }
