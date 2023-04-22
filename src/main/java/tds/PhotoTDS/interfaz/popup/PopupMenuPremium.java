@@ -3,6 +3,7 @@ package tds.PhotoTDS.interfaz.popup;
 import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
+import tds.PhotoTDS.GeneradorExcel;
 import tds.PhotoTDS.Usuario;
 import tds.PhotoTDS.interfaz.VentanaWarning;
 
@@ -22,6 +23,9 @@ public class PopupMenuPremium extends JPopupMenu {
 		
 		// Generar un archivo Excel con la lista de sus seguidores: filas con 3 columnas para registrar su nombre, email, y presentación;
 		JMenuItem genExcel = new JMenuItem("Generar Excel");
+		genExcel.addActionListener(ev -> {
+			new GeneradorExcel();
+		});
 		this.add(genExcel);
 				
 		// Generar un archivo PDF con la misma información que el Excel pero con una tabla de 3 columnas

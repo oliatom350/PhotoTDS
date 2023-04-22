@@ -30,5 +30,6 @@
 	<classpathentry kind="lib" path="lib/javax.persistence-api-2.2.jar"/>
 	<classpathentry kind="lib" path="lib/Luz.jar"/>
 	<classpathentry kind="lib" path="lib/local_maven_repo/umu/tds/ProyectoComponenteFotos/0.1/ProyectoComponenteFotos-0.1.jar"/>
+	<classpathentry kind="lib" path="lib/poi-3.17.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
