@@ -236,6 +236,12 @@ public class PhotoTDS implements FotosListener {
 				.collect(Collectors.toList());
 	}
 	
+	public ArrayList<Foto> getFotosTop(){
+		return (ArrayList<Foto>) repPublicaciones.getFotos().stream()
+				.sorted((f1,f2) -> f1.getMeGusta() - f2.getMeGusta())
+				.collect(Collectors.toList());
+	}
+	
 	public ArrayList<Album> getAlbumesUsuario(int id) throws Exception {
 		Usuario usuario = repUsuarios.getUsuario(id);
 		return (ArrayList<Album>) repPublicaciones.getAlbumes().stream()
