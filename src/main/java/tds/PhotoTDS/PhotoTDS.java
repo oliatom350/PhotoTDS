@@ -121,6 +121,7 @@ public class PhotoTDS implements FotosListener {
 		repPublicaciones.addAlbum(album);
 	}
 	
+	
 	public void eliminarAlbum(Album album) {
 		adaptadorAlbum.borrarAlbum(album);
 		repPublicaciones.removeAlbum(album);

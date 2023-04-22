@@ -24,6 +24,7 @@ public class VentanaAddFoto extends JFrame{
 
 	private static final long serialVersionUID = 1L;
 	private static int usuario;
+	private static String album = "";
 	
 	//private JFrame frame;
 
@@ -43,13 +44,14 @@ public class VentanaAddFoto extends JFrame{
 	public VentanaAddFoto(int usuario) {
 		initialize(usuario);
 	}
+	
+	public VentanaAddFoto(int usuario, String album) {
+		VentanaAddFoto.album = album;
+		initialize(usuario);
+	}
 
 	@SuppressWarnings("serial")
 	private void initialize(int usuario) {
-		/*frame = new JFrame();
-		frame.setBounds(100, 100, 550, 400);
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setResizable(false);*/
 		setBounds(100, 100, 550, 400);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
@@ -84,16 +86,13 @@ public class VentanaAddFoto extends JFrame{
 					if (droppedFiles.size() == 1) {
 						File droppedFile = droppedFiles.get(0);
 						PhotoTDS.copyFile(droppedFile);
-						VentanaAddFotoDescripcion vA = new VentanaAddFotoDescripcion(droppedFile.getName(), usuario);
-						vA.setVisible(true);
-						dispose();
+						addFotoDescripcion(droppedFile.getName(), usuario);
 					}
 				}catch (Exception e) {
-						// TODO: handle exception
+						e.printStackTrace();
 					}
 			}
 		});
-		//TODO ÑADIR FOTO ARRASTRANDO
 		
 		
 		JButton btnNewButton = new JButton("Selecciona una foto de tu ordenador");
@@ -103,11 +102,8 @@ public class VentanaAddFoto extends JFrame{
 			File currentFile = chooser.getSelectedFile();
 			try {
 				PhotoTDS.copyFile(currentFile);
-				VentanaAddFotoDescripcion vA = new VentanaAddFotoDescripcion(currentFile.getName(), usuario); //REVISAR
-				vA.setVisible(true);
-				dispose();
+				addFotoDescripcion(currentFile.getName(), usuario);
 			} catch (Exception e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		});
@@ -117,5 +113,24 @@ public class VentanaAddFoto extends JFrame{
 		gbc_btnNewButton.gridx = 1;
 		gbc_btnNewButton.gridy = 3;
 		getContentPane().add(btnNewButton, gbc_btnNewButton);
+	}
+	
+	public void addFotoAlbum(String alb) {
+		if (!album.equals("")) {
+			PhotoTDS controlador = PhotoTDS.getUnicaInstancia();
+			//TODO Controlador debe recuperar el álbum y añadir la foto al álbum
+			try {
+				
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	public void addFotoDescripcion(String nombreFoto, int idUsuario) {
+		addFotoAlbum(album);
+		VentanaAddFotoDescripcion vA = new VentanaAddFotoDescripcion(nombreFoto, idUsuario);
+		vA.setVisible(true);
+		dispose();
 	}
 }
