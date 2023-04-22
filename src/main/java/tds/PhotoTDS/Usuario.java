@@ -18,6 +18,8 @@ public class Usuario {
 	private String password;
 	private String fotoPerfil; //QUE GUARDE SOLO EL NOMBRE DE LA FOTO
 	private String presentacion;
+	
+	private final double precioPremium = 10; //El precio del premium lo inicializamos a un valor constante arbitrario
 	private ICalcularDescuento descuento;
 	
 	public Usuario(String nombre, String email, String nombreCompleto, Date fechaNacimiento, boolean isPremium, String password, String fotoPerfil, String presentacion) {
@@ -130,14 +132,8 @@ public class Usuario {
 	}
 	
 	//Métodos del patrón Estrategia para calcular el precio de hacerse premium
-	public void setDescuento(ICalcularDescuento descuento) {
-		this.descuento = descuento;
-	}
-	
 	public double calcularPrecio() {
-		return descuento.getPrecioPremium(this);
+		return precioPremium - descuento.getPrecioPremium(this, precioPremium);
 	}
-	
-	
 	
 }
