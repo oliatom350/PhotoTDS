@@ -1,22 +1,6 @@
 package tds.PhotoTDS;
 
-public class Descuento {
-
-	//Atributos
-	private String usuario;
-	//TODO Integer o Porcentaje Descuento?
-
-	//Constructor
-	public Descuento(String usuario) {
-		this.usuario = usuario;
-	}
-	
-	//Metodos
-	public String getUsuario() {
-		return usuario;
-	}
-	
-	public void aplicarDescuento() {
-		//TODO
-	}
+//Para crear un nuevo descuento futuro, basta con crear el fichero y que implemente esta interfaz
+public interface Descuento {
+	public double getPrecioPremium(Usuario usuario, double precioPremium);
 }

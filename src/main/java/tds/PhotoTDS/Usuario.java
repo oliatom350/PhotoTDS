@@ -2,6 +2,7 @@ package tds.PhotoTDS;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 
 public class Usuario {
 	
@@ -18,9 +19,6 @@ public class Usuario {
 	private String password;
 	private String fotoPerfil; //QUE GUARDE SOLO EL NOMBRE DE LA FOTO
 	private String presentacion;
-	
-	private final double precioPremium = 10; //El precio del premium lo inicializamos a un valor constante arbitrario
-	private ICalcularDescuento descuento;
 	
 	public Usuario(String nombre, String email, String nombreCompleto, Date fechaNacimiento, boolean isPremium, String password, String fotoPerfil, String presentacion) {
 		this.nombre = nombre;
@@ -131,9 +129,17 @@ public class Usuario {
 		this.notificaciones.add(notificacion);
 	}
 	
-	//Métodos del patrón Estrategia para calcular el precio de hacerse premium
 	public double calcularPrecio() {
-		return precioPremium - descuento.getPrecioPremium(this, precioPremium);
+		//El precio del premium lo inicializamos a un valor constante arbitrario
+		double precioFinal = 10;
+
+		HashSet<Descuento> descuentos = new HashSet<Descuento>();
+		descuentos.add(new DescuentoEdad());
+		descuentos.add(new DescuentoPopularidad());
+		for (Descuento desc : descuentos) {
+			precioFinal = desc.getPrecioPremium(this, precioFinal);
+		}
+		return precioFinal;
 	}
 	
 }

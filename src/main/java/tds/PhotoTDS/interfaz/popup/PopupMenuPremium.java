@@ -4,6 +4,7 @@ import javax.swing.JMenuItem;
 import javax.swing.JPopupMenu;
 
 import tds.PhotoTDS.Usuario;
+import tds.PhotoTDS.interfaz.VentanaWarning;
 
 public class PopupMenuPremium extends JPopupMenu {
 
@@ -13,7 +14,9 @@ public class PopupMenuPremium extends JPopupMenu {
 		//Botón para hacerse premium en caso de no serlo ya
 		JMenuItem premium = new JMenuItem("Premium");
 		premium.addActionListener(ev -> {
-			//TODO Crear descuento premium
+			double precio = user.calcularPrecio();
+			VentanaWarning vw = new VentanaWarning("El precio a pagar es de "+precio+"€");
+			vw.setVisible(true);
 		});
 		this.add(premium);
 		
