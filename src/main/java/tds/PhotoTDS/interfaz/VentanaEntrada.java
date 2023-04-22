@@ -136,7 +136,7 @@ public class VentanaEntrada extends JFrame {
 
 		JButton crearCuenta = new JButton("Crear una nueva cuenta");
 		crearCuenta.addActionListener(ev -> {
-			VentanaRegistro vR = new VentanaRegistro();
+			VentanaRegistro vR = new VentanaRegistro(null);
 			vR.setVisible(true);
 			this.dispose();
 		});

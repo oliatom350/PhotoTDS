@@ -81,6 +81,9 @@ public class VentanaDescripcion extends JFrame {
 		textArea.setLineWrap(true);
 		textArea.setWrapStyleWord(true);
 		panelCentral.add(textArea);
+		if(VentanaRegistro.usuario != null) {
+			textArea.setText(VentanaRegistro.usuario.getPresentacion());
+		}
 		
 		JPanel panelSur = new JPanel();
 		contentPane.add(panelSur, BorderLayout.SOUTH);

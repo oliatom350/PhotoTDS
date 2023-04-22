@@ -75,7 +75,7 @@ public class PanelPerfil extends JPanel {
 		int nSeguidores = 0;
 		int nSeguidos = 0;
 		try {
-			nPublicaciones = controlador.getAlbumesUsuario(usuario.getId()).size() + controlador.getFotosUsuario(usuario.getId()).size();
+			//nPublicaciones = controlador.getAlbumesUsuario(usuario.getId()).size() + controlador.getFotosUsuario(usuario.getId()).size();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -126,6 +126,36 @@ public class PanelPerfil extends JPanel {
 		listafotos.setCellRenderer(createListRenderer());
 		panel_1.setViewportView(listafotos);
 		//CREACION MATRIZ DE FOTOS
+		
+		//Creación botones seguir o editar perfil
+		JButton botonEditarPerfil = new JButton("Editar Perfil");
+		botonEditarPerfil.setBackground(new Color(0, 128, 192));
+		botonEditarPerfil.setOpaque(true);
+		botonEditarPerfil.setBorderPainted(false);
+		botonEditarPerfil.addActionListener(e -> {
+			//Insertar Ventana para editar perfil
+			VentanaRegistro vR = new VentanaRegistro(usuarioVP);
+			vR.setVisible(true);
+		});
+		
+		JButton botonSeguir = new JButton("Seguir");
+		botonSeguir.setBackground(new Color(0, 128, 192));
+		botonSeguir.setOpaque(true);
+		botonSeguir.setBorderPainted(false);
+		botonSeguir.addActionListener(e -> {
+			if (usuario.getUsuariosSeguidores().contains(usuarioVP.getId())) {
+				usuario.addSeguidor(usuarioVP.getId());
+				usuarioVP.addSeguido(usuario.getId());
+				controlador.modificarUsuario(usuario);
+				controlador.modificarUsuario(usuarioVP);
+			}
+		});
+		
+		
+		if(usuario.equals(usuarioVP)) {
+			panelNombreUsuario.add(botonEditarPerfil);
+		} else
+			panelNombreUsuario.add(botonSeguir);
 		
 	}
 	

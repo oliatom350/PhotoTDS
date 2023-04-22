@@ -95,6 +95,14 @@ public class PhotoTDS implements FotosListener {
 		repUsuarios.addUsuario(usuario);
 	}
 	
+	public void modificarUsuario(Usuario usuario) {
+		adaptadorUsuario.modificarUsuario(usuario);
+	}
+	
+	public void registrarNotificacion(Notificacion notificacion) {
+		adaptadorNotificacion.registrarNotificacion(notificacion);
+	}
+	
 	public void registrarFoto(Foto foto) {
 		adaptadorFoto.registrarFoto(foto);
 		repPublicaciones.addFoto(foto);

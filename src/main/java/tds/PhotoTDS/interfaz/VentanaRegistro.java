@@ -22,6 +22,7 @@ public class VentanaRegistro extends JFrame {
 	private JTextField textField_Dia;
 	private JTextField textField_Mes;
 	private JTextField textField_Año;
+	public static Usuario usuario;
 	
 	//Inicialmente, rutaFoto y descripcion estarán vacías
 	private String fotoPerfil = "";
@@ -31,7 +32,7 @@ public class VentanaRegistro extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VentanaRegistro frame = new VentanaRegistro();
+					VentanaRegistro frame = new VentanaRegistro(usuario);
 					frame.pack();
 					frame.setVisible(true);
 				} catch (Exception e) {
@@ -42,7 +43,8 @@ public class VentanaRegistro extends JFrame {
 	}
 
 	@SuppressWarnings("deprecation")
-	public VentanaRegistro() {
+	public VentanaRegistro(Usuario usuario) {
+		this.usuario = usuario;
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 524, 417);
@@ -261,6 +263,26 @@ public class VentanaRegistro extends JFrame {
 		JPanel panelBotonesVentana = new JPanel();
 		panelSur.add(panelBotonesVentana);
 		
+		//Deshabilita campos en el caso de editar perfil
+		if(usuario != null) {
+			textField_Usuario.setText(usuario.getNombre());
+			textField_Usuario.setEditable(false);
+			textField_Año.setText(Integer.toString(usuario.getFechaNacimiento().getYear()));
+			textField_Año.setEditable(false);
+			textField_Dia.setText(Integer.toString(usuario.getFechaNacimiento().getDay()));
+			textField_Dia.setEditable(false);
+			textField_Mes.setText(Integer.toString(usuario.getFechaNacimiento().getMonth()));
+			textField_Mes.setEditable(false);
+			textField_Nombre.setText(usuario.getNombreCompleto());
+			textField_Nombre.setEditable(false);
+			textField_Email.setText(usuario.getEmail());
+			textField_Email.setEditable(false);
+			
+			//Campos editables
+			textField_Contraseña.setText(usuario.getPassword());
+		}
+		
+		
 		JButton BotonAceptar = new JButton("Aceptar");
 		panelBotonesVentana.add(BotonAceptar);
 		BotonAceptar.addActionListener(ev -> {
@@ -284,7 +306,8 @@ public class VentanaRegistro extends JFrame {
 			
 			PhotoTDS controlador = PhotoTDS.getUnicaInstancia();
 			//Por defecto se registra al nuevo usuario como NO PREMIUM
-			controlador.registrarUsuario(new Usuario(textField_Usuario.getText(), 
+			if(usuario == null) {
+				controlador.registrarUsuario(new Usuario(textField_Usuario.getText(), 
 					 						textField_Email.getText(),
 					 						textField_Nombre.getText(),
 											new Date(Integer.parseInt(textField_Año.getText())-1900,
@@ -295,13 +318,25 @@ public class VentanaRegistro extends JFrame {
 											fotoPerfil,
 											descripcion
 					 						));
-			llamaVentanaLogin();
+				llamaVentanaLogin();
+			} else {
+				if (descripcion != "") 
+					usuario.setPresentacion(descripcion);
+				usuario.setPassword(textField_Contraseña.getText());
+				if (fotoPerfil == "defaultUserProfile.jpg")
+					usuario.setFotoPerfil(fotoPerfil);
+				controlador.modificarUsuario(usuario);
+				this.dispose();
+			}
 		});
 		
 		JButton BotonCancelar = new JButton("Cancelar");
 		panelBotonesVentana.add(BotonCancelar);
 		BotonCancelar.addActionListener(ev -> {
-			llamaVentanaLogin();
+			if (usuario == null)
+				llamaVentanaLogin();
+			else
+				this.dispose();
 		});
 	}
 	
