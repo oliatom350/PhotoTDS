@@ -115,7 +115,7 @@ public class VentanaPrincipal extends JFrame implements Observer {
 		icon = new ImageIcon(VentanaPrincipal.class.getResource("/images/premium.png")).getImage();
 		barrasMenuPremium.setIcon(new ImageIcon(icon.getScaledInstance(30, 30, DO_NOTHING_ON_CLOSE)));
 		barrasMenuPremium.addActionListener(ev -> {
-			PopupMenuPremium menu = new PopupMenuPremium();
+			PopupMenuPremium menu = new PopupMenuPremium(usuarioAct);
 			menu.show(barrasMenuPremium, 0, barrasMenuPremium.getHeight());
 		});
 		panelNorteEste.add(barrasMenuPremium);
