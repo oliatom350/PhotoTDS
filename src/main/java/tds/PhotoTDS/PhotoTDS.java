@@ -153,6 +153,10 @@ public class PhotoTDS implements FotosListener {
 		return repUsuarios.getUsuario(id);
 	}
 	
+	public String getFotoUsuario(int id) throws Exception {
+		return getUsuario(id).getPathFotoPerfil();
+	}
+	
 	public Usuario iniciarSesion(String nombreUsuario, String passUsuario) {
         List<Usuario> list = new ArrayList<Usuario>();
 		try {

@@ -67,7 +67,12 @@ public class PanelItemFoto extends JPanel {
 		JPanel panelInfoUsuario = new JPanel();
 		panelInfoUsuario.setLayout(new BoxLayout(panelInfoUsuario, BoxLayout.X_AXIS));
 		JLabel fotoUsuario = new JLabel();
-		icon = new ImageIcon(f.getFotoPerfil(f.getUsuario())).getImage();
+		PhotoTDS controlador = PhotoTDS.getUnicaInstancia();
+		try {
+			icon = new ImageIcon(controlador.getFotoUsuario(idUsuario)).getImage();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 		fotoUsuario.setIcon(new ImageIcon(icon.getScaledInstance(20, 20, 20)));
 		JLabel usuario = new JLabel("   " + f.getNickUsuario(f.getUsuario()));
 		
