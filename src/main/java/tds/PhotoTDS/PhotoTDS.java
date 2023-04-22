@@ -121,6 +121,9 @@ public class PhotoTDS implements FotosListener {
 		repPublicaciones.addAlbum(album);
 	}
 	
+	public void modificarAlbum(Album album) {
+		adaptadorAlbum.modificarAlbum(album);
+	}
 	
 	public void eliminarAlbum(Album album) {
 		adaptadorAlbum.borrarAlbum(album);
@@ -247,6 +250,14 @@ public class PhotoTDS implements FotosListener {
 		return (ArrayList<Album>) repPublicaciones.getAlbumes().stream()
 				.filter(a -> a.getUsuario() == usuario.getId())
 				.collect(Collectors.toList());
+	}
+	
+	public Album getAlbum(String nombre, int id) throws Exception {
+		ArrayList<Album> albumes = this.getAlbumesUsuario(id);
+		for (Album a : albumes) {
+			if (a.getTitulo().equals(nombre)) return a;
+		}
+		return null;
 	}
 	
 	//Método que devuelve las fotos de los seguidos por un usuario

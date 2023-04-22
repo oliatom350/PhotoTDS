@@ -4,6 +4,8 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import java.awt.Font;
+
+import tds.PhotoTDS.Album;
 import tds.PhotoTDS.PhotoTDS;
 
 import javax.swing.JButton;
@@ -18,6 +20,7 @@ import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetDropEvent;
 import java.io.File;
+import java.util.ArrayList;
 import java.util.List;
 
 public class VentanaAddFoto extends JFrame{
@@ -115,21 +118,8 @@ public class VentanaAddFoto extends JFrame{
 		getContentPane().add(btnNewButton, gbc_btnNewButton);
 	}
 	
-	public void addFotoAlbum(String alb) {
-		if (!album.equals("")) {
-			PhotoTDS controlador = PhotoTDS.getUnicaInstancia();
-			//TODO Controlador debe recuperar el álbum y añadir la foto al álbum
-			try {
-				
-			} catch (Exception e) {
-				e.printStackTrace();
-			}
-		}
-	}
-	
 	public void addFotoDescripcion(String nombreFoto, int idUsuario) {
-		addFotoAlbum(album);
-		VentanaAddFotoDescripcion vA = new VentanaAddFotoDescripcion(nombreFoto, idUsuario);
+		VentanaAddFotoDescripcion vA = new VentanaAddFotoDescripcion(nombreFoto, idUsuario, album);
 		vA.setVisible(true);
 		dispose();
 	}

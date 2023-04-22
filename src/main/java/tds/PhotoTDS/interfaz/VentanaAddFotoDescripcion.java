@@ -15,6 +15,8 @@ import java.util.regex.Pattern;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
+
+import tds.PhotoTDS.Album;
 import tds.PhotoTDS.Foto;
 import tds.PhotoTDS.PhotoTDS;
 
@@ -25,14 +27,15 @@ import javax.swing.SwingConstants;
 public class VentanaAddFotoDescripcion extends JFrame {
 
 	private static final long serialVersionUID = 1L;
-	private static String urlFoto;
+	private static String nombreFoto;
 	private static int usuario;
+	private static String album = "";
 
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					VentanaAddFotoDescripcion window = new VentanaAddFotoDescripcion(urlFoto, usuario);
+					VentanaAddFotoDescripcion window = new VentanaAddFotoDescripcion(nombreFoto, usuario, album);
 					window.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -41,12 +44,13 @@ public class VentanaAddFotoDescripcion extends JFrame {
 		});
 	}
 
-	public VentanaAddFotoDescripcion(String urlFoto, int usuario) {
-		initialize(urlFoto, usuario);
+	public VentanaAddFotoDescripcion(String nombreFoto, int usuario, String album) {
+		VentanaAddFotoDescripcion.album = album;
+		initialize(nombreFoto, usuario);
 	}
 
-	private void initialize(String urlFoto, int usuario) {
-		
+	private void initialize(String nombreFoto, int usuario) {
+		PhotoTDS controlador = PhotoTDS.getUnicaInstancia();
 		//TODO REVISAR SI SOBRA TIEMPO
 		setBounds(100, 100, 550, 350);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -57,7 +61,7 @@ public class VentanaAddFotoDescripcion extends JFrame {
 		panelFotoComentario.setLayout(new BoxLayout(panelFotoComentario, BoxLayout.X_AXIS));
 		
 		JLabel lblNewLabel = new JLabel("");
-		Image foto = new ImageIcon(System.getProperty("user.dir")+PhotoTDS.pathFotos+urlFoto).getImage();
+		Image foto = new ImageIcon(System.getProperty("user.dir") + PhotoTDS.pathFotos + nombreFoto).getImage();
 		
 		
 		JPanel panel_2 = new JPanel();
@@ -116,9 +120,17 @@ public class VentanaAddFotoDescripcion extends JFrame {
 				VentanaWarning vw = new VentanaWarning("La descripción sobrepasa los 120 caracteres, contiene más de 4 hashtags o algún hashtag sobrepasa el límite.");
 				vw.setVisible(true);
 			} else {
-				Foto f = new Foto(textArea.getText(), descp, hashtags, usuario, urlFoto);
+				Foto f = new Foto(textArea.getText(), descp, hashtags, usuario, nombreFoto);
 				addFoto(f);
-				PhotoTDS controlador = PhotoTDS.getUnicaInstancia();
+				if (!album.equals("")) {
+					try {
+						Album a = controlador.getAlbum(album, usuario);
+						a.addFoto(f);
+						controlador.modificarAlbum(a);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
+				}
 				VentanaPrincipal vP = null;
 				try {
 					vP = new VentanaPrincipal(controlador.getUsuario(usuario));
