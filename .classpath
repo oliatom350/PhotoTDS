@@ -35,5 +35,6 @@
 	<classpathentry kind="lib" path="C:/Users/oliat/Desktop/Universidad/3º/TDS/workspace/PhotoTDS/lib/iText7/kernel-7.1.2.jar"/>
 	<classpathentry kind="lib" path="C:/Users/oliat/Desktop/Universidad/3º/TDS/workspace/PhotoTDS/lib/iText7/io-7.1.2.jar"/>
 	<classpathentry kind="lib" path="C:/Users/oliat/Desktop/Universidad/3º/TDS/workspace/PhotoTDS/lib/iText7/slf4j-api-1.7.25.jar"/>
+	<classpathentry kind="lib" path="C:/Users/oliat/Desktop/Universidad/3º/TDS/workspace/PhotoTDS/lib/iText7/slf4j-simple-1.7.25.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
