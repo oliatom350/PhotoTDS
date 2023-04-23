@@ -64,7 +64,6 @@ public class VentanaDescuentosAplicables extends JFrame{
 		if (descuentos.size() == 0) {
 			VentanaPagoPremium vpp = new VentanaPagoPremium(usuario, Descuento.PRECIO_PREMIUM);
 			vpp.setVisible(true);
-			this.dispose();
 		}
 		for (Descuento descuento : descuentos) {
 			JPanel panel_1 = new JPanel();
