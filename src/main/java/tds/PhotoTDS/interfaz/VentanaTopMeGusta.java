@@ -19,15 +19,12 @@ import javax.swing.border.EmptyBorder;
 
 import tds.PhotoTDS.Foto;
 import tds.PhotoTDS.PhotoTDS;
-import tds.PhotoTDS.Usuario;
 
+@SuppressWarnings("serial")
 public class VentanaTopMeGusta extends JFrame {
 
 	private JPanel contentPane;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -41,16 +38,12 @@ public class VentanaTopMeGusta extends JFrame {
 		});
 	}
 
-	/**
-	 * Create the frame.
-	 */
 	public VentanaTopMeGusta() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setResizable(false);
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
