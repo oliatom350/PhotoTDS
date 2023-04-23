@@ -16,7 +16,7 @@ import tds.driver.ServicioPersistencia;
 public class AdaptadorTDSNotificacionDAO implements IAdaptadorNotificacionDAO{
 
 	ServicioPersistencia servPersistencia;
-	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+	private SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy hh:mm");
 	private PoolDAO poolNotificaciones;
 	private static AdaptadorTDSNotificacionDAO unicaInstancia;
 	
@@ -42,7 +42,8 @@ public class AdaptadorTDSNotificacionDAO implements IAdaptadorNotificacionDAO{
 		eNotificacion.setPropiedades(
 				new ArrayList<Propiedad>(Arrays.asList(
 						new Propiedad("fecha", dateFormat.format(notificacion.getFecha())),
-						new Propiedad("publicacion", Integer.toString(notificacion.getPublicacion())) 
+						new Propiedad("publicacion", Integer.toString(notificacion.getPublicacion())),
+						new Propiedad("mensaje", notificacion.getMensaje())
 				))
 		);
 		eNotificacion = servPersistencia.registrarEntidad(eNotificacion);
@@ -68,6 +69,9 @@ public class AdaptadorTDSNotificacionDAO implements IAdaptadorNotificacionDAO{
 			if(propiedad.getNombre().equals("publicacion")) {
 				propiedad.setValor(Integer.toString(notificacion.getPublicacion()));
 			}
+			if(propiedad.getNombre().equals("mensaje")) {
+				propiedad.setValor(notificacion.getMensaje());
+			}
 			servPersistencia.modificarPropiedad(propiedad);
 		}
 		//servPersistencia.modificarEntidad(eNotificacion);
@@ -81,7 +85,7 @@ public class AdaptadorTDSNotificacionDAO implements IAdaptadorNotificacionDAO{
 		
 		Date fecha = null;
 		
-		String f = servPersistencia.recuperarPropiedadEntidad(eNotificacion, "fechaNacimiento");
+		String f = servPersistencia.recuperarPropiedadEntidad(eNotificacion, "fecha");
 		if (f != null) {
 			try {
 				fecha = dateFormat.parse(f);
@@ -89,8 +93,9 @@ public class AdaptadorTDSNotificacionDAO implements IAdaptadorNotificacionDAO{
 		}
 		
 		int publicacion = Integer.parseInt(servPersistencia.recuperarPropiedadEntidad(eNotificacion, "publicacion"));
+		String mensaje = servPersistencia.recuperarPropiedadEntidad(eNotificacion, "mensaje");
 		
-		Notificacion notificacion = new Notificacion(fecha, publicacion);
+		Notificacion notificacion = new Notificacion(fecha, publicacion, mensaje);
 		notificacion.setId(id);
 		
 		return notificacion;

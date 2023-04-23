@@ -148,7 +148,7 @@ public class AdaptadorTDSUsuarioDAO implements IAdaptadorUsuarioDAO{
 			usuario.addNotificacion(notificacion);
 		}
 		for(int usuarioId : usuariosSeguidos) {
-			usuario.addSeguidor(usuarioId);
+			usuario.addSeguido(usuarioId);
 		}
 		usuario.setId(codigo);
 		

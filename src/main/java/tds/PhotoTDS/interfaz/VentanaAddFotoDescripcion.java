@@ -19,6 +19,7 @@ import javax.swing.ImageIcon;
 import tds.PhotoTDS.Album;
 import tds.PhotoTDS.Foto;
 import tds.PhotoTDS.PhotoTDS;
+import tds.PhotoTDS.Publicacion;
 
 import java.awt.Font;
 import javax.swing.JTextArea;
@@ -123,11 +124,13 @@ public class VentanaAddFotoDescripcion extends JFrame {
 			} else {
 				Foto f = new Foto(textArea.getText(), descp, hashtags, usuario, nombreFoto);
 				addFoto(f);
+				controlador.addNotificacionSeguidores(usuario, f);
 				if (!album.equals("")) {
 					try {
 						Album a = controlador.getAlbum(album, usuario);
 						a.addFoto(f);
 						controlador.modificarAlbum(a);
+						controlador.addNotificacionSeguidores(usuario, a);
 					} catch (Exception e) {
 						e.printStackTrace();
 					}

@@ -8,11 +8,13 @@ public class Notificacion {
 	private int id;
 	private Date fecha;
 	private int publicacion;
+	private String mensaje;
 	
 	//Constructor
-	public Notificacion(Date fecha, int publicacion) {
+	public Notificacion(Date fecha, int publicacion, String mensaje) {
 		this.fecha = fecha;
 		this.publicacion = publicacion;
+		this.mensaje = mensaje;
 	}
 
 
@@ -23,6 +25,10 @@ public class Notificacion {
 
 	public int getPublicacion() {
 		return publicacion;
+	}
+	
+	public String getMensaje() {
+		return mensaje;
 	}
 	
 	public int getId() {

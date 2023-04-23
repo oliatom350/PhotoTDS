@@ -27,6 +27,7 @@ import java.util.Comparator;
 import java.util.stream.Collectors;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JScrollPane;
 import pulsador.Luz;
@@ -98,6 +99,21 @@ public class VentanaPrincipal extends JFrame implements Observer {
 		panelNorteCentral = new JPanel();
 		panelNorte.add(panelNorteCentral, BorderLayout.CENTER);
 		
+		//Nuevo boton de notificaciones
+		JButton notisButton = new JButton("");
+		notisButton.setMaximumSize(new Dimension(20,20));
+		notisButton.setMinimumSize(new Dimension(20,20));
+		notisButton.setPreferredSize(new Dimension(20,20));
+		notisButton.setBackground(new Color(255, 255, 255));
+		Image notis = new ImageIcon(System.getProperty("user.dir")+PhotoTDS.pathFotos+"campanas.png").getImage();
+		notisButton.setIcon(new ImageIcon(notis.getScaledInstance(20, 20, java.awt.Image.SCALE_SMOOTH)));
+		notisButton.addActionListener(ev -> {
+			VentanaNotificaciones vN = new VentanaNotificaciones(user);
+			vN.setVisible(true);
+		});
+		
+		panelNorteCentral.add(notisButton);
+		
 		panelNorteOeste = new JPanel();
 		panelNorte.add(panelNorteOeste, BorderLayout.WEST);
 		
@@ -119,7 +135,7 @@ public class VentanaPrincipal extends JFrame implements Observer {
 		panelNorteEste.add(fotoPerfil);
 		JButton barrasMenuPremium = new JButton();
 		icon = new ImageIcon(VentanaPrincipal.class.getResource("/images/premium.png")).getImage();
-		barrasMenuPremium.setIcon(new ImageIcon(icon.getScaledInstance(30, 30, DO_NOTHING_ON_CLOSE)));
+		barrasMenuPremium.setIcon(new ImageIcon(icon.getScaledInstance(20, 20, DO_NOTHING_ON_CLOSE)));
 		barrasMenuPremium.addActionListener(ev -> {
 			PopupMenuPremium menu = new PopupMenuPremium(usuarioAct);
 			menu.show(barrasMenuPremium, 0, barrasMenuPremium.getHeight());
@@ -207,7 +223,7 @@ public class VentanaPrincipal extends JFrame implements Observer {
 		
 		panelCentralCentro = new JPanel();
 		panelCentral.add(panelCentralCentro, BorderLayout.CENTER);
-		GridBagLayout gbl = new GridBagLayout();
+		//GridBagLayout gbl = new GridBagLayout();
 		//panelCentralCentro.setLayout(gbl);
 		panelCentralCentro.setLayout(new BoxLayout(panelCentralCentro, BoxLayout.Y_AXIS));
 		int cont = 0;

@@ -8,6 +8,7 @@ import java.nio.file.Path;
 import java.nio.file.StandardCopyOption;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -96,6 +97,9 @@ public class PhotoTDS implements FotosListener {
 	}
 	
 	public void modificarUsuario(Usuario usuario) {
+		for(Notificacion n : usuario.getNotificaciones()) {
+			adaptadorNotificacion.registrarNotificacion(n);
+		}
 		adaptadorUsuario.modificarUsuario(usuario);
 	}
 	
@@ -278,6 +282,32 @@ public class PhotoTDS implements FotosListener {
 		return (ArrayList<Foto>) fotos.stream()
 				.sorted(Comparator.comparing(Foto::getFecha))
 				.collect(Collectors.toList());
+	}
+	
+	public void addUsuarioNotificacion(Usuario usuario, Publicacion publicacion, String mensaje) {
+		Date now = new Date();
+		Notificacion n; 
+		if (publicacion != null)
+			n = new Notificacion(now, publicacion.getId(), mensaje);
+		else
+			n = new Notificacion(now, -1, mensaje);
+		adaptadorNotificacion.registrarNotificacion(n);
+		usuario.addNotificacion(n);
+		modificarUsuario(usuario);
+	}
+	
+	public void eliminarUsuarioNotificacion(Usuario usuario, Notificacion notificacion) {
+		adaptadorNotificacion.borrarNotificacion(notificacion);
+		usuario.removeNotificacion(notificacion);
+		modificarUsuario(usuario);
+	}
+	
+	public void addNotificacionSeguidores(int usuarioid, Publicacion publicacion) {
+		Usuario usuario = repUsuarios.getUsuario(usuarioid);
+		ArrayList<Usuario> seguidores = new ArrayList<Usuario>();
+		for(int usuarioId : usuario.getUsuariosSeguidores())
+			seguidores.add(repUsuarios.getUsuario(usuarioId));
+		seguidores.forEach(s -> addUsuarioNotificacion(s, publicacion, "El usuario "+usuario.getNombre()+" ha publicado una foto o álbum!"));
 	}
 	
 }

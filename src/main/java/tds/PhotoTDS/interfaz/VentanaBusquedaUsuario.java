@@ -90,7 +90,7 @@ public class VentanaBusquedaUsuario extends JFrame implements Observable{
 			panel_1.add(panel_2);
 			panel_2.setLayout(null);
 			
-			JLabel lblNewLabel_1 = new JLabel(usuario.getNombre());
+			JLabel lblNewLabel_1 = new JLabel(usuario.getNombreCompleto());
 			panel_1.add(lblNewLabel_1);
 		}
 		

@@ -147,6 +147,11 @@ public class Usuario {
 		this.notificaciones.add(notificacion);
 	}
 	
+	public void removeNotificacion(Notificacion notificacion) {
+		if (this.notificaciones.contains(notificacion))
+			this.notificaciones.remove(notificacion);
+	}
+	
 	//Patron Estrategia
 	public HashSet<Descuento> getDescuentos() {
 		//Set de descuentos a devolver

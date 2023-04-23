@@ -157,11 +157,15 @@ public class PanelPerfil extends JPanel {
 		botonSeguir.setBorderPainted(false);
 		
 		JButton botonSiguiendo = new JButton("Siguiendo");
-		botonSiguiendo.setBackground(new Color(255, 255, 255));
+		botonSiguiendo.setBackground(new Color(0, 128, 192));
 		botonSiguiendo.setOpaque(true);
 		botonSiguiendo.setBorderPainted(false);
 		
-		
+		//
+		System.out.println("Usuario actual: "+Integer.toString(usuarioVP.getId()));
+		System.out.println("Usuarios que sigue"+usuarioVP.getUsuariosSeguidos());
+		System.out.println("Usuario del perfil:"+Integer.toString(usuario.getId()));
+		//
 		botonSeguir.addActionListener(e -> {
 			if (!usuario.getUsuariosSeguidores().contains(usuarioVP.getId())) {
 				usuario.addSeguidor(usuarioVP.getId());
@@ -172,6 +176,7 @@ public class PanelPerfil extends JPanel {
 				panelNombreUsuario.remove(botonSeguir);
 				panelNombreUsuario.revalidate();
 				panelNombreUsuario.repaint();
+				controlador.addUsuarioNotificacion(usuario, null, "El usuario " + usuarioVP.getNombre() + " ha empezado a seguirte!");
 			}
 		});	
 		botonSiguiendo.addActionListener(e -> {
@@ -185,6 +190,7 @@ public class PanelPerfil extends JPanel {
 				panelNombreUsuario.remove(botonSiguiendo);
 				panelNombreUsuario.revalidate();
 				panelNombreUsuario.repaint();
+				controlador.addUsuarioNotificacion(usuario, null, "El usuario " + usuarioVP.getNombre() + " ha dejado de seguirte");
 			}
 		});
 		
