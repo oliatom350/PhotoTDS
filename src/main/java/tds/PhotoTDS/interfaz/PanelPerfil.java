@@ -140,7 +140,7 @@ public class PanelPerfil extends JPanel {
 		
 		cargarMatrizFotos();
 		
-		//Creación botones seguir o editar perfil
+		//Creación botones seguir, siguiendo o editar perfil
 		JButton botonEditarPerfil = new JButton("Editar Perfil");
 		botonEditarPerfil.setBackground(new Color(0, 128, 192));
 		botonEditarPerfil.setOpaque(true);
@@ -155,19 +155,25 @@ public class PanelPerfil extends JPanel {
 		botonSeguir.setBackground(new Color(0, 128, 192));
 		botonSeguir.setOpaque(true);
 		botonSeguir.setBorderPainted(false);
+		
+		JButton botonSiguiendo = new JButton("Siguiendo");
+		botonSiguiendo.setBackground(new Color(255, 255, 255));
+		botonSiguiendo.setOpaque(true);
+		botonSiguiendo.setBorderPainted(false);
+		
+		
 		botonSeguir.addActionListener(e -> {
 			if (!usuario.getUsuariosSeguidores().contains(usuarioVP.getId())) {
 				usuario.addSeguidor(usuarioVP.getId());
 				usuarioVP.addSeguido(usuario.getId());
 				controlador.modificarUsuario(usuario);
 				controlador.modificarUsuario(usuarioVP);
+				panelNombreUsuario.add(botonSiguiendo);
+				panelNombreUsuario.remove(botonSeguir);
+				panelNombreUsuario.revalidate();
+				panelNombreUsuario.repaint();
 			}
-		});
-		
-		JButton botonSiguiendo = new JButton("Siguiendo");
-		botonSiguiendo.setBackground(new Color(255, 255, 255));
-		botonSiguiendo.setOpaque(true);
-		botonSiguiendo.setBorderPainted(false);
+		});	
 		botonSiguiendo.addActionListener(e -> {
 			ArrayList<Integer> seguidores = usuario.getUsuariosSeguidores();
 			if (seguidores.contains(usuarioVP.getId())) {
@@ -175,6 +181,10 @@ public class PanelPerfil extends JPanel {
 				usuarioVP.removeSeguido(usuario.getId());
 				controlador.modificarUsuario(usuario);
 				controlador.modificarUsuario(usuarioVP);
+				panelNombreUsuario.add(botonSeguir);
+				panelNombreUsuario.remove(botonSiguiendo);
+				panelNombreUsuario.revalidate();
+				panelNombreUsuario.repaint();
 			}
 		});
 		
