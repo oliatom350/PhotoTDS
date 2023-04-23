@@ -241,7 +241,7 @@ public class PhotoTDS implements FotosListener {
 	
 	public ArrayList<Foto> getFotosTop(){
 		return (ArrayList<Foto>) repPublicaciones.getFotos().stream()
-				.sorted((f1,f2) -> f1.getMeGusta() - f2.getMeGusta())
+				.sorted((f1,f2) -> f2.getMeGusta() - f1.getMeGusta())
 				.collect(Collectors.toList());
 	}
 	

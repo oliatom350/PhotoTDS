@@ -53,7 +53,7 @@ public class VentanaTopMeGusta extends JFrame {
 		
 		JPanel panel = new JPanel();
 		contentPane.add(panel);
-		panel.setPreferredSize(new Dimension(400, 120*fotos.size()));
+		panel.setPreferredSize(new Dimension(400, 90*fotos.size()));
 		
 		JScrollPane scrollPane = new JScrollPane(panel);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
@@ -64,21 +64,17 @@ public class VentanaTopMeGusta extends JFrame {
 			panel.add(panel_1);
 			
 			JLabel lblNewLabel = new JLabel("");
-			Image icon = new ImageIcon(System.getProperty("user.dir")+PhotoTDS.pathFotos+foto.getPath()).getImage();
+			Image icon = new ImageIcon(foto.getPath()).getImage();
 			panel_1.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
 			lblNewLabel.setIcon(new ImageIcon(icon.getScaledInstance(110, 80, java.awt.Image.SCALE_SMOOTH)));
-			lblNewLabel.addMouseListener(new MouseAdapter() {
-				public void mouseClicked(MouseEvent e) {
-                    
-                }
-			});
+			
 			panel_1.add(lblNewLabel);
 			
 			JPanel panel_2 = new JPanel();
 			panel_1.add(panel_2);
 			panel_2.setLayout(null);
 			
-			JLabel lblNewLabel_1 = new JLabel(Integer.toString(foto.getMeGusta())  );
+			JLabel lblNewLabel_1 = new JLabel("Nº Me Gusta: "+Integer.toString(foto.getMeGusta()));
 			panel_1.add(lblNewLabel_1);
 		}
 	}
