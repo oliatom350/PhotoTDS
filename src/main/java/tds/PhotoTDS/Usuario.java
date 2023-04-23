@@ -120,19 +120,27 @@ public class Usuario {
 	}
 	
 	public void addSeguidor(int seguidor) {
-		this.usuariosSeguidores.add(seguidor);
+		if (!this.usuariosSeguidores.contains(seguidor)) {
+			this.usuariosSeguidores.add(seguidor);
+		}
 	}
 	
 	public void removeSeguidor(int seguidor) {
-		usuariosSeguidores.remove(usuariosSeguidores.indexOf(seguidor));
+		if (this.usuariosSeguidores.contains(seguidor)) {
+			usuariosSeguidores.remove(usuariosSeguidores.indexOf(seguidor));
+		}
 	}
 	
 	public void addSeguido(int seguido) {
-		this.usuariosSeguidos.add(seguido);
+		if (!this.usuariosSeguidos.contains(seguido)) {
+			this.usuariosSeguidos.add(seguido);
+		}
 	}
 	
 	public void removeSeguido(int seguido) {
-		usuariosSeguidos.remove(usuariosSeguidos.indexOf(seguido));
+		if (this.usuariosSeguidos.contains(seguido)) {
+			usuariosSeguidos.remove(usuariosSeguidos.indexOf(seguido));
+		}
 	}
 	
 	public void addNotificacion(Notificacion notificacion) {
