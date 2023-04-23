@@ -28,7 +28,7 @@ public class PopupMenuPremium extends JPopupMenu {
 		JMenuItem genExcel = new JMenuItem("Generar Excel");
 		genExcel.addActionListener(ev -> {
 			if (warningNoPremium(user)) {
-				new GeneradorExcel();
+				new GeneradorExcel(user);
 			}
 		});
 		this.add(genExcel);

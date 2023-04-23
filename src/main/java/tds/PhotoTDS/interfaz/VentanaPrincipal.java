@@ -146,7 +146,6 @@ public class VentanaPrincipal extends JFrame implements Observer {
 		Image iconAddFoto = new ImageIcon(VentanaPrincipal.class.getResource("/images/iconoplus.png")).getImage();
 		addFoto.setIcon(new ImageIcon(iconAddFoto.getScaledInstance(20, 20, DO_NOTHING_ON_CLOSE)));
 		addFoto.addActionListener(ev -> {
-			this.setVisible(false);
 			nuevaFoto();
 		});
 		panelNorteCentral.add(addFoto);
