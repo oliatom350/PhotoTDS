@@ -23,6 +23,8 @@ import javax.swing.JButton;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.stream.Collectors;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Dimension;
@@ -197,6 +199,11 @@ public class VentanaPrincipal extends JFrame implements Observer {
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
+		
+		//Stream para ordenar fotos por fecha
+		fotos = (ArrayList<Foto>) fotos.stream()
+					 .sorted(Comparator.comparing(Foto::getFecha))
+					 .collect(Collectors.toList());
 		
 		panelCentralCentro = new JPanel();
 		panelCentral.add(panelCentralCentro, BorderLayout.CENTER);
