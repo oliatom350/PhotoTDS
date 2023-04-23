@@ -10,16 +10,17 @@ import tds.PhotoTDS.interfaz.VentanaDescuentosAplicables;
 import tds.PhotoTDS.interfaz.VentanaTopMeGusta;
 import tds.PhotoTDS.interfaz.VentanaWarning;
 
+@SuppressWarnings("serial")
 public class PopupMenuPremium extends JPopupMenu {
-
-	private static final long serialVersionUID = 3817779545038902831L;
 
 	public PopupMenuPremium(Usuario user) {
 		//Botón para hacerse premium en caso de no serlo ya
 		JMenuItem premium = new JMenuItem("Premium");
 		premium.addActionListener(ev -> {
 			VentanaDescuentosAplicables vda = new VentanaDescuentosAplicables(user);
-			vda.setVisible(true);
+			if (vda.existenDescuentos()) {
+				vda.setVisible(true);
+			}
 		});
 		this.add(premium);
 		

@@ -161,11 +161,6 @@ public class PanelPerfil extends JPanel {
 		botonSiguiendo.setOpaque(true);
 		botonSiguiendo.setBorderPainted(false);
 		
-		//
-		System.out.println("Usuario actual: "+Integer.toString(usuarioVP.getId()));
-		System.out.println("Usuarios que sigue"+usuarioVP.getUsuariosSeguidos());
-		System.out.println("Usuario del perfil:"+Integer.toString(usuario.getId()));
-		//
 		botonSeguir.addActionListener(e -> {
 			if (!usuario.getUsuariosSeguidores().contains(usuarioVP.getId())) {
 				usuario.addSeguidor(usuarioVP.getId());

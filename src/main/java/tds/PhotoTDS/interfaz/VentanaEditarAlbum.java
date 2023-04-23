@@ -28,14 +28,10 @@ import javax.swing.border.EmptyBorder;
 import tds.PhotoTDS.Album;
 import tds.PhotoTDS.Foto;
 import tds.PhotoTDS.PhotoTDS;
-import tds.PhotoTDS.Usuario;
 
+@SuppressWarnings("serial")
 public class VentanaEditarAlbum extends JFrame {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private static Album album;
 	private static int usuario;
@@ -45,9 +41,6 @@ public class VentanaEditarAlbum extends JFrame {
 	private static int altof = 80;
 	private static boolean visitante = false;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -67,7 +60,6 @@ public class VentanaEditarAlbum extends JFrame {
 	public VentanaEditarAlbum(int usuario, Album album, boolean visitante) {
 		VentanaEditarAlbum.album = album;
 		VentanaEditarAlbum.visitante = visitante;
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

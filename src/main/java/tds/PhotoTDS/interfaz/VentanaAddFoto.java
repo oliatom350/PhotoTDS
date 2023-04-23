@@ -5,7 +5,6 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import java.awt.Font;
 
-import tds.PhotoTDS.Album;
 import tds.PhotoTDS.PhotoTDS;
 
 import javax.swing.JButton;
@@ -20,7 +19,6 @@ import java.awt.dnd.DnDConstants;
 import java.awt.dnd.DropTarget;
 import java.awt.dnd.DropTargetDropEvent;
 import java.io.File;
-import java.util.ArrayList;
 import java.util.List;
 
 public class VentanaAddFoto extends JFrame{
@@ -56,7 +54,7 @@ public class VentanaAddFoto extends JFrame{
 	@SuppressWarnings("serial")
 	private void initialize(int usuario) {
 		setBounds(100, 100, 550, 400);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setResizable(false);
 		
 		GridBagConstraints gbc_editorPane_1_1 = new GridBagConstraints();

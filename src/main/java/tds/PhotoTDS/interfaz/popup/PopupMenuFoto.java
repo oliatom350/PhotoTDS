@@ -6,9 +6,8 @@ import javax.swing.JPopupMenu;
 import tds.PhotoTDS.Foto;
 import tds.PhotoTDS.PhotoTDS;
 
+@SuppressWarnings("serial")
 public class PopupMenuFoto extends JPopupMenu {
-	
-	private static final long serialVersionUID = -1213976366962644102L;
 
 	public PopupMenuFoto(Foto foto) {
 		JMenuItem eliminar = new JMenuItem("Eliminar");

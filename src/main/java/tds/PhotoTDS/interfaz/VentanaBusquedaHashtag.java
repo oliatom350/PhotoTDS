@@ -46,7 +46,6 @@ public class VentanaBusquedaHashtag extends JFrame {
 	}
 	
 	private void initialize(Map<String, Integer> hashtags) {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(200, 200, 350, 200);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));

@@ -8,6 +8,7 @@ import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import tds.PhotoTDS.Descuento;
 import tds.PhotoTDS.PhotoTDS;
 import tds.PhotoTDS.Usuario;
 
@@ -39,6 +40,9 @@ public class VentanaPagoPremium extends JDialog {
 		contentPanel.setLayout(null);
 		{
 			JLabel lblNewLabel = new JLabel("El precio a pagar tras el descuento es de "+ precio);
+			if (precio == Descuento.PRECIO_PREMIUM) {
+				lblNewLabel = new JLabel("El precio a pagar es de "+ precio);
+			}
 			lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 			lblNewLabel.setBounds(5, 5, 426, 222);
 			contentPanel.add(lblNewLabel);

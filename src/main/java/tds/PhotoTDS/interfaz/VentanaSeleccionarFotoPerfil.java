@@ -48,7 +48,6 @@ public class VentanaSeleccionarFotoPerfil extends JFrame {
     	vr = ventana;
     	
         //Parametros asociados a la ventana
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setBounds(100, 100, 428, 211);
         contentPane = new JPanel();
         setContentPane(contentPane);

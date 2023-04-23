@@ -19,8 +19,6 @@ import javax.swing.ImageIcon;
 import tds.PhotoTDS.Album;
 import tds.PhotoTDS.Foto;
 import tds.PhotoTDS.PhotoTDS;
-import tds.PhotoTDS.Publicacion;
-
 import java.awt.Font;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
@@ -54,7 +52,6 @@ public class VentanaAddFotoDescripcion extends JFrame {
 		PhotoTDS controlador = PhotoTDS.getUnicaInstancia();
 		//TODO REVISAR SI SOBRA TIEMPO
 		setBounds(100, 100, 550, 350);
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
