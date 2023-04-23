@@ -69,6 +69,10 @@ public class VentanaBusquedaHashtag extends JFrame {
 			
 			JLabel lblNewLabel = new JLabel(entry.getKey());
 			panel_1.setLayout(new FlowLayout(FlowLayout.LEFT, 5, 5));
+			panel_1.setMaximumSize(new Dimension(350, 20));
+			panel_1.setMinimumSize(new Dimension(350, 20));
+			panel_1.setPreferredSize(new Dimension(350, 20));
+			
 			panel_1.add(lblNewLabel);
 			
 			JLabel separator = new JLabel("  ->  ");
