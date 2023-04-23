@@ -4,7 +4,7 @@ import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
+import java.util.ArrayList;
 
 import javax.swing.JPanel;
 import javax.swing.JPopupMenu;
@@ -16,8 +16,6 @@ import tds.PhotoTDS.Album;
 import tds.PhotoTDS.Foto;
 import tds.PhotoTDS.PhotoTDS;
 import tds.PhotoTDS.Usuario;
-import tds.PhotoTDS.interfaz.popup.PopMenuFotoListener;
-
 import javax.swing.BoxLayout;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
@@ -30,7 +28,6 @@ import java.awt.FlowLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.GridLayout;
 import java.awt.BorderLayout;
 import javax.swing.JButton;
 
@@ -167,12 +164,32 @@ public class PanelPerfil extends JPanel {
 			}
 		});
 		
+		JButton botonSiguiendo = new JButton("Siguiendo");
+		botonSiguiendo.setBackground(new Color(255, 255, 255));
+		botonSiguiendo.setOpaque(true);
+		botonSiguiendo.setBorderPainted(false);
+		botonSiguiendo.addActionListener(e -> {
+			ArrayList<Integer> seguidores = usuario.getUsuariosSeguidores();
+			if (seguidores.contains(usuarioVP.getId())) {
+				usuario.removeSeguidor(usuarioVP.getId());
+				usuarioVP.removeSeguido(usuario.getId());
+				controlador.modificarUsuario(usuario);
+				controlador.modificarUsuario(usuarioVP);
+			}
+		});
+		
 		
 		if(usuario.equals(usuarioVP)) {
 			panelNombreUsuario.add(botonEditarPerfil);
-		} else
-			panelNombreUsuario.add(botonSeguir);
-		
+		} else {
+			ArrayList<Integer> seguidores = usuario.getUsuariosSeguidores();
+			ArrayList<Integer> seguidos = usuarioVP.getUsuariosSeguidos();
+			if (seguidores.contains(usuarioVP.getId()) && seguidos.contains(usuario.getId())) {
+				panelNombreUsuario.add(botonSiguiendo);
+			} else {
+				panelNombreUsuario.add(botonSeguir);
+			}
+		}
 	}
 	
 	private void mostrarMenuEmergente(MouseEvent e) {

@@ -123,8 +123,16 @@ public class Usuario {
 		this.usuariosSeguidores.add(seguidor);
 	}
 	
+	public void removeSeguidor(int seguidor) {
+		usuariosSeguidores.remove(usuariosSeguidores.indexOf(seguidor));
+	}
+	
 	public void addSeguido(int seguido) {
 		this.usuariosSeguidos.add(seguido);
+	}
+	
+	public void removeSeguido(int seguido) {
+		usuariosSeguidos.remove(usuariosSeguidos.indexOf(seguido));
 	}
 	
 	public void addNotificacion(Notificacion notificacion) {

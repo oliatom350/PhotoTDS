@@ -1,10 +1,8 @@
 package tds.PhotoTDS.interfaz;
 
 import java.awt.EventQueue;
-import java.awt.FlowLayout;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
-import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
@@ -25,7 +23,6 @@ import javax.swing.JButton;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import java.util.ArrayList;
-import java.util.concurrent.Flow;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Dimension;
@@ -227,7 +224,6 @@ public class VentanaPrincipal extends JFrame implements Observer {
 	public void nuevaFoto() {
 		VentanaAddFoto vaf = new VentanaAddFoto(usuarioAct.getId());
 		vaf.setVisible(true);
-		//TODO Al cerrar la VentanaAddFoto se cierra también VentanaPrincipal
 	}
 	
 	public void abreBusqueda(String entrada) {
