@@ -53,7 +53,7 @@ public class VentanaTopMeGusta extends JFrame {
 		
 		JPanel panel = new JPanel();
 		contentPane.add(panel);
-		panel.setPreferredSize(new Dimension(400, 240*fotos.size()));
+		panel.setPreferredSize(new Dimension(400, 120*fotos.size()));
 		
 		JScrollPane scrollPane = new JScrollPane(panel);
 		panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));

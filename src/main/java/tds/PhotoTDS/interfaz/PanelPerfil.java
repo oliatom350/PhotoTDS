@@ -159,7 +159,7 @@ public class PanelPerfil extends JPanel {
 		botonSeguir.setOpaque(true);
 		botonSeguir.setBorderPainted(false);
 		botonSeguir.addActionListener(e -> {
-			if (usuario.getUsuariosSeguidores().contains(usuarioVP.getId())) {
+			if (!usuario.getUsuariosSeguidores().contains(usuarioVP.getId())) {
 				usuario.addSeguidor(usuarioVP.getId());
 				usuarioVP.addSeguido(usuario.getId());
 				controlador.modificarUsuario(usuario);

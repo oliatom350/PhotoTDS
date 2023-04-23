@@ -139,6 +139,7 @@ public class VentanaEditarAlbum extends JFrame {
         eliminarItem.addActionListener((ActionEvent event) -> {
             Foto foto = listafotos.getSelectedValue();
             album.removeFoto(foto);
+            PhotoTDS.getUnicaInstancia().modificarAlbum(album);
             cargarMatrizFotos();
         });
         if(!visitante)
