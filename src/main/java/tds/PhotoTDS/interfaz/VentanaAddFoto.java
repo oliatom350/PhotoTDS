@@ -58,6 +58,7 @@ public class VentanaAddFoto extends JFrame{
 		setBounds(100, 100, 550, 400);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
 		GridBagConstraints gbc_editorPane_1_1 = new GridBagConstraints();
 		gbc_editorPane_1_1.insets = new Insets(0, 0, 5, 5);

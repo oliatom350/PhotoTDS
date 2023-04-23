@@ -50,6 +50,7 @@ public class VentanaDescripcion extends JFrame {
 
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
 		JPanel panelNorte = new JPanel();
 		contentPane.add(panelNorte, BorderLayout.NORTH);

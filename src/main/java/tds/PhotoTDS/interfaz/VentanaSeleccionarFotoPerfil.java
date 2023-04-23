@@ -53,6 +53,7 @@ public class VentanaSeleccionarFotoPerfil extends JFrame {
         contentPane = new JPanel();
         setContentPane(contentPane);
         contentPane.setLayout(new BorderLayout(0, 0));
+        setDefaultCloseOperation(DISPOSE_ON_CLOSE);
         
         panelNorte = new JPanel();
         contentPane.add(panelNorte, BorderLayout.NORTH);

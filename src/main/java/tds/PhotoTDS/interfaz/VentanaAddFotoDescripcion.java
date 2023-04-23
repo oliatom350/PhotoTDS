@@ -55,6 +55,7 @@ public class VentanaAddFotoDescripcion extends JFrame {
 		setBounds(100, 100, 550, 350);
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
 		JPanel panelFotoComentario = new JPanel();
 		getContentPane().add(panelFotoComentario, BorderLayout.CENTER);

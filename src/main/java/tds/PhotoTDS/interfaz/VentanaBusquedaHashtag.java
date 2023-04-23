@@ -51,6 +51,7 @@ public class VentanaBusquedaHashtag extends JFrame {
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setResizable(false);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
 		setContentPane(contentPane);
 		contentPane.setLayout(new BorderLayout(0, 0));

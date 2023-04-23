@@ -73,6 +73,7 @@ public class VentanaEditarAlbum extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		contentPane.setLayout(new BoxLayout(contentPane, BoxLayout.Y_AXIS));
 		setContentPane(contentPane);
+		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
 		//Boton
 		JPanel panelBoton = new JPanel();
