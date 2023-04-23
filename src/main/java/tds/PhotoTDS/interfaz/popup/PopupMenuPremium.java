@@ -54,7 +54,7 @@ public class PopupMenuPremium extends JPopupMenu {
 	
 	public boolean warningNoPremium(Usuario user) {
 		if (!user.isPremium()) {
-			VentanaWarning vw = new VentanaWarning("Usuario no premium, hazte premium ahora para disfrutar de esta característica");
+			VentanaWarning vw = new VentanaWarning("¡Usuario no premium!");
 			vw.setVisible(true);
 			//No permitimos al usuario acceder a esta función
 			return false;
