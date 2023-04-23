@@ -42,8 +42,7 @@ public class PanelItemFoto extends JPanel {
 		icon = new ImageIcon(PanelItemFoto.class.getResource("/images/me-gusta.png")).getImage();
 		mgButton.setIcon(new ImageIcon(icon.getScaledInstance(15, 15, 15)));
 		mgButton.addActionListener(ev -> {
-			PhotoTDS controlador = PhotoTDS.getUnicaInstancia();
-			controlador.addMeGusta(f);
+			PhotoTDS.getUnicaInstancia().addMeGusta(f);
 			String newMg = Integer.toString(f.getMeGusta());
 			mgLabel.setText("   " + newMg + " me gusta");
 		});

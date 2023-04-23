@@ -237,9 +237,13 @@ public class PanelPerfil extends JPanel {
             vEA.setVisible(true);
         });
         JMenuItem meGusta = new JMenuItem("Dar Me Gusta");
-        meGusta.addActionListener((ActionEvent event) -> {
+        meGusta.addActionListener(ev -> {
             Album album = listaAlbumes.getSelectedValue();
             album.addMeGusta();
+            PhotoTDS.getUnicaInstancia().modificarAlbum(album);
+            for (Foto foto : album.getFotos()) {
+            	PhotoTDS.getUnicaInstancia().addMeGusta(foto);
+            }
         });
         
         if(usuario.equals(usuarioVP)) {
