@@ -1,5 +1,8 @@
 package tds.PhotoTDS;
 
+import java.time.LocalDate;
+import java.time.Period;
+import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashSet;
@@ -35,7 +38,6 @@ public class Usuario {
 	}
 
 	//Metodos
-	
 
 	public String getFotoPerfil() {
 		return fotoPerfil;
@@ -129,17 +131,49 @@ public class Usuario {
 		this.notificaciones.add(notificacion);
 	}
 	
-	public double calcularPrecio() {
-		//El precio del premium lo inicializamos a un valor constante arbitrario
-		double precioFinal = 10;
-
+	//Patron Estrategia
+	public HashSet<Descuento> getDescuentos() {
+		//Set de descuentos a devolver
 		HashSet<Descuento> descuentos = new HashSet<Descuento>();
-		descuentos.add(new DescuentoEdad());
-		descuentos.add(new DescuentoPopularidad());
-		for (Descuento desc : descuentos) {
-			precioFinal = desc.getPrecioPremium(this, precioFinal);
+		//DescuentoEdad
+		//Condiciones:
+		int edad = calculaEdad();
+		//1-Entre 18 y 25 años, un 25%
+		if (edad <= 25 && edad >= 18) {
+			descuentos.add(new DescuentoEdad(true)); 
 		}
-		return precioFinal;
+		//2-Para mayores de 65 años, un 15%
+		else if (edad > 65) {
+			descuentos.add(new DescuentoEdad(false)); 
+		}
+		
+		//DescuentoLikes
+		//Condiciones:
+		//1-Si tiene más de 100 "me gusta", un 20%
+		int numMG = calculaMG();
+		if (numMG > 100) {
+			descuentos.add(new DescuentoPopularidad());
+		}	
+		return descuentos;
+	}
+	
+	public int calculaEdad() {
+		LocalDate now = LocalDate.now();
+		LocalDate birthday = this.getFechaNacimiento().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+		return Period.between(birthday, now).getYears();
+	}
+	
+	public int calculaMG() {
+		PhotoTDS controlador = PhotoTDS.getUnicaInstancia();
+		ArrayList<Foto> publicaciones = new ArrayList<Foto>();
+		try {
+			publicaciones = controlador.getFotosUsuario(this.getId());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return publicaciones.stream()
+					.mapToInt(p -> p.getMeGusta())
+					.sum();
 	}
 	
 }

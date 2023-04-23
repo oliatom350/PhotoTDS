@@ -5,7 +5,7 @@ import javax.swing.JPopupMenu;
 
 import tds.PhotoTDS.GeneradorExcel;
 import tds.PhotoTDS.Usuario;
-import tds.PhotoTDS.interfaz.VentanaWarning;
+import tds.PhotoTDS.interfaz.VentanaDescuentosAplicables;
 
 public class PopupMenuPremium extends JPopupMenu {
 
@@ -15,9 +15,8 @@ public class PopupMenuPremium extends JPopupMenu {
 		//Botón para hacerse premium en caso de no serlo ya
 		JMenuItem premium = new JMenuItem("Premium");
 		premium.addActionListener(ev -> {
-			double precio = user.calcularPrecio();
-			VentanaWarning vw = new VentanaWarning("El precio a pagar es de "+precio+"€");
-			vw.setVisible(true);
+			VentanaDescuentosAplicables vda = new VentanaDescuentosAplicables(user);
+			vda.setVisible(true);
 		});
 		this.add(premium);
 		
