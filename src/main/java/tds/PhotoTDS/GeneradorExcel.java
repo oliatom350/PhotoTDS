@@ -53,7 +53,7 @@ public class GeneradorExcel {
         
         FileOutputStream fileOut = null;
 		try {
-			fileOut = new FileOutputStream("src\\test\\java\\tds\\PhotoTDS\\prueba.xls");
+			fileOut = new FileOutputStream("src\\test\\java\\tds\\PhotoTDS\\" + user.getNombre() + ".xls");
 			wb.write(fileOut);
 			VentanaWarning vw = new VentanaWarning("Excel creado con éxito");
 			vw.setVisible(true);

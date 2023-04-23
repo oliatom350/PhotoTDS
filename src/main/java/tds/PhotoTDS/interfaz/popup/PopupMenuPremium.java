@@ -37,7 +37,7 @@ public class PopupMenuPremium extends JPopupMenu {
 		JMenuItem genPDF = new JMenuItem("Generar PDF");
 		genPDF.addActionListener(ev -> {
 			if (warningNoPremium(user)) {
-				new GeneradorPDF();
+				new GeneradorPDF(user);
 			}
 		});
 		this.add(genPDF);
