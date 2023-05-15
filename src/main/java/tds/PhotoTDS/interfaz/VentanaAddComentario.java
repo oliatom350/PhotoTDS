@@ -4,7 +4,9 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.border.BevelBorder;
 import javax.swing.border.EmptyBorder;
+import javax.swing.border.SoftBevelBorder;
 
 import tds.PhotoTDS.Comentario;
 import tds.PhotoTDS.Foto;
@@ -13,19 +15,24 @@ import tds.PhotoTDS.PhotoTDS;
 import java.awt.BorderLayout;
 import javax.swing.JLabel;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+
 import java.awt.Font;
+import java.awt.Image;
+
 import javax.swing.JTextArea;
 import javax.swing.JButton;
 import java.awt.FlowLayout;
 
+@SuppressWarnings("serial")
 public class VentanaAddComentario extends JFrame {
-
-	private static final long serialVersionUID = -6906524484620549062L;
 
 	private JPanel contentPane;
 	
 	private static int usuario;
 	private static Foto foto;
+	private static int width = 450;
+	private static int height = 300;
 	
 	private final int longitudMaxima = 120;
 
@@ -46,7 +53,7 @@ public class VentanaAddComentario extends JFrame {
 		usuario = user;
 		foto = f;
 		
-		setBounds(100, 100, 450, 300);
+		setBounds(100, 100, width, height);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -106,6 +113,14 @@ public class VentanaAddComentario extends JFrame {
 		btnCancelar.addActionListener(ev -> {
 			this.dispose();
 		});
+		
+		JPanel panelOeste = new JPanel();
+		contentPane.add(panelOeste, BorderLayout.WEST);
+		panelOeste.setBorder(new SoftBevelBorder(BevelBorder.LOWERED, null, null, null, null));
+		JLabel fotoLabel = new JLabel("");
+		Image icon = new ImageIcon(foto.getPath()).getImage();
+		fotoLabel.setIcon(new ImageIcon(icon.getScaledInstance(width/2, height/2, Image.SCALE_SMOOTH)));
+		panelOeste.add(fotoLabel);
 	}
 	
 	public boolean VerificaLongitud(String text) {

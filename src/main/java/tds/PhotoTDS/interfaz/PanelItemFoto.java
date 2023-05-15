@@ -30,7 +30,7 @@ public class PanelItemFoto extends JPanel {
 		//TODO Problema de no visualizacion de fotos con alta resolucion
 		Image icon = new ImageIcon(f.getPath()).getImage();
 		panelFoto.setLayout(new BoxLayout(panelFoto, BoxLayout.X_AXIS));
-		fotoLabel.setIcon(new ImageIcon(icon.getScaledInstance(width, height, ABORT)));
+		fotoLabel.setIcon(new ImageIcon(icon.getScaledInstance(width, height, Image.SCALE_SMOOTH)));
 		panelFoto.add(fotoLabel);
 		JPanel panelInfo = new JPanel();
 		this.add(panelInfo);
@@ -40,7 +40,7 @@ public class PanelItemFoto extends JPanel {
 		
 		JButton mgButton = new JButton("");
 		icon = new ImageIcon(PanelItemFoto.class.getResource("/images/me-gusta.png")).getImage();
-		mgButton.setIcon(new ImageIcon(icon.getScaledInstance(15, 15, 15)));
+		mgButton.setIcon(new ImageIcon(icon.getScaledInstance(15, 15, Image.SCALE_DEFAULT)));
 		mgButton.addActionListener(ev -> {
 			PhotoTDS.getUnicaInstancia().addMeGusta(f);
 			String newMg = Integer.toString(f.getMeGusta());
@@ -50,7 +50,7 @@ public class PanelItemFoto extends JPanel {
 		JButton commentButton = new JButton("");
 		icon = new ImageIcon(PanelItemFoto.class.getResource("/images/comment.png")).getImage();
 		panelInfo.setLayout(new BorderLayout(0, 0));
-		commentButton.setIcon(new ImageIcon(icon.getScaledInstance(15, 15, 15)));
+		commentButton.setIcon(new ImageIcon(icon.getScaledInstance(15, 15, Image.SCALE_DEFAULT)));
 		commentButton.addActionListener(ev -> {
 			addComentario(idUsuario, f);
 		});
@@ -72,7 +72,7 @@ public class PanelItemFoto extends JPanel {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		fotoUsuario.setIcon(new ImageIcon(icon.getScaledInstance(20, 20, 20)));
+		fotoUsuario.setIcon(new ImageIcon(icon.getScaledInstance(20, 20, Image.SCALE_SMOOTH)));
 		JLabel usuario = new JLabel("   " + f.getNickUsuario(f.getUsuario()));
 		
 		panelInfoUsuario.add(fotoUsuario);
@@ -94,5 +94,7 @@ public class PanelItemFoto extends JPanel {
 	public void addComentario(int idUsuario, Foto f) {
 		VentanaAddComentario vac = new VentanaAddComentario(idUsuario, f);
 		vac.setVisible(true);
+//		VentanaVerFoto vvf = new VentanaVerFoto(f);
+//		vvf.setVisible(true);
 	}
 }
