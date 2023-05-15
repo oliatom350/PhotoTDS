@@ -149,7 +149,12 @@ public class PhotoTDS implements FotosListener {
 		if (publicacion instanceof Foto) {
 			adaptadorFoto.modificarFoto((Foto) publicacion);
 		} else {
-			adaptadorAlbum.modificarAlbum((Album) publicacion);
+			Album album = (Album) publicacion;
+			adaptadorAlbum.modificarAlbum(album);
+			for (Foto foto : album.getFotos()) {
+            	addMeGusta(foto);
+            	adaptadorFoto.modificarFoto(foto);
+            }
 		}
 	}
 	
