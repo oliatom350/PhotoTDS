@@ -40,12 +40,12 @@ public class PanelPerfil extends JPanel {
 	private static int altof = 70;
 	private JList<Foto> listafotos;
 	private JList<Album> listaAlbumes;
-	private Usuario usuario;
+	private static Usuario usuario;
 	private Usuario usuarioVP;
 	private JScrollPane panel_1;
 	
-	public PanelPerfil(Usuario usuario, Usuario usuarioVP) {
-		this.usuario = usuario;
+	public PanelPerfil(Usuario user, Usuario usuarioVP) {
+		usuario = user;
 		this.usuarioVP = usuarioVP;
 		PhotoTDS controlador = PhotoTDS.getUnicaInstancia();
 		setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -61,7 +61,7 @@ public class PanelPerfil extends JPanel {
 		panelInfoUsuario.add(panelFotoPerfil, BorderLayout.WEST);
 		
 		JLabel fotoLabel = new JLabel("");
-		String path = usuario.getPathFotoPerfil();
+		String path = user.getPathFotoPerfil();
 		Image foto = new ImageIcon(path).getImage();
 		panelFotoPerfil.setLayout(new FlowLayout(FlowLayout.LEADING, 5, 5));
 		fotoLabel.setIcon(new ImageIcon(foto.getScaledInstance(ancho, alto, java.awt.Image.SCALE_SMOOTH)));
@@ -77,7 +77,7 @@ public class PanelPerfil extends JPanel {
 		fl_panelNombreUsuario.setAlignment(FlowLayout.LEADING);
 		panelInfo.add(panelNombreUsuario);
 		
-		JLabel nombreUsuario = new JLabel(usuario.getNombre());
+		JLabel nombreUsuario = new JLabel(user.getNombre());
 		panelNombreUsuario.add(nombreUsuario);
 		
 		JPanel panelInfoPubli = new JPanel();
@@ -91,12 +91,12 @@ public class PanelPerfil extends JPanel {
 		int nSeguidores = 0;
 		int nSeguidos = 0;
 		try {
-			nPublicaciones = controlador.getAlbumesUsuario(usuario.getId()).size() + controlador.getFotosUsuario(usuario.getId()).size();
+			nPublicaciones = controlador.getAlbumesUsuario(user.getId()).size() + controlador.getFotosUsuario(user.getId()).size();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		nSeguidores = usuario.getUsuariosSeguidores().size();
-		nSeguidos = usuario.getUsuariosSeguidos().size();
+		nSeguidores = user.getUsuariosSeguidores().size();
+		nSeguidos = user.getUsuariosSeguidos().size();
 		
 		JLabel publicLabel = new JLabel(Integer.toString(nPublicaciones) + " publicaciones");
 		panelInfoPubli.add(publicLabel);
@@ -113,7 +113,7 @@ public class PanelPerfil extends JPanel {
 		flowLayout.setAlignment(FlowLayout.LEADING);
 		panelInfo.add(panelNombre);
 		
-		JLabel nombreCompletoLabel = new JLabel(usuario.getNombreCompleto());
+		JLabel nombreCompletoLabel = new JLabel(user.getNombreCompleto());
 		panelNombre.add(nombreCompletoLabel);
 		
 		JPanel panelSeleccion = new JPanel();
@@ -162,40 +162,40 @@ public class PanelPerfil extends JPanel {
 		botonSiguiendo.setBorderPainted(false);
 		
 		botonSeguir.addActionListener(e -> {
-			if (!usuario.getUsuariosSeguidores().contains(usuarioVP.getId())) {
-				usuario.addSeguidor(usuarioVP.getId());
-				usuarioVP.addSeguido(usuario.getId());
-				controlador.modificarUsuario(usuario);
+			if (!user.getUsuariosSeguidores().contains(usuarioVP.getId())) {
+				user.addSeguidor(usuarioVP.getId());
+				usuarioVP.addSeguido(user.getId());
+				controlador.modificarUsuario(user);
 				controlador.modificarUsuario(usuarioVP);
 				panelNombreUsuario.add(botonSiguiendo);
 				panelNombreUsuario.remove(botonSeguir);
 				panelNombreUsuario.revalidate();
 				panelNombreUsuario.repaint();
-				controlador.addUsuarioNotificacion(usuario, null, "El usuario " + usuarioVP.getNombre() + " ha empezado a seguirte!");
+				controlador.addUsuarioNotificacion(user, null, "El usuario " + usuarioVP.getNombre() + " ha empezado a seguirte!");
 			}
 		});	
 		botonSiguiendo.addActionListener(e -> {
-			ArrayList<Integer> seguidores = usuario.getUsuariosSeguidores();
+			ArrayList<Integer> seguidores = user.getUsuariosSeguidores();
 			if (seguidores.contains(usuarioVP.getId())) {
-				usuario.removeSeguidor(usuarioVP.getId());
-				usuarioVP.removeSeguido(usuario.getId());
-				controlador.modificarUsuario(usuario);
+				user.removeSeguidor(usuarioVP.getId());
+				usuarioVP.removeSeguido(user.getId());
+				controlador.modificarUsuario(user);
 				controlador.modificarUsuario(usuarioVP);
 				panelNombreUsuario.add(botonSeguir);
 				panelNombreUsuario.remove(botonSiguiendo);
 				panelNombreUsuario.revalidate();
 				panelNombreUsuario.repaint();
-				controlador.addUsuarioNotificacion(usuario, null, "El usuario " + usuarioVP.getNombre() + " ha dejado de seguirte");
+				controlador.addUsuarioNotificacion(user, null, "El usuario " + usuarioVP.getNombre() + " ha dejado de seguirte");
 			}
 		});
 		
 		
-		if(usuario.equals(usuarioVP)) {
+		if(user.equals(usuarioVP)) {
 			panelNombreUsuario.add(botonEditarPerfil);
 		} else {
-			ArrayList<Integer> seguidores = usuario.getUsuariosSeguidores();
+			ArrayList<Integer> seguidores = user.getUsuariosSeguidores();
 			ArrayList<Integer> seguidos = usuarioVP.getUsuariosSeguidos();
-			if (seguidores.contains(usuarioVP.getId()) && seguidos.contains(usuario.getId())) {
+			if (seguidores.contains(usuarioVP.getId()) && seguidos.contains(user.getId())) {
 				panelNombreUsuario.add(botonSiguiendo);
 			} else {
 				panelNombreUsuario.add(botonSeguir);
@@ -206,13 +206,23 @@ public class PanelPerfil extends JPanel {
 	private void mostrarMenuEmergente(MouseEvent e) {
 		JPopupMenu popupMenu = new JPopupMenu();
         JMenuItem eliminarItem = new JMenuItem("Eliminar");
-        eliminarItem.addActionListener((ActionEvent event) -> {
+        eliminarItem.addActionListener(ev -> {
             Foto foto = listafotos.getSelectedValue();
             PhotoTDS.getUnicaInstancia().eliminarFoto(foto);
             cargarMatrizFotos();
         });
-        if (usuario.equals(usuarioVP))
+        JMenuItem commentItem = new JMenuItem("Comentar");
+        commentItem.addActionListener(ev -> {
+        	Foto foto = listafotos.getSelectedValue();
+        	VentanaAddComentario vac = new VentanaAddComentario(usuario.getId(), foto);
+        	vac.setVisible(true);
+        });
+        if (usuario.equals(usuarioVP)) {
         	popupMenu.add(eliminarItem);
+        }
+        else {
+        	popupMenu.add(commentItem);
+        }
         popupMenu.show(e.getComponent(), e.getX(), e.getY());
 	}
 	
@@ -309,10 +319,6 @@ public class PanelPerfil extends JPanel {
 	
 	private static ListCellRenderer<? super Foto> createListRenderer() {
 		return new DefaultListCellRenderer() {
-			/**
-			 * 
-			 */
-			private static final long serialVersionUID = 1L;
 			@Override
 			public Component getListCellRendererComponent(JList<?> list, Object value,
 														int index, boolean isSelected,
@@ -323,6 +329,15 @@ public class PanelPerfil extends JPanel {
 					Foto foto = (Foto) value;
 					label.setText("");
 					label.setIcon(new ImageIcon((new ImageIcon(foto.getPath()).getImage().getScaledInstance(anchof, altof, java.awt.Image.SCALE_SMOOTH))));
+//					label.addMouseListener(new MouseAdapter() {
+//						@Override
+//					    public void mousePressed(MouseEvent e) {
+//							if (SwingUtilities.isLeftMouseButton(e)) {
+//								VentanaAddComentario vac = new VentanaAddComentario(usuario.getId(), foto);
+//								vac.setVisible(true);
+//							}
+//						}
+//					});
 				}
 				return c;
 			}

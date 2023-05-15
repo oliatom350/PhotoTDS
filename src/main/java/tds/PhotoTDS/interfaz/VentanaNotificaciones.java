@@ -19,18 +19,12 @@ import tds.PhotoTDS.Notificacion;
 import tds.PhotoTDS.PhotoTDS;
 import tds.PhotoTDS.Usuario;
 
+@SuppressWarnings("serial")
 public class VentanaNotificaciones extends JFrame {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private static Usuario usuario;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -53,7 +47,6 @@ public class VentanaNotificaciones extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		contentPane.setLayout(new BorderLayout(0, 0));
-		setResizable(false);
 		
 		//Obtenemos las notificaciones del usuario
 		ArrayList<Notificacion> notificaciones = usuario.getNotificaciones();

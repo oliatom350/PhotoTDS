@@ -135,13 +135,13 @@ public class PhotoTDS implements FotosListener {
 	}
 	
 	public void addComentario(Comentario comentario, Publicacion publicacion) {
+		adaptadorComentario.registrarComentario(comentario);
 		publicacion.addComentario(comentario);
 		if (publicacion instanceof Foto) {
 			adaptadorFoto.modificarFoto((Foto) publicacion);
 		} else {
 			adaptadorAlbum.modificarAlbum((Album) publicacion);
 		}
-		adaptadorComentario.registrarComentario(comentario);
 	}
 	
 	public void addMeGusta(Publicacion publicacion) {
