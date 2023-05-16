@@ -6,6 +6,7 @@ import java.awt.Image;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.io.File;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -19,16 +20,20 @@ import tds.PhotoTDS.interfaz.popup.PopupMenuPremium;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import java.util.ArrayList;
 import java.util.Comparator;
+import java.util.EventObject;
 import java.util.stream.Collectors;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.JScrollPane;
+
+import pulsador.IEncendidoListener;
 import pulsador.Luz;
 
 public class VentanaPrincipal extends JFrame implements Observer {
@@ -163,6 +168,18 @@ public class VentanaPrincipal extends JFrame implements Observer {
 		panelNorteCentral.add(searchButton);
 		
 		xmlLoaderButton = new Luz();
+		xmlLoaderButton.addEncendidoListener(new IEncendidoListener() {
+			@Override
+			public void enteradoCambioEncendido(EventObject arg0) {
+				JFileChooser chooser = new JFileChooser();
+				chooser.showOpenDialog(getContentPane());
+				File xmlFile = chooser.getSelectedFile();
+				controlador.cargarFotosPath(xmlFile.getPath());
+				VentanaXMLFotos vxml = new VentanaXMLFotos(controlador.getFotosCargador());
+				vxml.setVisible(true);
+				//xmlLoaderButton.setEncendido(false);
+			}
+		});
 		panelNorteCentral.add(xmlLoaderButton);
 		
 		cardLayout = new CardLayout();

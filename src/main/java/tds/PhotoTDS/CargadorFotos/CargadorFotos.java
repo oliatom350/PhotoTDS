@@ -22,7 +22,7 @@ public class CargadorFotos {
 	}
 	
 	public void setArchivoFotos(String archivoFotos) {
-		if (!this.archivoFotos.equals(archivoFotos)) {
+		if (!archivoFotos.equals(this.archivoFotos)) {
 			this.fotos = MapperFotosXMLtoJava.cargarFotos(archivoFotos);
 			FotosEvent ev = new FotosEvent(this, fotos);
 			notificarCambio(ev);

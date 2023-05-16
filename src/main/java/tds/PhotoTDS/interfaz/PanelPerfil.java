@@ -329,15 +329,6 @@ public class PanelPerfil extends JPanel {
 					Foto foto = (Foto) value;
 					label.setText("");
 					label.setIcon(new ImageIcon((new ImageIcon(foto.getPath()).getImage().getScaledInstance(anchof, altof, java.awt.Image.SCALE_SMOOTH))));
-//					label.addMouseListener(new MouseAdapter() {
-//						@Override
-//					    public void mousePressed(MouseEvent e) {
-//							if (SwingUtilities.isLeftMouseButton(e)) {
-//								VentanaAddComentario vac = new VentanaAddComentario(usuario.getId(), foto);
-//								vac.setVisible(true);
-//							}
-//						}
-//					});
 				}
 				return c;
 			}

@@ -24,7 +24,6 @@ import tds.PhotoTDS.dao.IAdaptadorNotificacionDAO;
 import tds.PhotoTDS.dao.IAdaptadorTDSAlbumDAO;
 import tds.PhotoTDS.dao.IAdaptadorUsuarioDAO;
 import umu.tds.fotos.Fotos;
-import umu.tds.fotos.MapperFotosXMLtoJava;
 
 public class PhotoTDS implements FotosListener{
 
