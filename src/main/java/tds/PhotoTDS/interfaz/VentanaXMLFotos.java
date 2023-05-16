@@ -4,14 +4,12 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
 
-import javax.swing.BoxLayout;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JList;
-import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.ListCellRenderer;
 
@@ -21,7 +19,6 @@ import umu.tds.fotos.Fotos;
 @SuppressWarnings("serial")
 public class VentanaXMLFotos extends JFrame {
 
-	private JPanel contentPane;
 	private static Fotos listFotos;
 	private static final int altof = 100;
 	private static final int anchof = 70;
