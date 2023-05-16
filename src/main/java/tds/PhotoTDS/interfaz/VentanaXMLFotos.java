@@ -1,8 +1,10 @@
 package tds.PhotoTDS.interfaz;
 
+import java.awt.Color;
 import java.awt.Component;
 import java.awt.EventQueue;
 
+import javax.swing.BoxLayout;
 import javax.swing.DefaultListCellRenderer;
 import javax.swing.DefaultListModel;
 import javax.swing.ImageIcon;
@@ -42,7 +44,9 @@ public class VentanaXMLFotos extends JFrame {
 		listFotos = fotos;
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
+		//setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 		panel = new JScrollPane();
+		panel.setBackground(Color.WHITE);
 		add(panel);
 		cargarMatrizFotos();
 	}
@@ -57,8 +61,8 @@ public class VentanaXMLFotos extends JFrame {
 				if (c instanceof JLabel) {
 					JLabel label = (JLabel) c;
 					Foto foto = (Foto) value;
-					label.setText("Gorrinilla");
-					label.setIcon(new ImageIcon((new ImageIcon(foto.getPath()).getImage())));
+					label.setText("");
+					label.setIcon(new ImageIcon((new ImageIcon(System.getProperty("user.dir") + foto.getPath()).getImage().getScaledInstance(altof, anchof, java.awt.Image.SCALE_SMOOTH))));
 				}
 				return c;
 			}
