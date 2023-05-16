@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import tds.PhotoTDS.CargadorFotos.CargadorFotos;
 import tds.PhotoTDS.CargadorFotos.FotosEvent;
 import tds.PhotoTDS.CargadorFotos.FotosListener;
 import tds.PhotoTDS.dao.FactoriaDAO;
@@ -22,8 +23,10 @@ import tds.PhotoTDS.dao.IAdaptadorFotoDAO;
 import tds.PhotoTDS.dao.IAdaptadorNotificacionDAO;
 import tds.PhotoTDS.dao.IAdaptadorTDSAlbumDAO;
 import tds.PhotoTDS.dao.IAdaptadorUsuarioDAO;
+import umu.tds.fotos.Fotos;
+import umu.tds.fotos.MapperFotosXMLtoJava;
 
-public class PhotoTDS implements FotosListener {
+public class PhotoTDS implements FotosListener{
 
 	//Atributos
 	private static PhotoTDS unicaInstancia = new PhotoTDS();
@@ -36,6 +39,8 @@ public class PhotoTDS implements FotosListener {
 	private IAdaptadorComentarioDAO adaptadorComentario;
 	private IAdaptadorFotoDAO adaptadorFoto;
 	private IAdaptadorTDSAlbumDAO adaptadorAlbum;
+	private CargadorFotos cargador = new CargadorFotos();
+	private Fotos fotosCargador;
 	
 	//Ruta de imágenes
 	public static String pathFotos = "/src/main/java/images/";
@@ -44,6 +49,7 @@ public class PhotoTDS implements FotosListener {
 	public PhotoTDS() {
 		inicializarAdaptadores();
 		inicializarRepos();
+		//cargador.addFotosListener(this);
 	}
 	
 	public static PhotoTDS getUnicaInstancia() {
@@ -69,6 +75,7 @@ public class PhotoTDS implements FotosListener {
 	public void inicializarRepos() {
 		repUsuarios = RepoUsuarios.getInstancia();
 		repPublicaciones = RepoPublicaciones.getInstancia();
+		cargador.addFotosListener(this);
 	}
 	
 	//Metodos
@@ -167,10 +174,7 @@ public class PhotoTDS implements FotosListener {
 		return repPublicaciones.getFoto(id);
 	}
 
-	@Override
-	public void cargarFotos(FotosEvent e) {
-		//TODO Java Beans
-	}
+
 	
 	public Usuario getUsuario(int id) throws Exception {
 		return repUsuarios.getUsuario(id);
@@ -318,6 +322,21 @@ public class PhotoTDS implements FotosListener {
 		for(int usuarioId : usuario.getUsuariosSeguidores())
 			seguidores.add(repUsuarios.getUsuario(usuarioId));
 		seguidores.forEach(s -> addUsuarioNotificacion(s, publicacion, "El usuario "+usuario.getNombre()+" ha publicado una foto o álbum!"));
+	}
+
+	
+	public void cargarFotosPath(String pathFotos) {
+		cargador.setArchivoFotos(pathFotos);
+	}
+
+	@Override
+	public void cargarFotos(FotosEvent e) {
+		// TODO Auto-generated method stub
+		fotosCargador = e.getFotos();
+	}
+	
+	public Fotos getFotosCargador() {
+		return fotosCargador;
 	}
 	
 }
