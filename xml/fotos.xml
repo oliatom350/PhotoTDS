@@ -10,5 +10,13 @@
 			<HashTag>Cargador</HashTag>
 		</HashTags>
 	</foto>
+	<foto titulo="Imagen2">
+		<Path><![CDATA[/src/main/java/images/SU.png]]></Path>
+		<Descripcion>Prueba de Imagen1</Descripcion>
+		<HashTags>
+			<HashTag>TDS</HashTag>
+			<HashTag>Cargador</HashTag>
+		</HashTags>
+	</foto>
 
 </fotos>
