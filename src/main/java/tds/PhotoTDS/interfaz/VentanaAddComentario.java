@@ -103,8 +103,7 @@ public class VentanaAddComentario extends JFrame {
 				PhotoTDS controlador = PhotoTDS.getUnicaInstancia();
 				controlador.addComentario(coment, f);
 				try {
-					controlador.addUsuarioNotificacion(controlador.getUsuario(foto.getUsuario()), null, controlador.getUsuario(user).getNombre() + ": '" + coment.getTexto() + "' en " + f.getTitulo());
-					//controlador.addUsuarioNotificacion(controlador.getUsuario(foto.getUsuario()), null, controlador.getUsuario(user).getNombre() + " ha publicado un comentario en " + f.getTitulo());
+					controlador.addUsuarioNotificacion(controlador.getUsuario(foto.getUsuario()), null, controlador.getUsuario(user).getNombre() + " ha publicado un comentario en " + f.getTitulo());
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
