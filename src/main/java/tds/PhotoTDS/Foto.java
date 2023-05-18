@@ -1,6 +1,9 @@
 package tds.PhotoTDS;
 
 import java.util.ArrayList;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
 
 public class Foto extends Publicacion {
 
@@ -30,6 +33,12 @@ public class Foto extends Publicacion {
 	public String getNickUsuario(int idUsuario) {
 		PhotoTDS controlador = PhotoTDS.getUnicaInstancia();
 		return controlador.getRepUsers().getUsuario(idUsuario).getNombre();
+	}
+	
+	public static ArrayList<Foto> getFotosOrdenadas(List<Foto> fotos){
+		return (ArrayList<Foto>) fotos.stream()
+				.sorted(Comparator.comparing(Foto::getFecha))
+				.collect(Collectors.toList());
 	}
 	
 }

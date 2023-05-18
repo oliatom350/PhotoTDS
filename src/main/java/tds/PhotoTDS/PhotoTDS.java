@@ -330,7 +330,6 @@ public class PhotoTDS implements FotosListener{
 
 	@Override
 	public void cargarFotos(FotosEvent e) {
-		// TODO Auto-generated method stub
 		fotosCargador = e.getFotos();
 	}
 	
