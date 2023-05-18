@@ -10,8 +10,6 @@ import javax.swing.JButton;
 import java.awt.FlowLayout;
 import java.awt.Image;
 import java.util.ArrayList;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
@@ -19,6 +17,8 @@ import javax.swing.ImageIcon;
 import tds.PhotoTDS.Album;
 import tds.PhotoTDS.Foto;
 import tds.PhotoTDS.PhotoTDS;
+import tds.PhotoTDS.Publicacion;
+
 import java.awt.Font;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
@@ -114,7 +114,7 @@ public class VentanaAddFotoDescripcion extends JFrame {
 		JButton btnNewButton = new JButton("Compartir");
 		btnNewButton.addActionListener(ev -> {
 			String descp = textArea_1.getText();
-			ArrayList<String> hashtags = getHashtags(descp);
+			ArrayList<String> hashtags = Publicacion.getHashtags(descp);
 			if (hashtags == null || descp.length() > 120) {
 				VentanaWarning vw = new VentanaWarning("La descripción sobrepasa los 120 caracteres, contiene más de 4 hashtags o algún hashtag sobrepasa el límite.");
 				vw.setVisible(true);
@@ -152,20 +152,7 @@ public class VentanaAddFotoDescripcion extends JFrame {
 		panel.add(btnNewButton_1);
 		
 	}
-	private ArrayList<String> getHashtags(String descripcion){
-		Pattern pt = Pattern.compile("#(\\S+)");
-		Matcher m = pt.matcher(descripcion);
-		ArrayList<String> list = new ArrayList<String>();
-		while(m.find()) {
-			list.add(m.group(1));
-		}
-		
-		// Se comprueba que los hashtags no pasen el límite
-		if (list.stream()
-				.anyMatch(h -> h.length() > 15) || list.size() > 4)
-			return null;
-		return list;
-	}
+
 	
 	private void addFoto(Foto f) {
 		PhotoTDS controlador = PhotoTDS.getUnicaInstancia();

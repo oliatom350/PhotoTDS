@@ -1,6 +1,8 @@
 package tds.PhotoTDS;
 
 import java.util.*;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 public class Publicacion {
 
@@ -81,6 +83,21 @@ public class Publicacion {
 	
 	public void addComentario (Comentario comentario) {
 		this.comentarios.add(comentario);
+	}
+	
+	public static ArrayList<String> getHashtags(String descripcion){
+		Pattern pt = Pattern.compile("#(\\S+)");
+		Matcher m = pt.matcher(descripcion);
+		ArrayList<String> list = new ArrayList<String>();
+		while(m.find()) {
+			list.add(m.group(1));
+		}
+		
+		// Se comprueba que los hashtags no pasen el límite
+		if (list.stream()
+				.anyMatch(h -> h.length() > 15) || list.size() > 4)
+			return null;
+		return list;
 	}
 	
 }
