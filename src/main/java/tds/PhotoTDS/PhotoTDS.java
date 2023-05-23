@@ -337,4 +337,17 @@ public class PhotoTDS implements FotosListener{
 		return fotosCargador;
 	}
 	
+	public Album addFotoAlbum(Foto f, String album, int usuario) {
+		try {
+			Album a = getAlbum(album, usuario);
+			a.addFoto(f);
+			modificarAlbum(a);
+			addNotificacionSeguidores(usuario, a);
+			return a;
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		return null;
+		
+	}
 }

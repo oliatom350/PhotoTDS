@@ -123,14 +123,7 @@ public class VentanaAddFotoDescripcion extends JFrame {
 				addFoto(f);
 				controlador.addNotificacionSeguidores(usuario, f);
 				if (!album.equals("")) {
-					try {
-						Album a = controlador.getAlbum(album, usuario);
-						a.addFoto(f);
-						controlador.modificarAlbum(a);
-						controlador.addNotificacionSeguidores(usuario, a);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
+					controlador.addFotoAlbum(f, album, usuario);
 				}
 				VentanaPrincipal vP = null;
 				try {
