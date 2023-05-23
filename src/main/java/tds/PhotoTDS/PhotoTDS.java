@@ -48,7 +48,6 @@ public class PhotoTDS implements FotosListener{
 	public PhotoTDS() {
 		inicializarAdaptadores();
 		inicializarRepos();
-		//cargador.addFotosListener(this);
 	}
 	
 	public static PhotoTDS getUnicaInstancia() {
@@ -186,7 +185,8 @@ public class PhotoTDS implements FotosListener{
 	public Usuario iniciarSesion(String nombreUsuario, String passUsuario) {
         List<Usuario> list = new ArrayList<Usuario>();
 		try {
-			list = unicaInstancia.adaptadorUsuario.recuperarTodosUsuarios(); //TODO CAMBIAR A ACCEDER REPOSITORIO EN VEZ DE ADAPTADOR
+			//list = unicaInstancia.adaptadorUsuario.recuperarTodosUsuarios();
+			list = repUsuarios.getUsuarios();
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -237,7 +237,6 @@ public class PhotoTDS implements FotosListener{
 					try {
 						r = repUsuarios.getUsuario(u).getUsuariosSeguidos().size();
 					} catch (Exception e) {
-						// TODO Auto-generated catch block
 						e.printStackTrace();
 					}
 					return r;
@@ -284,7 +283,6 @@ public class PhotoTDS implements FotosListener{
 									try {
 										return getFotosUsuario(uId).stream();
 									} catch (Exception e) {
-										// TODO Auto-generated catch block
 										e.printStackTrace();
 									}
 									return null;

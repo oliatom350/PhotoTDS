@@ -22,9 +22,9 @@ import java.awt.Font;
 import javax.swing.JTextArea;
 import javax.swing.SwingConstants;
 
+@SuppressWarnings("serial")
 public class VentanaAddFotoDescripcion extends JFrame {
-
-	private static final long serialVersionUID = 1L;
+	
 	private static String nombreFoto;
 	private static int usuario;
 	private static String album = "";
