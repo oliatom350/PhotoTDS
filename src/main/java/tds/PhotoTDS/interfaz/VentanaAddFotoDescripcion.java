@@ -14,7 +14,6 @@ import java.util.ArrayList;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 
-import tds.PhotoTDS.Album;
 import tds.PhotoTDS.Foto;
 import tds.PhotoTDS.PhotoTDS;
 import tds.PhotoTDS.Publicacion;
