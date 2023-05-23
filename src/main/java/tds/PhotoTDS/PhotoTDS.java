@@ -263,9 +263,8 @@ public class PhotoTDS implements FotosListener{
 	}
 	
 	public ArrayList<Album> getAlbumesUsuario(int id) throws Exception {
-		Usuario usuario = repUsuarios.getUsuario(id);
 		return (ArrayList<Album>) repPublicaciones.getAlbumes().stream()
-				.filter(a -> a.getUsuario() == usuario.getId())
+				.filter(a -> a.getUsuario() == id)
 				.collect(Collectors.toList());
 	}
 	
