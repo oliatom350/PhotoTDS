@@ -347,4 +347,18 @@ public class PhotoTDS implements FotosListener{
 		return null;
 		
 	}
+	
+	public void addSeguidor(Usuario seguido, Usuario seguidor) {
+		seguido.addSeguidor(seguidor.getId());
+		seguidor.addSeguido(seguido.getId());
+		modificarUsuario(seguido);
+		modificarUsuario(seguidor);
+	}
+	
+	public void removeSeguidor(Usuario seguido, Usuario seguidor) {
+		seguido.addSeguidor(seguidor.getId());
+		seguidor.addSeguido(seguido.getId());
+		modificarUsuario(seguido);
+		modificarUsuario(seguidor);
+	}
 }

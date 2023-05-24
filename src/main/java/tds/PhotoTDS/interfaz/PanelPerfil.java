@@ -163,10 +163,7 @@ public class PanelPerfil extends JPanel {
 		
 		botonSeguir.addActionListener(e -> {
 			if (!user.getUsuariosSeguidores().contains(usuarioVP.getId())) {
-				user.addSeguidor(usuarioVP.getId());
-				usuarioVP.addSeguido(user.getId());
-				controlador.modificarUsuario(user);
-				controlador.modificarUsuario(usuarioVP);
+				controlador.addSeguidor(user, usuarioVP);
 				panelNombreUsuario.add(botonSiguiendo);
 				panelNombreUsuario.remove(botonSeguir);
 				panelNombreUsuario.revalidate();
@@ -177,10 +174,7 @@ public class PanelPerfil extends JPanel {
 		botonSiguiendo.addActionListener(e -> {
 			ArrayList<Integer> seguidores = user.getUsuariosSeguidores();
 			if (seguidores.contains(usuarioVP.getId())) {
-				user.removeSeguidor(usuarioVP.getId());
-				usuarioVP.removeSeguido(user.getId());
-				controlador.modificarUsuario(user);
-				controlador.modificarUsuario(usuarioVP);
+				controlador.removeSeguidor(user, usuarioVP);
 				panelNombreUsuario.add(botonSeguir);
 				panelNombreUsuario.remove(botonSiguiendo);
 				panelNombreUsuario.revalidate();
