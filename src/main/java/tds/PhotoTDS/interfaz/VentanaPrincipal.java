@@ -34,10 +34,9 @@ import javax.swing.JScrollPane;
 import pulsador.IEncendidoListener;
 import pulsador.Luz;
 
+@SuppressWarnings("serial")
 public class VentanaPrincipal extends JFrame implements Observer {
 
-	private static final long serialVersionUID = -2940916222961478615L;
-	
 	private JPanel contentPane;
 	private JButton searchButton;
 	private Luz xmlLoaderButton;
@@ -175,7 +174,6 @@ public class VentanaPrincipal extends JFrame implements Observer {
 				controlador.cargarFotosPath(xmlFile.getPath());
 				VentanaXMLFotos vxml = new VentanaXMLFotos(controlador.getFotosCargador());
 				vxml.setVisible(true);
-				//xmlLoaderButton.setEncendido(false);
 			}
 		});
 		panelNorteCentral.add(xmlLoaderButton);
@@ -231,8 +229,6 @@ public class VentanaPrincipal extends JFrame implements Observer {
 		
 		panelCentralCentro = new JPanel();
 		panelCentral.add(panelCentralCentro, BorderLayout.CENTER);
-		//GridBagLayout gbl = new GridBagLayout();
-		//panelCentralCentro.setLayout(gbl);
 		panelCentralCentro.setLayout(new BoxLayout(panelCentralCentro, BoxLayout.Y_AXIS));
 		int cont = 0;
 		
