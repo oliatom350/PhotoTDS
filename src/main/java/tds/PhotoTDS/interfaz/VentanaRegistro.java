@@ -273,7 +273,7 @@ public class VentanaRegistro extends JFrame {
 	        int day = calendar.get(Calendar.DAY_OF_MONTH);
 	        int month = calendar.get(Calendar.MONTH) + 1;
 	        int year = calendar.get(Calendar.YEAR);
-			textField_Año.setText(Integer.toString(year+1900));
+			textField_Año.setText(Integer.toString(year));
 			textField_Año.setEditable(false);
 			textField_Dia.setText(Integer.toString(day));
 			textField_Dia.setEditable(false);
