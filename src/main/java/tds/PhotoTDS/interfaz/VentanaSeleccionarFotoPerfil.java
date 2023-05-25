@@ -9,11 +9,10 @@ import tds.PhotoTDS.PhotoTDS;
 
 import java.awt.BorderLayout;
  
+@SuppressWarnings("serial")
 public class VentanaSeleccionarFotoPerfil extends JFrame {
  
-    
-	private static final long serialVersionUID = -8875294651683696548L;
-	private JPanel contentPane;
+    private JPanel contentPane;
     private File fichero;
     
     private static VentanaRegistro vr;
@@ -25,9 +24,6 @@ public class VentanaSeleccionarFotoPerfil extends JFrame {
     private JButton btnAceptar;
     private JButton btnCancelar;
  
-    /**
-     * Launch the application.
-     */
     public static void main(String[] args) {
         EventQueue.invokeLater(new Runnable() {
             public void run() {

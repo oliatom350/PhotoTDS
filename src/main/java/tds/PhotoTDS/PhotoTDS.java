@@ -93,12 +93,37 @@ public class PhotoTDS implements FotosListener{
 		return genExcel;
 	}
 
-	public void registrarUsuario(Usuario usuario) {
-		for(Notificacion n : usuario.getNotificaciones()) {
+	public void registrarUsuario(String nombre, String email, String nombreCompleto, Date fechaNacimiento, boolean isPremium, String password, String fotoPerfil, String presentacion) {
+		Usuario u = new Usuario(nombre, email, nombreCompleto, fechaNacimiento, isPremium, password, fotoPerfil, presentacion);
+		for(Notificacion n : u.getNotificaciones()) {
 			adaptadorNotificacion.registrarNotificacion(n);
 		}
-		adaptadorUsuario.registrarUsuario(usuario);
-		repUsuarios.addUsuario(usuario);
+		adaptadorUsuario.registrarUsuario(u);
+		repUsuarios.addUsuario(u);
+	}
+	
+	public void cambiarPassword(int id, String newPass) {
+		Usuario u;
+		try {
+			u = getUsuario(id);
+			u.setPassword(newPass);
+			adaptadorUsuario.modificarUsuario(u);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	public void checkOpcionales(int id, String descripcion, String fotoPerfil) {
+		try {
+			Usuario u = getUsuario(id);
+			if (descripcion != "") 
+				u.setPresentacion(descripcion);
+			if (fotoPerfil != "")
+				u.setFotoPerfil(fotoPerfil);
+			modificarUsuario(u);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public void modificarUsuario(Usuario usuario) {

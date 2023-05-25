@@ -10,11 +10,9 @@ import java.awt.*;
 import java.util.Calendar;
 import java.util.Date;
 
+@SuppressWarnings("serial")
 public class VentanaRegistro extends JFrame {
 
-	
-	private static final long serialVersionUID = -1897859737632306368L;
-	
 	private JPanel contentPane;
 	private JTextField textField_Email;
 	private JTextField textField_Nombre;
@@ -213,9 +211,6 @@ public class VentanaRegistro extends JFrame {
 		fl_panelFotoPerfil.setAlignment(FlowLayout.RIGHT);
 		panelCentralCentral.add(panelFotoPerfil);
 		
-		//Inicialmente, al usuario se le asignará la ruta de la foto default
-		fotoPerfil = "defaultUserProfile.jpg";
-		
 		JLabel EtiquetaFoto = new JLabel("Foto de perfil (opcional)");
 		EtiquetaFoto.setFont(new Font("SansSerif", Font.PLAIN, 14));
 		panelFotoPerfil.add(EtiquetaFoto);
@@ -313,7 +308,9 @@ public class VentanaRegistro extends JFrame {
 			PhotoTDS controlador = PhotoTDS.getUnicaInstancia();
 			//Por defecto se registra al nuevo usuario como NO PREMIUM
 			if(usuario == null) {
-				controlador.registrarUsuario(new Usuario(textField_Usuario.getText(), 
+				//Inicialmente, al usuario se le asignará la ruta de la foto default
+				fotoPerfil = "defaultUserProfile.jpg";
+				controlador.registrarUsuario(textField_Usuario.getText(), 
 					 						textField_Email.getText(),
 					 						textField_Nombre.getText(),
 											new Date(Integer.parseInt(textField_Año.getText())-1900,
@@ -323,15 +320,11 @@ public class VentanaRegistro extends JFrame {
 											textField_Contraseña.getText(),
 											fotoPerfil,
 											descripcion
-					 						));
+					 						);
 				llamaVentanaLogin();
 			} else {
-				if (descripcion != "") 
-					usuario.setPresentacion(descripcion);
-				usuario.setPassword(textField_Contraseña.getText());
-				if (fotoPerfil == "defaultUserProfile.jpg")
-					usuario.setFotoPerfil(fotoPerfil);
-				controlador.modificarUsuario(usuario);
+				controlador.cambiarPassword(usuario.getId(), textField_Contraseña.getText());
+				controlador.checkOpcionales(usuario.getId(), descripcion, fotoPerfil);
 				this.dispose();
 			}
 		});
