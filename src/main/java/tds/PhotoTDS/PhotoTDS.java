@@ -290,7 +290,7 @@ public class PhotoTDS implements FotosListener{
 								.collect(Collectors.toList()));
 		fotos.addAll(getFotosUsuario(id));
 		return (ArrayList<Foto>) fotos.stream()
-				.sorted(Comparator.comparing(Foto::getFecha))
+				.sorted(Comparator.comparing(Foto::getFecha).reversed())
 				.collect(Collectors.toList());
 	}
 	
