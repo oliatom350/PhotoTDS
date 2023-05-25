@@ -97,13 +97,11 @@ public class VentanaAddAlbum extends JDialog {
 			{
 				JPanel panel_1 = new JPanel();
 				panel.add(panel_1);
+				panel_1.setLayout(new BoxLayout(panel_1, BoxLayout.X_AXIS));
 				{
 					textArea = new JTextArea();
 					textArea.setWrapStyleWord(true);
-					textArea.setTabSize(4);
-					textArea.setRows(6);
 					textArea.setLineWrap(true);
-					textArea.setColumns(52);
 					panel_1.add(textArea);
 				}
 			}

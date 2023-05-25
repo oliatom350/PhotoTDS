@@ -49,8 +49,7 @@ public class VentanaAddFotoDescripcion extends JFrame {
 
 	private void initialize(String nombreFoto, int usuario) {
 		PhotoTDS controlador = PhotoTDS.getUnicaInstancia();
-		//TODO REVISAR SI SOBRA TIEMPO
-		setBounds(100, 100, 550, 350);
+		setBounds(100, 100, 650, 350);
 		setResizable(false);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
@@ -81,10 +80,11 @@ public class VentanaAddFotoDescripcion extends JFrame {
 		
 		JPanel panel_4 = new JPanel();
 		panelComentario.add(panel_4);
-		panel_4.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		panel_4.setLayout(new BoxLayout(panel_4, BoxLayout.X_AXIS));
 		
 		JTextArea textArea = new JTextArea();
 		panel_4.add(textArea);
+		textArea.setWrapStyleWord(true);
 		textArea.setLineWrap(true);
 		
 		JLabel lblNewLabel_1 = new JLabel("Añade una descripción:");
@@ -94,15 +94,14 @@ public class VentanaAddFotoDescripcion extends JFrame {
 		
 		JPanel panel_5 = new JPanel();
 		panelComentario.add(panel_5);
-		panel_5.setLayout(new FlowLayout(FlowLayout.CENTER, 5, 5));
+		panel_5.setLayout(new BoxLayout(panel_5, BoxLayout.X_AXIS));
 		
 		JTextArea textArea_1 = new JTextArea();
 		textArea_1.setLineWrap(true);
 		panel_5.add(textArea_1);
 		
-		
-		JPanel panel_3 = new JPanel();
-		panelFotoComentario.add(panel_3);
+		JPanel panel_2_1 = new JPanel();
+		panelFotoComentario.add(panel_2_1);
 		
 		
 		JPanel panel = new JPanel();
