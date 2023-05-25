@@ -117,7 +117,8 @@ public class VentanaAddFotoDescripcion extends JFrame {
 				VentanaWarning vw = new VentanaWarning("La descripción sobrepasa los 120 caracteres, contiene más de 4 hashtags o algún hashtag sobrepasa el límite.");
 				vw.setVisible(true);
 			} else {
-				Foto f = new Foto(textArea.getText(), descp, hashtags, usuario, nombreFoto);
+				//Foto f = new Foto(textArea.getText(), descp, hashtags, usuario, nombreFoto);
+				Foto f = controlador.crearFoto(textArea.getText(), descp, hashtags, usuario, nombreFoto);
 				addFoto(f);
 				controlador.addNotificacionSeguidores(usuario, f);
 				if (!album.equals("")) {

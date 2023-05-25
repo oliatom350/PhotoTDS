@@ -117,6 +117,10 @@ public class PhotoTDS implements FotosListener{
 		repPublicaciones.addFoto(foto);
 	}
 	
+	public Foto crearFoto(String titulo, String desc, ArrayList<String> hashtags, int usuario, String nombreFoto) {
+		return new Foto(titulo, desc, hashtags, usuario, nombreFoto);
+	}
+	
 	public void eliminarFoto(Foto foto) {
 		adaptadorFoto.borrarFoto(foto);
 		repPublicaciones.removeFoto(foto);
@@ -258,6 +262,7 @@ public class PhotoTDS implements FotosListener{
 	public ArrayList<Foto> getFotosTop(){
 		return (ArrayList<Foto>) repPublicaciones.getFotos().stream()
 				.sorted((f1,f2) -> f2.getMeGusta() - f1.getMeGusta())
+				.limit(10)
 				.collect(Collectors.toList());
 	}
 	
@@ -361,4 +366,5 @@ public class PhotoTDS implements FotosListener{
 		modificarUsuario(seguido);
 		modificarUsuario(seguidor);
 	}
+	
 }
