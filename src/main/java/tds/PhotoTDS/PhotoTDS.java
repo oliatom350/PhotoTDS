@@ -356,8 +356,8 @@ public class PhotoTDS implements FotosListener{
 	}
 	
 	public void removeSeguidor(Usuario seguido, Usuario seguidor) {
-		seguido.addSeguidor(seguidor.getId());
-		seguidor.addSeguido(seguido.getId());
+		seguido.removeSeguidor(seguidor.getId());
+		seguidor.removeSeguido(seguido.getId());
 		modificarUsuario(seguido);
 		modificarUsuario(seguidor);
 	}
