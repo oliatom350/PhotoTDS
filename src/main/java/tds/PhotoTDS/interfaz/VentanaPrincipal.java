@@ -24,9 +24,7 @@ import javax.swing.JFileChooser;
 import javax.swing.BoxLayout;
 import javax.swing.ImageIcon;
 import java.util.ArrayList;
-import java.util.Comparator;
 import java.util.EventObject;
-import java.util.stream.Collectors;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -83,9 +81,6 @@ public class VentanaPrincipal extends JFrame implements Observer {
 		PhotoTDS controlador = PhotoTDS.getUnicaInstancia();
 		try {
 			fotos = controlador.getFotosSeguidos(idUsuarioAct);
-			for(Foto f : fotos) {
-				System.out.println(f.getFecha());
-			}
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}

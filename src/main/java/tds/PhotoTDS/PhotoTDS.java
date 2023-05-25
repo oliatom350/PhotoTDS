@@ -392,4 +392,8 @@ public class PhotoTDS implements FotosListener{
 		modificarUsuario(seguidor);
 	}
 	
+	public void removeFotoAlbum(Album a, Foto f) {
+		a.removeFoto(f);
+	}
+	
 }

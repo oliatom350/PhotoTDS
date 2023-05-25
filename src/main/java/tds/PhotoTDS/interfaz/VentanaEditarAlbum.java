@@ -130,7 +130,8 @@ public class VentanaEditarAlbum extends JFrame {
         JMenuItem eliminarItem = new JMenuItem("Eliminar");
         eliminarItem.addActionListener((ActionEvent event) -> {
             Foto foto = listafotos.getSelectedValue();
-            album.removeFoto(foto);
+            //album.removeFoto(foto); //TODO Cambiar controlador
+            PhotoTDS.getUnicaInstancia().removeFotoAlbum(album, foto);
             PhotoTDS.getUnicaInstancia().modificarAlbum(album);
             cargarMatrizFotos();
         });
