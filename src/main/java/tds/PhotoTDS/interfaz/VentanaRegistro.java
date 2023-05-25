@@ -267,11 +267,11 @@ public class VentanaRegistro extends JFrame {
 		if(usuario != null) {
 			textField_Usuario.setText(usuario.getNombre());
 			textField_Usuario.setEditable(false);
-			textField_Año.setText(Integer.toString(usuario.getFechaNacimiento().getYear()));
+			textField_Año.setText(Integer.toString(usuario.getFechaNacimiento().getYear()+1900));
 			textField_Año.setEditable(false);
 			textField_Dia.setText(Integer.toString(usuario.getFechaNacimiento().getDay()));
 			textField_Dia.setEditable(false);
-			textField_Mes.setText(Integer.toString(usuario.getFechaNacimiento().getMonth()));
+			textField_Mes.setText(Integer.toString(usuario.getFechaNacimiento().getMonth()+1));
 			textField_Mes.setEditable(false);
 			textField_Nombre.setText(usuario.getNombreCompleto());
 			textField_Nombre.setEditable(false);
