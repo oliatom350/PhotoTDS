@@ -83,6 +83,9 @@ public class VentanaPrincipal extends JFrame implements Observer {
 		PhotoTDS controlador = PhotoTDS.getUnicaInstancia();
 		try {
 			fotos = controlador.getFotosSeguidos(idUsuarioAct);
+			for(Foto f : fotos) {
+				System.out.println(f.getFecha());
+			}
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
@@ -230,11 +233,6 @@ public class VentanaPrincipal extends JFrame implements Observer {
 		} catch (Exception e1) {
 			e1.printStackTrace();
 		}
-		
-		//Stream para ordenar fotos por fecha
-		fotos = (ArrayList<Foto>) fotos.stream()
-					 .sorted(Comparator.comparing(Foto::getFecha))
-					 .collect(Collectors.toList());
 		
 		panelCentralCentro = new JPanel();
 		panelCentral.add(panelCentralCentro, BorderLayout.CENTER);
